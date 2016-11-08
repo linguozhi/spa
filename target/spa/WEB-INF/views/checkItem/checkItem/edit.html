@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    [#include "../../common/header.html" /]
+</head>
+<body>
+[#if checkItem.id?? ]
+<form name="form" action="${WEBROOT}/checkItem/update.html" method="post" onSubmit="return false;" class="form-horizontal">
+    [#else]
+    <form name="form" action="${WEBROOT}/checkItem/save.html" method="post" onSubmit="return false;"
+          class="form-horizontal">
+        [/#if]
+        <input id="id" name="id" type="hidden" class="form-control input-sm" required value="${checkItem.id!}">
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>名称</label>
+            <div class="col-sm-3">
+                <input id="name" name="name" type="text" class="form-control input-sm" maxlength="25" required
+                       value="${checkItem.name!}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>显示顺序</label>
+            <div class="col-sm-3">
+                <input id="orderNo" name="orderNo" type="number"  step="any"  class="form-control input-sm" maxlength="25" required
+                       value="${checkItem.orderNo!}">
+            </div>
+
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>权重</label>
+            <div class="col-sm-3">
+                <input id="weight" name="weight" type="number" step="any"  class="form-control input-sm"maxlength="25" required
+                       value="${checkItem.weight!}">
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="hidden" id="ageLevelStr" name="ageLevelStr" value="">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>年龄设置</label>
+            <div class="col-sm-5">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <span id="btnAdd" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus"></span> 添加</span>
+                    </div>
+                    <div id="age-sets" class="panel-body ">
+                        [#if ageLevelList??]
+                            [#list ageLevelList as ageLevel]
+                                <div class="form-inline age-set add-item form-group" style="padding-left: 15px">
+                                    <input id="gtAge" type="number" class="form-control input-sm " style="width: 120px" placeholder="年龄>=" required value="${ageLevel.gtAge}">
+                                    <label>到</label>
+                                    <input id="ltAge" type="number" class="form-control input-sm " style="width: 120px" placeholder="年龄<" required value="${ageLevel.ltAge}">
+                                    <input id="score" type="number" class="form-control input-sm " style="width: 120px" maxlength="25" required placeholder="基数"
+                                           value="${ageLevel.score}">
+                                    <span class="glyphicon glyphicon-minus" style="display: none"></span>
+                                </div>
+                            [/#list]
+                        [/#if]
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>显示比例</label>
+            <div class="col-sm-3">
+                <input id="showRatio" name="showRatio" type="number"  step="any"  class="form-control input-sm" maxlength="25" required
+                       value="${checkItem.showRatio!}">
+            </div>
+
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>随机比例</label>
+            <div class="col-sm-3">
+                <input id="randRatio" name="randRatio" type="number"  step="any"  class="form-control input-sm" maxlength="25" required
+                       value="${checkItem.randRatio!}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" id="childItemStr" name="childItemStr" value="">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>子品项</label>
+            <div class="col-sm-5">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <span id="btnItemAdd" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus"></span> 添加</span>
+                    </div>
+                    <div id="item-sets" class="panel-body ">
+                        [#if childItemList??]
+                        [#list childItemList as item]
+                        <div class="form-inline item-set add-item form-group" style="padding-left: 15px">
+                            <input id="childItemName" type="childItemName" class="form-control input-sm " style="width: 200px" placeholder="名称" required value="${item.name}">
+                        </div>
+                        [/#list]
+                        [/#if]
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>体验后增益比例</label>
+            <div class="col-sm-3">
+                <input id="addRatio" name="addRatio" type="number"  step="any"  class="form-control input-sm" maxlength="25" required
+                       value="${checkItem.addRatio!}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>天衰减比例</label>
+            <div class="col-sm-3">
+                <input id="minusRatio" name="minusRatio" type="number"  step="any"  class="form-control input-sm" maxlength="25" required
+                       value="${checkItem.minusRatio!}">
+            </div>
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>衰减最大比例</label>
+            <div class="col-sm-3">
+                <input id="maxMinusRatio" name="maxMinusRatio" type="number"  step="any"  class="form-control input-sm" maxlength="25" required
+                       value="${checkItem.maxMinusRatio!}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2f col-sm-2">
+                <button type="button" class="btn btn-default" onclick="javascript:history.back()">返回</button>
+                <button type="submit" class="btn btn-success">保 存</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+[#include "../../common/footer.html" /]
+<script type="text/javascript" src="${WEBROOT}/public/js/bootstrap/bootstrap3-typeahead.js"></script>
+<script type="text/javascript" src="${WEBROOT}/public/js/spa/checkItem/checkItem/edit.js?v=0614"></script>
+</html>

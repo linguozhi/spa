@@ -1,0 +1,47 @@
+<!-- 公共底部，存放页面公共js-->
+<script src="${WEBROOT}/public/js/jquery/jquery-1.10.2.min.js"></script>
+<script src="${WEBROOT}/public/css/bootstrap/js/bootstrap.min.js"></script>
+<script src="${WEBROOT}/public/js/dialog/dialog-plus-min.js"></script>
+<script src="${WEBROOT}/public/js/ace/ace-extra.min.js"></script>
+<script src="${WEBROOT}/public/js/ace/ace.min.js"></script>
+<script src="${WEBROOT}/public/js/jquery/ajaxform.js"></script>
+<script src="${WEBROOT}/public/js/common/html5Validation.js"></script>
+<script src="${WEBROOT}/public/js/common/utils.js"></script>
+<script src="${WEBROOT}/public/js/common/format.js"></script>
+<script src="${WEBROOT}/public/js/common/common.js"></script>
+<script src="${WEBROOT}/public/js/common/form.js"></script>
+<script src="${WEBROOT}/public/js/common/moment.js"></script>
+<script src="${WEBROOT}/public/js/common/dateUtils.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+    (function() {
+
+        // 内容区变化时自动更新当前iframe的高度
+        var waiting = false;
+        $(".main-inner").bind( "DOMSubtreeModified", function() {
+            if ( waiting ) return;
+            setTimeout( function() {
+                window.parent
+                && $.isFunction( window.parent.updateFrameHeight )
+                && window.parent.updateFrameHeight();
+                waiting = false;
+            }, 150);
+            waiting = true;
+        });
+
+        // 主要用于侧边栏收缩和展开时的场景:
+        $(window).resize( function() {
+            window.parent
+            && $.isFunction( window.parent.updateFrameHeight )
+            && window.parent.updateFrameHeight();
+        });
+
+        // 初始化校验功能
+        $("input,select,textarea").not("[type=submit]").html5Validate();
+
+    })();
+</script>
+
+<script type="text/javascript" src="${WEBROOT}/public/js/jquery/datables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${WEBROOT}/public/js/common/datatable-common.js"></script>
+<script type="text/javascript" src="${WEBROOT}/public/js/jquery/jquery.datetimepicker.js"></script>

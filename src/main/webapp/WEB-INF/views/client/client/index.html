@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>客户管理-SPA系统</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    [#include "../../common/header.html" /]
+</head>
+<body>
+<!-- 路径导航 begin -->
+<ol class="breadcrumb" id="breadcrumb">
+    <li><i class="icon-home"></i> <a href="#">SPA系统</a></li>
+    <li class="active">客户管理</li>
+</ol>
+<!-- 路径导航 end -->
+<div class="main-inner">
+    <div class="searchbar">
+        <form class="form-inline" role="form" id="converageForm">
+            <div class="btn-group btn-opts">
+                <span id="btnAdd" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus"></span> 新增</span>
+                <span id="btnMod" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-edit"></span> 修改</span>
+                <span id="btnDel" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-edit"></span> 删除</span>
+            </div>
+            <input id="sch_name" class="form-control input-sm" type="text" data-provide="typeahead" placeholder="姓名..." value="" >
+
+            <button id="btnSearch" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span> 搜 索</button>
+            <!--<span id="btnExport" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> 导出</span>-->
+        </form>
+    </div>
+    <!--  添加stripe会有隔行换色效果 -->
+    <table id="datatable" class="cell-border row-border hover" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th id="checkbox"><input role="ckAll" type="checkbox" class="checkbox"/></th>
+            <th id="id">编号</th>
+            <th id="name">姓名</th>
+            <th id="age">年龄</th>
+            <th id="create_time">创建时间</th>
+            <th id="modify_time">修改时间</th>
+            <th id="operator">操作</th>
+        </tr>
+        </thead>
+    </table>
+
+</div>
+</body>
+
+[#include "../../common/footer.html" /]
+<script type="text/javascript" src="${WEBROOT}/public/js/bootstrap/bootstrap3-typeahead.js"></script>
+<script type="text/javascript" src="${WEBROOT}/public/js/spa/client/client/index.js"></script>
+</html>
