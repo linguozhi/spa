@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    [#include "../../common/header.html" /]
+    <link href="http://cdn.bootcss.com/bootstrap-fileinput/4.3.5/css/fileinput.css" rel="stylesheet">
+
+</head>
+<body>
+[#if product.id?? ]
+<form name="form" action="${WEBROOT}/product/update.html" method="post" onSubmit="return false;" class="form-horizontal">
+    [#else]
+    <form name="form" action="${WEBROOT}/product/save.html" method="post" onSubmit="return false;"
+          class="form-horizontal">
+        [/#if]
+        <input id="id" name="id" type="hidden" class="form-control input-sm" required value="${product.id!}">
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>名称</label>
+            <div class="col-sm-3">
+                <input id="name" name="name" type="text" class="form-control input-sm" maxlength="25" required
+                       value="${product.name!}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>显示顺序</label>
+            <div class="col-sm-3">
+                <input id="orderNo" name="orderNo" type="text" class="form-control input-sm" maxlength="25" required
+                       value="${product.orderNo!}">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>对应品项</label>
+            <div class="col-sm-3">
+                <select id="itemId" name="itemId" class="form-control input-sm" value="">
+                    <option value="0">-选择品项-</option>
+                    [if itemList??]
+                    [#list itemList as item]
+                    <option value="${item.id}" [#if product.id?? && product.id == item.id]selected="selected"[/#if]>${item.name}</option>
+                    [/#list]
+                    [/if]
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2f col-sm-2">
+                <button type="button" class="btn btn-default" onclick="javascript:history.back()">返回</button>
+                <button type="submit" class="btn btn-success">保 存</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+[#include "../../common/footer.html" /]
+<script type="text/javascript" src="${WEBROOT}/public/js/bootstrap/bootstrap3-typeahead.js"></script>
+<script type="text/javascript" src="${WEBROOT}/public/js/spa/product/product/edit.js?v=0614"></script>
+</html>

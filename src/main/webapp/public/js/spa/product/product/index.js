@@ -17,7 +17,7 @@ var datatable = $('#datatable').DataTable(
         "order": [1, 'desc'],
         "lengthMenu": [[15, 30, 50, 100], [15, 30, 50, 100]],
         "ajax": {
-            "url": WEBROOT + "/checkItem/getList.html",
+            "url": WEBROOT + "/product/getList.html",
             "type": 'post',
             "data": function (d) {
                 return $.extend({}, d,
@@ -33,10 +33,8 @@ var datatable = $('#datatable').DataTable(
             {"data": "id", className: "center", "orderable": false, "width": "10px", class: "text-center"},
             {"data": "id", "defaultContent": "", "width": "80px", class: "text-center"},
             {"data": "name", "defaultContent": ""},
+            {"data": "itemName", "defaultContent": ""},
             {"data": "orderNo", "defaultContent": ""},
-            {"data": "weight", "defaultContent": ""},
-            {"data": "showRatio", "defaultContent": ""},
-            {"data": "randRatio", "defaultContent": ""},
             {
                 "data": "createTime", "defaultContent": "", "render": function (data, type) {
                 return moment(data).format("YYYY-MM-DD HH:mm:ss");
@@ -58,7 +56,7 @@ var datatable = $('#datatable').DataTable(
             var html = '';
             html += '<a href="javascript:doMod(' + aData.id + ')">修改</a>|';
             html += '<a href="javascript:doDel(' + aData.id + ')">删除</a>|';
-            $('td:eq(9)', nRow).html(html.substr(0, html.length - 1));
+            $('td:eq(7)', nRow).html(html.substr(0, html.length - 1));
         },
         "drawCallback": function (settings) {
             popup.loading().hide();
@@ -92,7 +90,7 @@ onLoadInit = function () {
  * 新增
  */
 doAdd = function () {
-    windows.go(WEBROOT + "/checkItem/edit.html");
+    windows.go(WEBROOT + "/product/edit.html");
 }
 
 /**
@@ -109,7 +107,7 @@ doMod = function (id) {
         return;
     }
     // 操作
-    windows.go(WEBROOT + '/checkItem/edit.html?id=' + id);
+    windows.go(WEBROOT + '/product/edit.html?id=' + id);
 }
 
 /**
@@ -126,7 +124,34 @@ doDel = function (ids) {
     // 操作
     popup.confirm('删除', '是否确认删除', function () {
         popup.loading('正在删除，请稍候……').show();
-        $.post(WEBROOT + "/checkItem/del.html", {
+        $.post(WEBROOT + "/product/del.html", {
+            id: ids
+        }, function (result) {
+            popup.loading().hide();
+            if (protocols.isSuccess(result)) {
+                myDataTable.reloads();
+            } else {
+                popup.tip(protocols.getMessage(result));
+                console.log(protocols.getMessage(result));
+            }
+        }, "json");
+    });
+}
+
+/**
+ * 检测
+ */
+doCaculate = function(ids) {
+    // 校验
+    if (utils.emptys(ids)) {
+        popup.tip("请选择检测数据");
+        return;
+    }
+
+    // 操作
+    popup.confirm('检测', '是否确认检测', function () {
+        popup.loading('正在检测，请稍候……').show();
+        $.post(WEBROOT + "/product/caculate.html", {
             id: ids
         }, function (result) {
             popup.loading().hide();
@@ -166,7 +191,7 @@ doDetail = function (id) {
     // 异步获取页面内容
     $.ajax({
         type: "post",
-        url: WEBROOT + '/checkItem/detail.html?id=' + id,
+        url: WEBROOT + '/product/detail.html?id=' + id,
         success: function (data) {
             userDetailModel.content(data);
             userDetailModel.showModal();
