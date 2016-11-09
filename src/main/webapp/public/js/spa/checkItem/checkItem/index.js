@@ -54,8 +54,9 @@ var datatable = $('#datatable').DataTable(
         },
         "fnCreatedRow": function (nRow, aData, iDataIndex) {
             $('td:eq(0)', nRow).html('<input role="ck" type="checkbox" name="checkbox" class="center" value="' + aData.id + '">');
-            var html = '<a href="javascript:doDetail(' + aData.name + ')">查看</a>|';
+            //var html = '<a href="javascript:doDetail(' + aData.name + ')">查看</a>|';
             html += '<a href="javascript:doMod(' + aData.id + ')">修改</a>|';
+            var html = '';
             html += '<a href="javascript:doDel(' + aData.id + ')">删除</a>|';
             $('td:eq(9)', nRow).html(html.substr(0, html.length - 1));
         },

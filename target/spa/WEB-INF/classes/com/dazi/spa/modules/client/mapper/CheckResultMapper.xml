@@ -8,9 +8,13 @@
     <result column="score" jdbcType="DECIMAL" property="score" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+
   </resultMap>
   <sql id="Base_Column_List">
-    id, client_id, item_id, score, create_time, modify_time
+    scr.id, scr.client_id, scr.item_id, scr.score, scr.create_time, scr.modify_time
   </sql>
   <sql id="Where_Clause">
      where 1=1 
@@ -31,6 +35,12 @@
     </if>
     <if test="record.modifyTime != null">
       and scr.modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="record.clientName != null and record.clientName != ''">
+      and sc.name like concat('%',#{record.clientName,jdbcType=TIMESTAMP}, '%')
+    </if>
+    <if test="record.itemName != null and record.itemName != ''">
+      and sci.name like concat('%',#{record.itemName,jdbcType=TIMESTAMP}, '%')
     </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -126,12 +136,17 @@
   </update>
   <select id="selectTotal" parameterType="com.dazi.spa.modules.client.model.CheckResult" resultType="java.lang.Integer">
     select count(*) from spa_check_result scr
+    inner join spa_client sc on sc.id=scr.client_id
+    inner join spa_check_item sci on sci.id=scr.item_id
     <include refid="Where_Clause" />
   </select>
   <select id="selectList" parameterType="com.dazi.spa.modules.client.model.CheckResult" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+    , sc.name client_name, sci.name item_name
      from spa_check_result scr
+    inner join spa_client sc on sc.id=scr.client_id
+    inner join spa_check_item sci on sci.id=scr.item_id
     <include refid="Where_Clause" />
     <if test="order != null and order.colName != null and order.colName != ''">
       order by ${order.colName}

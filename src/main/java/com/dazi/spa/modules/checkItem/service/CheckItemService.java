@@ -4,6 +4,8 @@ import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.mapper.CheckItemMapper;
 import com.dazi.spa.modules.checkItem.model.CheckItem;
+
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ public class CheckItemService {
 
     public int insertSelective(CheckItem record) {
         Assert.notNull(record, "查询对象不能为空");
+        record.setCreateTime(new Date());
         return checkItemMapper.insertSelective(record);
     }
 

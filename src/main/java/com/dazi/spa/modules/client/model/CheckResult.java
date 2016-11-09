@@ -84,4 +84,31 @@ public class CheckResult implements Serializable {
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+    // extend fields
+    /**
+     * 客户姓名
+     */
+    private String clientName;
+
+    /**
+     * 品项名称
+     */
+    private String itemName;
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
 }
