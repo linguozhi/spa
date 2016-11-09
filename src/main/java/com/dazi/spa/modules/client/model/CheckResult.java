@@ -35,6 +35,12 @@ public class CheckResult implements Serializable {
      */
     private Date modifyTime;
 
+
+    /**
+     * 检测记录id
+     */
+    private Integer recordId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -110,5 +116,13 @@ public class CheckResult implements Serializable {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public Integer getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(Integer recordId) {
+        this.recordId = recordId;
     }
 }

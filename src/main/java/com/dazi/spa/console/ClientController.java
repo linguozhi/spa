@@ -7,6 +7,7 @@ import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.model.CheckItem;
 import com.dazi.spa.modules.checkItem.service.CheckItemService;
 import com.dazi.spa.modules.client.model.Client;
+import com.dazi.spa.modules.client.service.CheckRecordService;
 import com.dazi.spa.modules.client.service.CheckResultService;
 import com.dazi.spa.modules.client.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class ClientController {
 
     @Autowired
     private CheckResultService checkResultService;
+
+    @Autowired
+    private CheckRecordService checkRecordService;
 
     @RequestMapping("/index")
     public String index() {
@@ -112,6 +116,12 @@ public class ClientController {
 
         Client client = clientService.selectByPrimaryKey(id);
         Assert.notNull(client, "客户信息为空");
+
+        // 生成检测记录
+        if(checkRecordService.save(id) < 1) {
+            return ResponseHelper.buildErrorResult("生成检测记录失败");
+        }
+
 
         // 获取顶级品项
         List<CheckItem> topItemList = checkItemService.getTopItemList();

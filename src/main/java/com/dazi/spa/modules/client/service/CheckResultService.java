@@ -1,6 +1,7 @@
 package com.dazi.spa.modules.client.service;
 
 import com.dazi.spa.common.datatable.Order;
+import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.model.AgeLevel;
 import com.dazi.spa.modules.checkItem.model.CheckItem;
 import com.dazi.spa.modules.checkItem.service.AgeLevelService;
@@ -27,6 +28,9 @@ public class CheckResultService {
 
     @Autowired
     private CheckItemService checkItemService;
+
+    @Autowired
+    private AgeLevelService ageLevelService;
 
 
     @Autowired
@@ -79,9 +83,25 @@ public class CheckResultService {
 
     }
 
-    @Autowired
-    private AgeLevelService ageLevelService;
+    /**
+     * get list by recordId
+     * @param recordId
+     * @return
+     */
+    public List<CheckResult> getListByRecordId(Integer recordId) {
+        Assert.isTrue(IntegerUtil.gtZero(recordId), "recordId not less than 1");
 
+        CheckResult record = new CheckResult();
+        record.setRecordId(recordId);
+
+        return selectList(record, null, 0, -1);
+    }
+
+    /**
+     * 计算检测值
+     * @param client
+     * @param checkItem
+     */
     private void caculateTopItem(Client client, CheckItem checkItem) {
 
         int age = client.getAge();
