@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     [#include "../../common/header.html" /]
-    <link href="http://cdn.bootcss.com/bootstrap-fileinput/4.3.5/css/fileinput.css" rel="stylesheet">
+    <link href="${WEBROOT}/public/js/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -24,7 +25,6 @@
                        value="${product.name!}">
             </div>
         </div>
-
         <div class="form-group">
             <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>显示顺序</label>
             <div class="col-sm-3">
@@ -32,8 +32,6 @@
                        value="${product.orderNo!}">
             </div>
         </div>
-
-
         <div class="form-group">
             <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>对应品项</label>
             <div class="col-sm-3">
@@ -41,10 +39,19 @@
                     <option value="0">-选择品项-</option>
                     [if itemList??]
                     [#list itemList as item]
-                    <option value="${item.id}" [#if product.id?? && product.id == item.id]selected="selected"[/#if]>${item.name}</option>
+                    <option value="${item.id}" [#if product.itemId?? && product.itemId == item.id]selected="selected"[/#if]>${item.name}</option>
                     [/#list]
                     [/if]
                 </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>图片</label>
+            <div class="col-sm-6">
+                <input type="hidden" id="imageIdStr" name="imageIdStr" value="">
+                <input id="input-24" name="productImage" type="file" multiple class="file-loading">
+                <p class="help-block">支持jpg、png格式，大小不超过2.0M</p>
+                <div id="errorBlock" class="help-block"></div>
             </div>
         </div>
 
@@ -58,6 +65,23 @@
 </body>
 
 [#include "../../common/footer.html" /]
-<script type="text/javascript" src="${WEBROOT}/public/js/bootstrap/bootstrap3-typeahead.js"></script>
+<script>
+    var imageArr = [];
+    var imageConfigArr = [];
+    var config = {caption: "Moon.jpg" , width: "120px", key: 1, extra:{id:1}};
+    [#if imageList??]
+        [#list imageList as img]
+        imageArr.push('${img.url}');
+
+        config.caption = '${img.id}';
+        config.key = ${img.id};
+        config.extra.id = ${img.id}
+
+        imageConfigArr.push(config);
+        [/#list]
+    [/#if]
+</script>
+<script type="text/javascript" src="${WEBROOT}/public/js/bootstrap-fileinput/js/fileinput.js"></script>
+<script type="text/javascript" src="${WEBROOT}/public/js/bootstrap-fileinput/js/locales/zh.js"></script>
 <script type="text/javascript" src="${WEBROOT}/public/js/spa/product/product/edit.js?v=0614"></script>
 </html>

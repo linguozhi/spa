@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -37,6 +38,13 @@ public class BaseController {
     @ResponseBody
     public Map handlePOIException(POIException ex) {
         logger.error("导出错误", ex);
+        return ResponseHelper.buildErrorResult(ex.getMessage());
+    }
+
+    @ExceptionHandler(IOException.class)
+    @ResponseBody
+    public Map handleIOException(IOException ex) {
+        logger.error("IO错误", ex);
         return ResponseHelper.buildErrorResult(ex.getMessage());
     }
 

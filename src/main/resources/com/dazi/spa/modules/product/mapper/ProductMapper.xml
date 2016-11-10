@@ -54,6 +54,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dazi.spa.modules.product.model.Product">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into spa_product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

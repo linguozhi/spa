@@ -94,4 +94,14 @@ public class Product implements Serializable {
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
+
+    private String imageIdStr;
+
+    public String getImageIdStr() {
+        return imageIdStr;
+    }
+
+    public void setImageIdStr(String imageIdStr) {
+        this.imageIdStr = imageIdStr;
+    }
 }
