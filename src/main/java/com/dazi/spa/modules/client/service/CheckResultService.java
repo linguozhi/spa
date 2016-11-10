@@ -1,5 +1,6 @@
 package com.dazi.spa.modules.client.service;
 
+import com.alibaba.fastjson.JSON;
 import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.model.AgeLevel;
@@ -126,14 +127,17 @@ public class CheckResultService {
         checkResult.setScore(topScore);
 
         if(insertSelective(checkResult) < 1) {
+            errors.add("检测结果入库失败");
             // log error
-            logger.error("insert top item checkResult failed");
+            logger.error("insert top item checkResult failed, info:{}" , JSON.toJSONString(checkItem));
             return;
         }
 
         // 计算子品项分值
         List<CheckItem> childItemList = checkItemService.getListByParentId(checkItem.getId());
         if(CollectionUtils.isEmpty(childItemList)) {
+            errors.add("子品项为空");
+            logger.error("子品项为空,info:{}", JSON.toJSONString(checkItem));
             return;
         }
 
@@ -151,7 +155,8 @@ public class CheckResultService {
             checkResult.setRecordId(client.getRecordId());
 
             if(insertSelective(checkResult) < 1) {
-                logger.error("insert child item checkResult failed");
+                errors.add("子品项入库失败");
+                logger.error("insert child item checkResult failed,info:{}", JSON.toJSONString(child));
             }
         }
     }

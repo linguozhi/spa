@@ -1,5 +1,6 @@
 package com.dazi.spa.console;
 
+import com.alibaba.fastjson.JSON;
 import com.dazi.spa.common.datatable.DataTable;
 import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.protocol.ResponseHelper;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -135,7 +137,13 @@ public class ClientController {
         List<String> errors = new ArrayList<>();
         checkResultService.caculateTopItemList(client, topItemList, errors);
 
-        return ResponseHelper.buildSuccessResult("检测完成");
+        if(CollectionUtils.isEmpty(errors)) {
+            return ResponseHelper.buildSuccessResult("检测完成");
+
+        } else {
+            return ResponseHelper.buildErrorResult("检测完成,但存在错误:" + JSON.toJSONString(errors));
+
+        }
 
 
     }
