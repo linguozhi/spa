@@ -6,6 +6,7 @@ import com.dazi.spa.common.protocol.ResponseHelper;
 import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.model.CheckItem;
 import com.dazi.spa.modules.checkItem.service.CheckItemService;
+import com.dazi.spa.modules.client.model.CheckRecord;
 import com.dazi.spa.modules.client.model.Client;
 import com.dazi.spa.modules.client.service.CheckRecordService;
 import com.dazi.spa.modules.client.service.CheckResultService;
@@ -17,6 +18,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -118,16 +120,20 @@ public class ClientController {
         Assert.notNull(client, "客户信息为空");
 
         // 生成检测记录
-        if(checkRecordService.save(id) < 1) {
+        CheckRecord checkRecord = new CheckRecord();
+        checkRecord.setClientId(id);
+        if(checkRecordService.insertSelective(checkRecord) < 1) {
             return ResponseHelper.buildErrorResult("生成检测记录失败");
         }
 
 
+        client.setRecordId(checkRecord.getId());
         // 获取顶级品项
         List<CheckItem> topItemList = checkItemService.getTopItemList();
 
         // 计算顶级品项分数
-        checkResultService.caculateTopItemList(client, topItemList);
+        List<String> errors = new ArrayList<>();
+        checkResultService.caculateTopItemList(client, topItemList, errors);
 
         return ResponseHelper.buildSuccessResult("检测完成");
 

@@ -70,4 +70,15 @@ public class Client implements Serializable {
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+    // extend fields
+    private Integer recordId;
+
+    public Integer getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(Integer recordId) {
+        this.recordId = recordId;
+    }
 }

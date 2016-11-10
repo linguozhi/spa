@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @desc:
@@ -18,7 +19,9 @@ public class FileUtil {
 
     //文件上传
     public static String uploadFile(MultipartFile file, String filePath, HttpServletRequest request) throws IOException {
-        String fileName = file.getOriginalFilename();
+
+        String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+        String fileName =  new Date().getTime() + "." + ext;
         File tempFile = new File(filePath, String.valueOf(fileName));
         if (!tempFile.getParentFile().exists()) {
             tempFile.getParentFile().mkdir();

@@ -71,7 +71,7 @@
     var config = {caption: "Moon.jpg" , width: "120px", key: 1, extra:{id:1}};
     [#if imageList??]
         [#list imageList as img]
-        imageArr.push('${img.url}');
+        imageArr.push('${img.shortUrl!}');
 
         config.caption = '${img.id}';
         config.key = ${img.id};

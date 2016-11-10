@@ -36,6 +36,9 @@ public class ImageController extends BaseController {
     @Value("${upload.path}")
     private String FILE_PATH;
 
+    @Value("${upload.shortPath}")
+    private String SHORT_FILE_PATH;
+
     @Autowired
     private ProductImageService productImageService;
 
@@ -49,6 +52,7 @@ public class ImageController extends BaseController {
 
         // save
         ProductImage productImage = new ProductImage();
+        productImage.setShortUrl(SHORT_FILE_PATH + filePath.substring(filePath.lastIndexOf("/") + 1));
         productImage.setUrl(filePath);
 
         if(productImageService.insertSelective(productImage) < 1) {
