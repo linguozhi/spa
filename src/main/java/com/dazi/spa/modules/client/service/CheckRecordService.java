@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class CheckRecordService {
@@ -68,5 +69,20 @@ public class CheckRecordService {
         record.setClientId(clientId);
 
         return selectList(record, null, 0, -1);
+    }
+
+    /**
+     * 获取最近检测记录
+     * @param clientId
+     * @return
+     */
+    public CheckRecord getLatest(Integer clientId) {
+        Assert.isTrue(IntegerUtil.gtZero(clientId), "clientId not less than 1");
+
+        CheckRecord record = new CheckRecord();
+        record.setClientId(clientId);
+
+        List<CheckRecord> list = selectList(record, Order.build("modify_time"), 0, 1);
+        return CollectionUtils.isEmpty(list) ? null : list.get(0);
     }
 }

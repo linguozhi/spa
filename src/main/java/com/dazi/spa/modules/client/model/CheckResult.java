@@ -42,6 +42,7 @@ public class CheckResult implements Serializable {
     private Integer recordId;
 
     private static final long serialVersionUID = 1L;
+    private Integer parentId;
 
     public Integer getId() {
         return id;
@@ -124,5 +125,13 @@ public class CheckResult implements Serializable {
 
     public void setRecordId(Integer recordId) {
         this.recordId = recordId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public Integer getParentId() {
+        return parentId;
     }
 }

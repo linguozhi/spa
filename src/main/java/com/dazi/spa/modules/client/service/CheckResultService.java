@@ -8,9 +8,11 @@ import com.dazi.spa.modules.checkItem.model.CheckItem;
 import com.dazi.spa.modules.checkItem.service.AgeLevelService;
 import com.dazi.spa.modules.checkItem.service.CheckItemService;
 import com.dazi.spa.modules.client.mapper.CheckResultMapper;
+import com.dazi.spa.modules.client.model.CheckRecord;
 import com.dazi.spa.modules.client.model.CheckResult;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -81,7 +83,6 @@ public class CheckResultService {
         for (CheckItem ci: topItemList) {
             caculateTopItem(client, ci, errors);
         }
-
     }
 
 
@@ -109,7 +110,11 @@ public class CheckResultService {
         int age = client.getAge();
         // 获取年龄对应分值
         AgeLevel ageLevel = ageLevelService.getBy(checkItem.getId(), age);
-        Assert.notNull(ageLevel, "年龄基数为空");
+        if(ageLevel == null) {
+            errors.add("年龄为空");
+            logger.error("年龄阶梯为空, info:{}", JSON.toJSONString(checkItem));
+            return;
+        }
 
         // r = -1 or r = 1
         int r = (int)Math.pow(-1, (int)(Math.random()*2));
@@ -124,6 +129,7 @@ public class CheckResultService {
         CheckResult checkResult = new CheckResult();
         checkResult.setItemId(checkItem.getId());
         checkResult.setClientId(client.getId());
+        checkResult.setRecordId(client.getRecordId());
         checkResult.setScore(topScore);
 
         if(insertSelective(checkResult) < 1) {
@@ -159,6 +165,108 @@ public class CheckResultService {
                 logger.error("insert child item checkResult failed,info:{}", JSON.toJSONString(child));
             }
         }
+    }
+
+    public void caculate(Client client, List<String> errors) {
+        Assert.notNull(client, "client not null");
+
+        // 获取顶级品项
+        List<CheckItem> topItemList = checkItemService.getTopItemList();
+
+        caculateTopItemList(client, topItemList, errors);
+    }
+
+    /**
+     * 计算检测值
+     * @param client
+     * @param latestCheckRecord
+     * @param errors
+     */
+    public void caculate(Client client, CheckRecord latestCheckRecord, List<String> errors) {
+        Assert.notNull(client, "client not null");
+        Assert.notNull(latestCheckRecord, "latestCheckRecord not null");
+
+        // 获取顶级品项
+        List<CheckItem> topItemList = checkItemService.getTopItemList();
+        Assert.notEmpty(topItemList, "检测品项不能为空");
+
+        // 获取上次检测大项
+        CheckResult record = new CheckResult();
+        record.setClientId(client.getId());
+        record.setRecordId(latestCheckRecord.getId());
+        record.setParentId(0);
+
+        List<CheckResult> topCheckResultList = selectList(record, null, 0, -1);
+        Assert.notEmpty(topCheckResultList, "上次检测结果为空");
+
+        List<CheckResult> caculateList = new ArrayList<>();
+
+        for (CheckResult lastTopCheckResult : topCheckResultList) {
+            CheckItem topCheckItem = checkItemService.selectByPrimaryKey(lastTopCheckResult.getItemId());
+            // 体验后增益比例
+            BigDecimal addRatio = topCheckItem.getAddRatio();
+            // 获取上次子项检测结果
+            record.setParentId(topCheckItem.getId());
+            List<CheckResult> lastChildCheckResultList = selectList(record, null, 0, -1);
+
+            // 计算增益后分数
+            CheckResult newTopCheckResult = countScore(lastTopCheckResult, addRatio, client.getRecordId());
+            List<CheckResult> newChildCheckResultList = countScore(lastChildCheckResultList, addRatio, client.getRecordId());
+
+            caculateList.add(newTopCheckResult);
+            caculateList.addAll(newChildCheckResultList);
+        }
+
+        // 最新检测分数入库
+        if(save(caculateList) < 1) {
+            errors.add("检测结果入库失败");
+            logger.error("save check result failed,info:{}", JSON.toJSONString(caculateList));
+        }
+    }
+
+    public int save(List<CheckResult> caculateList) {
+        Assert.notEmpty(caculateList, "caculateList not empty");
+        int success = 0;
+        for (CheckResult checkResult : caculateList) {
+            success += insertSelective(checkResult);
+        }
+
+        return success;
+    }
+
+    /**
+     * 在上次检测结果上计算新的检测分数
+     * @param oldcheckResult
+     * @param addRatio
+     * @param newRecordId
+     * @return
+     */
+    public CheckResult countScore(CheckResult oldcheckResult, BigDecimal addRatio, Integer newRecordId) {
+        CheckResult newCheckResult = new CheckResult();
+        BigDecimal score = oldcheckResult.getScore().multiply(new BigDecimal(1).add(addRatio));
+
+        newCheckResult.setScore(score);
+        newCheckResult.setRecordId(newRecordId);
+        newCheckResult.setClientId(oldcheckResult.getClientId());
+        newCheckResult.setItemId(oldcheckResult.getItemId());
+
+        return newCheckResult;
+    }
+
+    /**
+     * 在上次检测结果上计算新的检测分数
+     * @param checkResultList
+     * @param addRatio
+     * @param newRecordId
+     * @return
+     */
+    public List<CheckResult> countScore(List<CheckResult> checkResultList, BigDecimal addRatio, Integer newRecordId) {
+        List<CheckResult> newCheckResultList = new ArrayList<>();
+        for (CheckResult checkResult : checkResultList) {
+            newCheckResultList.add(countScore(checkResult, addRatio, newRecordId));
+        }
+
+        return newCheckResultList;
     }
 
 }

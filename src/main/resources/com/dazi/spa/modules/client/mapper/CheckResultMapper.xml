@@ -46,6 +46,9 @@
     <if test="record.itemName != null and record.itemName != ''">
       and sci.name like concat('%',#{record.itemName,jdbcType=TIMESTAMP}, '%')
     </if>
+    <if test="record.parentId != null and record.parentId > -1">
+      and sci.parent_id = #{record.parentId,jdbcType=INTEGER}
+    </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

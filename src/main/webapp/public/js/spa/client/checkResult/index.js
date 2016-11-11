@@ -45,8 +45,8 @@ var datatable = $('#datatable').DataTable(
                 "data": "modifyTime", "defaultContent": "", "render": function (data, type) {
                 return moment(data).format("YYYY-MM-DD HH:mm:ss");
             }
-            },
-            {"data": "id", className: "center", "orderable": false, "width": "120px", class: "text-center"},
+            }
+            //{"data": "id", className: "center", "orderable": false, "width": "120px", class: "text-center"},
         ],
         "preDrawCallback": function (settings) {
             popup.loading().show();
@@ -58,7 +58,7 @@ var datatable = $('#datatable').DataTable(
             html += '<a href="javascript:doMod(' + aData.id + ')">修改</a>|';
             html += '<a href="javascript:doCaculate(' + aData.id + ')">开始检测</a>|';
             html += '<a href="javascript:doDel(' + aData.id + ')">删除</a>|';
-            $('td:eq(7)', nRow).html(html.substr(0, html.length - 1));
+            //$('td:eq(7)', nRow).html(html.substr(0, html.length - 1));
         },
         "drawCallback": function (settings) {
             popup.loading().hide();

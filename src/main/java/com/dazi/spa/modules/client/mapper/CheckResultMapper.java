@@ -20,5 +20,6 @@ public interface CheckResultMapper {
 
     int selectTotal(@Param("record") CheckResult record);
 
-    List<com.dazi.spa.modules.client.model.CheckResult> selectList(@Param("record") CheckResult record, @Param("order") Order order, @Param("offset") int offset, @Param("count") int count);
+    List<CheckResult> selectList(@Param("record") CheckResult record, @Param("order") Order order, @Param("offset") int offset, @Param("count") int count);
+
 }

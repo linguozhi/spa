@@ -59,6 +59,13 @@ public class Order {
 		return order;
 	}
 
+	public static Order build(String colName, String direction) {
+		Order order = new Order();
+		order.setColName(colName);
+		order.setDirection(direction);
+		return order;
+	}
+
 	/**
 	 * get desc
 	 *

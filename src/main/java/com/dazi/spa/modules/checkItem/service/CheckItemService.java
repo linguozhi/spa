@@ -53,6 +53,12 @@ public class CheckItemService {
         return checkItemMapper.selectList(record, order, offset, count);
     }
 
+    public CheckItem selectOne(CheckItem record, Order order, int offset, int count) {
+        Assert.notNull(record, "查询对象不能为空");
+        List<CheckItem> list =  checkItemMapper.selectList(record, order, offset, count);
+        return CollectionUtils.isEmpty(list) ? null : list.get(0);
+    }
+
     public List<CheckItem> selectListByParentId(Integer parentId) {
         Assert.isTrue(IntegerUtil.gtZero(parentId), "品项id不能小于1");
 

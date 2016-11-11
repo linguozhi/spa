@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.dazi.spa.common.datatable.DataTable;
 import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.protocol.ResponseHelper;
+import com.dazi.spa.common.utils.DateUtils;
 import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.model.CheckItem;
 import com.dazi.spa.modules.checkItem.service.CheckItemService;
@@ -115,11 +116,14 @@ public class ClientController {
      * @return
      */
     @RequestMapping("/caculate")
-    @ResponseBody  public Map caculte(Integer id) {
+    @ResponseBody  public Map caculate(Integer id) {
         Assert.isTrue(IntegerUtil.gtZero(id), "id不能小于1");
 
         Client client = clientService.selectByPrimaryKey(id);
         Assert.notNull(client, "客户信息为空");
+
+        // 最近检测记录
+        CheckRecord latestCheckRecord = checkRecordService.getLatest(client.getId());
 
         // 生成检测记录
         CheckRecord checkRecord = new CheckRecord();
@@ -128,24 +132,24 @@ public class ClientController {
             return ResponseHelper.buildErrorResult("生成检测记录失败");
         }
 
-
         client.setRecordId(checkRecord.getId());
-        // 获取顶级品项
-        List<CheckItem> topItemList = checkItemService.getTopItemList();
 
-        // 计算顶级品项分数
         List<String> errors = new ArrayList<>();
-        checkResultService.caculateTopItemList(client, topItemList, errors);
+        // 当天检测
+        if(latestCheckRecord != null
+                && DateUtils.format(latestCheckRecord.getCreateTime(), "yyyyMMdd").equals(DateUtils.format(new Date(), "yyyyMMdd"))) {
+            // 计算
+            checkResultService.caculate(client, latestCheckRecord, errors);
+        } else {
+            checkResultService.caculate(client, errors);
+        }
 
         if(CollectionUtils.isEmpty(errors)) {
             return ResponseHelper.buildSuccessResult("检测完成");
 
         } else {
             return ResponseHelper.buildErrorResult("检测完成,但存在错误:" + JSON.toJSONString(errors));
-
         }
-
-
     }
 
 }
