@@ -9,13 +9,14 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="record_id" jdbcType="INTEGER" property="recordId" />
+    <result column="general_score" jdbcType="DECIMAL" property="generalScore" />
 
     <result column="client_name" jdbcType="VARCHAR" property="clientName" />
     <result column="item_name" jdbcType="VARCHAR" property="itemName" />
 
   </resultMap>
   <sql id="Base_Column_List">
-    scr.id, scr.client_id, scr.item_id, scr.score, scr.create_time, scr.modify_time, scr.record_id
+    scr.id, scr.client_id, scr.item_id, scr.score, scr.create_time, scr.modify_time, scr.record_id, scr.general_score
   </sql>
   <sql id="Where_Clause">
      where 1=1 
@@ -92,6 +93,10 @@
       <if test="recordId != null">
         record_id,
       </if>
+      <if test="generalScore != null">
+        general_score,
+      </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -115,6 +120,10 @@
       <if test="recordId != null">
         #{recordId,jdbcType=INTEGER},
       </if>
+      <if test="generalScore != null">
+        #{generalScore,jdbcType=DECIMAL},
+      </if>
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.dazi.spa.modules.client.model.CheckResult">

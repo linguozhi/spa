@@ -41,6 +41,11 @@ public class CheckResult implements Serializable {
      */
     private Integer recordId;
 
+    /**
+     * 参考值
+     */
+    private BigDecimal generalScore;
+
     private static final long serialVersionUID = 1L;
     private Integer parentId;
 
@@ -91,6 +96,15 @@ public class CheckResult implements Serializable {
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+    public BigDecimal getGeneralScore() {
+        return generalScore;
+    }
+
+    public void setGeneralScore(BigDecimal generalScore) {
+        this.generalScore = generalScore;
+    }
+
 
     // extend fields
     /**

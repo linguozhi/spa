@@ -131,6 +131,7 @@ public class CheckResultService {
         checkResult.setClientId(client.getId());
         checkResult.setRecordId(client.getRecordId());
         checkResult.setScore(topScore);
+        checkResult.setGeneralScore(ageLevel.getScore());
 
         if(insertSelective(checkResult) < 1) {
             errors.add("检测结果入库失败");
@@ -159,6 +160,7 @@ public class CheckResultService {
             checkResult.setItemId(child.getId());
             checkResult.setClientId(client.getId());
             checkResult.setRecordId(client.getRecordId());
+            checkResult.setGeneralScore(ageLevel.getScore());
 
             if(insertSelective(checkResult) < 1) {
                 errors.add("子品项入库失败");
@@ -249,6 +251,7 @@ public class CheckResultService {
         newCheckResult.setRecordId(newRecordId);
         newCheckResult.setClientId(oldcheckResult.getClientId());
         newCheckResult.setItemId(oldcheckResult.getItemId());
+        newCheckResult.setGeneralScore(oldcheckResult.getGeneralScore());
 
         return newCheckResult;
     }

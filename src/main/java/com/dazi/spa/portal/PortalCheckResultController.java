@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @desc:
+ * @desc: 检测成绩
  * @author:linguozhi@52tt.com
  * @date: 2016/11/11
  */
 @Controller
-@RequestMapping("portal")
-public class CheckResultController {
+@RequestMapping("portal/checkResult")
+public class PortalCheckResultController {
 
     @Autowired
     private CheckResultService checkResultService;
@@ -37,9 +37,8 @@ public class CheckResultController {
     @Autowired
     private CheckItemService checkItemService;
 
-    @RequestMapping("/checkResult")
-    @ResponseBody
-    public String checkResult(CheckResult checkResult, int start, int length, Model model) {
+    @RequestMapping("/index")
+    public String index(CheckResult checkResult, int start, int length, Model model) {
         Assert.isTrue(IntegerUtil.gtZero(checkResult.getClientId()), "请选择查看用户");
 
         // 获取用户最近的检测记录
@@ -52,13 +51,14 @@ public class CheckResultController {
 
         Assert.notNull(latestCheckRecord, "找不到该客户的检测记录");
 
+        CheckItem record = new CheckItem();
+        record.setParentId(0);
+        int total = checkItemService.selectTotal(record);
         // 查看父品项
         CheckItem topCheckItem = null;
         if(IntegerUtil.gtZero(checkResult.getItemId())) {
             topCheckItem = checkItemService.selectByPrimaryKey(checkResult.getItemId());
         } else {
-            CheckItem record = new CheckItem();
-            record.setParentId(0);
             List<CheckItem> topCheckItemList = checkItemService.selectList(record, Order.build("order_no", "asc"), start, length);
             topCheckItem = CollectionUtils.isEmpty(topCheckItemList) ? null : topCheckItemList.get(0);
         }
@@ -80,8 +80,12 @@ public class CheckResultController {
 
         List<CheckResult> childCheckResultList = checkResultService.selectList(checkResultRecord, null, 0, -1);
 
+        model.addAttribute("topCheckItem", topCheckItem);
         model.addAttribute("topCheckResult", topCheckResult);
         model.addAttribute("childCheckResultList", childCheckResultList);
-        return null;
+        model.addAttribute("total", total);
+        model.addAttribute("start", start);
+        model.addAttribute("clientId", checkResult.getClientId());
+        return "portal/checkResult/index";
     }
 }

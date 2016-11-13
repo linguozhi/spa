@@ -1,0 +1,45 @@
+body {
+    background-color: #d0e4fe;
+    font-family: "Times New Roman";
+    font-size: 20px;
+}
+
+h1 {
+    color: #00a0e9;
+    text-align: center;
+}
+
+
+.item-title {
+    color: #00a0e9;
+}
+
+.main-con {
+    width: 990px;
+    padding: 20px 10px 0 10px;
+    margin: 0 auto;
+}
+
+.un-l {
+    height:1px;
+    width:100%;
+    background:#00CCFF;
+    overflow:hidden;
+}
+
+.c-item {
+    width: 50%;
+    float: left;
+}
+
+.prog {
+    width: 40%;
+}
+
+.pager {
+    float: right;
+}
+
+.s-product {
+    float:left;
+}
