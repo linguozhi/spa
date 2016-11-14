@@ -56,36 +56,74 @@ public class PortalCheckResultController {
         int total = checkItemService.selectTotal(record);
         // 查看父品项
         CheckItem topCheckItem = null;
-        if(IntegerUtil.gtZero(checkResult.getItemId())) {
-            topCheckItem = checkItemService.selectByPrimaryKey(checkResult.getItemId());
-        } else {
-            List<CheckItem> topCheckItemList = checkItemService.selectList(record, Order.build("order_no", "asc"), start, length);
-            topCheckItem = CollectionUtils.isEmpty(topCheckItemList) ? null : topCheckItemList.get(0);
+        CheckResult checkResultRecord = null;
+        // 父品项分值
+        CheckResult topCheckResult = null;
+        // 子项分值
+        List<CheckResult> childCheckResultList = null;
+
+        if(start * length < total) {
+            if(IntegerUtil.gtZero(checkResult.getItemId())) {
+                topCheckItem = checkItemService.selectByPrimaryKey(checkResult.getItemId());
+            } else {
+                List<CheckItem> topCheckItemList = checkItemService.selectList(record, Order.build("order_no", "asc"), start, length);
+                topCheckItem = CollectionUtils.isEmpty(topCheckItemList) ? null : topCheckItemList.get(0);
+            }
+
+            Assert.notNull(topCheckItem, "找不到检测项");
+
+            // 查找父品项检测成绩
+            checkResultRecord = new CheckResult();
+            checkResultRecord.setRecordId(latestCheckRecord.getId());
+            checkResultRecord.setItemId(topCheckItem.getId());
+            List<CheckResult> topCheckResultList = checkResultService.selectList(checkResultRecord, null, 0, 1);
+
+            topCheckResult = CollectionUtils.isEmpty(topCheckResultList) ? null : topCheckResultList.get(0);
+
+            // 查找子品项检测成绩
+            checkResultRecord = new CheckResult();
+            checkResultRecord.setRecordId(latestCheckRecord.getId());
+            checkResultRecord.setParentId(topCheckItem.getId());
+
+            childCheckResultList = checkResultService.selectList(checkResultRecord, null, 0, -1);
+
         }
+        // 综合报告
+        else if( start * length >= total) {
 
-        Assert.notNull(topCheckItem, "找不到检测项");
+            checkResultRecord = new CheckResult();
+            checkResultRecord.setRecordId(latestCheckRecord.getId());
+            checkResultRecord.setParentId(0);
+            childCheckResultList = checkResultService.selectList(checkResultRecord, Order.build("order_no", "asc"), 0, -1);
 
-        // 查找父品项检测成绩
-        CheckResult checkResultRecord = new CheckResult();
-        checkResultRecord.setRecordId(latestCheckRecord.getId());
-        checkResultRecord.setItemId(topCheckItem.getId());
-        List<CheckResult> topCheckResultList = checkResultService.selectList(checkResultRecord, null, 0, 1);
+            topCheckResult = new CheckResult();
+            topCheckResult.setItemName("综合报告");
+            checkResultService.countMultipleScore(childCheckResultList, topCheckResult);
 
-        CheckResult topCheckResult = CollectionUtils.isEmpty(topCheckResultList) ? null : topCheckResultList.get(0);
-
-        // 查找子品项检测成绩
-        checkResultRecord = new CheckResult();
-        checkResultRecord.setRecordId(latestCheckRecord.getId());
-        checkResultRecord.setParentId(topCheckItem.getId());
-
-        List<CheckResult> childCheckResultList = checkResultService.selectList(checkResultRecord, null, 0, -1);
+        }
 
         model.addAttribute("topCheckItem", topCheckItem);
         model.addAttribute("topCheckResult", topCheckResult);
         model.addAttribute("childCheckResultList", childCheckResultList);
+
+
         model.addAttribute("total", total);
         model.addAttribute("start", start);
         model.addAttribute("clientId", checkResult.getClientId());
         return "portal/checkResult/index";
     }
+
+    @RequestMapping("/detail")
+    public String detail(Integer id, Model model) {
+        Assert.isTrue(IntegerUtil.gtZero(id), "id不能小于1");
+//
+//        Custom custom = customService.selectByPrimaryKey(id);
+//        // custom tag
+//        List<TagCustom> tagCustomList = tagCustomService.selectListByCustomId(id);
+//
+//        model.addAttribute("custom", custom);
+//        model.addAttribute("tagCustomList", tagCustomList);
+        return "portal/checkResult/detail";
+    }
+
 }

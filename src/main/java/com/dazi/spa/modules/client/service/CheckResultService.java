@@ -272,4 +272,30 @@ public class CheckResultService {
         return newCheckResultList;
     }
 
+    /**
+     * 计算综合分数
+     * @param childCheckResultList
+     * @return
+     */
+    public void countMultipleScore(List<CheckResult> topCheckResultList, CheckResult multipleCheckResult) {
+        Assert.notEmpty(topCheckResultList, "检查品项不能为空");
+
+        // 检测值
+        BigDecimal totalScore = new BigDecimal(0);
+        // 标准值
+        BigDecimal generalScore = new BigDecimal(0);
+
+        for (CheckResult checkResult : topCheckResultList) {
+            CheckItem checkItem = checkItemService.selectByPrimaryKey(checkResult.getItemId());
+            // 权重分数
+            BigDecimal weightScore = checkResult.getScore().multiply(checkItem.getWeight());
+            totalScore = totalScore.add(weightScore);
+
+            generalScore = generalScore.add(checkResult.getGeneralScore().multiply(checkItem.getWeight()));
+        }
+
+        multipleCheckResult.setScore(totalScore);
+        multipleCheckResult.setGeneralScore(generalScore);
+
+    }
 }

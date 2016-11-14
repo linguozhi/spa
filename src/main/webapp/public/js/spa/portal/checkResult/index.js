@@ -170,8 +170,9 @@ doCaculate = function(ids) {
  * 详情页
  * @param id    用户ID
  */
-doDetail = function (id) {
+doDetail = function () {
 
+    var id = $("topCheckItemId").val();
     // 校验
     if (utils.empty(id)) {
         popup.tip("请选择查看对象");
@@ -180,32 +181,26 @@ doDetail = function (id) {
 
     // 构建弹出层
     var userDetailModel = dialog({
-        title: '分类详情',
-        width: '100%',
+        title: '推荐产品',
+        width: '500px',
         content: "努力加载中...",
         cancelValue: '关 闭',
         cancel: function () {
         }
     });
-
-    var data = $('#testCar').html();
-
-    userDetailModel.content(data);
-    userDetailModel.showModal();
-
     // 异步获取页面内容
-    //$.ajax({
-    //    type: "post",
-    //    url: WEBROOT + '/client/detail.html?id=' + id,
-    //    success: function (data) {
-    //        userDetailModel.content(data);
-    //        userDetailModel.showModal();
-    //    },
-    //    error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //        popup.tip(errorThrown);
-    //    },
-    //    cache: false
-    //});
+    $.ajax({
+        type: "post",
+        url: WEBROOT + '/portal/checkResult/detail.html?id=' + id,
+        success: function (data) {
+            userDetailModel.content(data);
+            userDetailModel.showModal();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            popup.tip(errorThrown);
+        },
+        cache: false
+    });
 }
 
 /**

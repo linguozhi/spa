@@ -11,27 +11,31 @@
 </head>
 <body>
 
-<h1> 检 测 报 告</h1>
+<h1> <div class="tit"> 检 测 报 告</div></h1>
 
 <div class="main-con">
+    <input type="hidden" id="topCheckItemId" value="${topCheckItem.id!}" >
+    <div style="height: 500px">
     [#if topCheckResult??]
-    <div class="item-title"><h2>${topCheckResult.itemName}</h2></div>
-    <span>标准值:${topCheckResult.generalScore}</span>
-
-    <div class="progress prog" style="width: 20%">
-        <div class="progress-bar progress-bar-info" role="progressbar"
-             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-             style="width: ${topCheckResult.generalScore}%;">
-            <span class="sr-only">30% 完成（信息）</span>
+    <div class="item-title"><h1>${topCheckResult.itemName}</h1></div>
+    <div style="margin: auto">
+        <div style="display: inline;width: 20%;float: left;font-size: 25px"><span>标准值:${topCheckResult.generalScore?string("#.#")}</span></div>
+        <div class="progress prog" style="width:20%;display: inline;float: left">
+            <div class="progress-bar progress-bar-info" role="progressbar"
+                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                 style="width: ${topCheckResult.generalScore}%;">
+                <span class="sr-only">30% 完成（信息）</span>
+            </div>
         </div>
     </div>
-    <p>检测值:${topCheckResult.score}</p>
-
-    <div class="progress prog" style="width: 20%">
-        <div class="progress-bar progress-bar-warning" role="progressbar"
-             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-             style="width: ${topCheckResult.score}%;">
-            <span class="sr-only">20% 完成（警告）</span>
+    <div style="clear: left">
+        <div style="display: inline;width: 20%;float: left;font-size: 25px"><span>检测值:${topCheckResult.score?string("#.#")}</span></div>
+        <div class="progress prog " style="width: 20%;display: inline;float: left"">
+            <div class="progress-bar progress-bar-warning" role="progressbar"
+                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                 style="width: ${topCheckResult.score}%;">
+                <span class="sr-only">20% 完成（警告）</span>
+            </div>
         </div>
     </div>
     [/#if]
@@ -39,8 +43,9 @@
     [#if childCheckResultList??]
     [#list childCheckResultList as child]
     <div class="c-item ">
-        <div class="item-title"><h3>${topCheckResult.itemName}</h3></div>
-        <p>标准值:${topCheckResult.generalScore}</p>
+        <div class="item-title"><h3>${child.itemName}</h3></div>
+        <div>
+        <div class="v-name"  style="width: 40%"><span>标准值:${topCheckResult.generalScore?string("#.#")}</span></div>
 
         <div class="progress prog">
             <div class="progress-bar progress-bar-info" role="progressbar"
@@ -49,7 +54,7 @@
                 <span class="sr-only">30% 完成（信息）</span>
             </div>
         </div>
-        <p>检测值:${child.score}</p>
+        <div class="v-name"  style="width: 40%"><span>检测值:${child.score?string("#.#")}</span></div>
 
         <div class="progress prog">
             <div class="progress-bar progress-bar-warning" role="progressbar"
@@ -58,20 +63,19 @@
                 <span class="sr-only">20% 完成（警告）</span>
             </div>
         </div>
+        </div>
     </div>
     [/#list]
     [/#if]
-
-    <div class="s-product">
-        <ul class="pager">
-
+    </div>
+    <div class="s-product" style="width: 50%">
+        <ul class="pager" style="float:left;margin-top: 20px">
             <div class="btn-group btn-opts">
-
                 <span id="btnDetail" class="btn btn-md btn-success">推荐产品</span>
             </div>
         </ul>
     </div>
-    <div class="pager">
+    <div style="width: 50%;float: right">
         <ul class="pager">
             [#if start == 0]
             <li class="disabled"><a href="#">上一页</a></li>
@@ -81,7 +85,7 @@
             </li>
             [/#if]
 
-            [#if start+1 gte total]
+            [#if start gte total]
             <li class="disabled"><a href="#">下一页</a></li>
             [#else]
             <li>
@@ -91,38 +95,6 @@
         </ul>
     </div>
 
-</div>
-
-
-
-<div id="testCar">
-<div id="myCarousel" class="carousel slide" style="display: none">
-    <!-- 轮播（Carousel）指标 -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <!-- 轮播（Carousel）项目 -->
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="http://image.9game.cn/2016/11/10/14865440.jpg" alt="First slide">
-        </div>
-        <div class="item">
-            <img src="http://image.9game.cn/2016/11/10/14865440.jpg" alt="Second slide">
-        </div>
-        <div class="item">
-            <img src="http://image.9game.cn/2016/11/10/14865440.jpg" alt="Third slide">
-        </div>
-    </div>
-    <!-- 轮播（Carousel）导航 -->
-    <a class="carousel-control left" href="#myCarousel"
-       data-slide="prev">&lsaquo;
-    </a>
-    <a class="carousel-control right" href="#myCarousel"
-       data-slide="next">&rsaquo;
-    </a>
-</div>
 </div>
 </body>
 

@@ -150,11 +150,15 @@ doCaculate = function(ids) {
 
     // 操作
     popup.confirm('检测', '是否确认检测', function () {
-        popup.loading('正在检测，请稍候……').show();
+
+        //popup.loading('正在检测，请稍候:<span id="waitTime">15</span>').show();
+        var countdown = 5000;
+        var delay = popup.block("检测分析中,请耐心等待...");
+        delay.showModal();
         $.post(WEBROOT + "/client/caculate.html", {
             id: ids
         }, function (result) {
-            popup.loading().hide();
+            //popup.loading().hide();
             if (protocols.isSuccess(result)) {
                 myDataTable.reloads();
             } else {
@@ -162,9 +166,14 @@ doCaculate = function(ids) {
                 console.log(protocols.getMessage(result));
             }
         }, "json");
+
+        window.setTimeout(function() {
+            window.location.href = "/portal/checkResult/index.html?start=0&length=1&clientId=" + ids;
+            delay.close().remove();
+
+        }, countdown);
     });
 }
-
 
 /**
  * 详情页

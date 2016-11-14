@@ -57,10 +57,23 @@ var popup = {
 		// d.show();  // 没有遮盖层
 		d.showModal();
 	},
+
+	block : function(c) {
+		var html =  '<div class="ui-dialog" style="width: 200px;">'
+			+	'<p>' + c + '</p>'
+			+'</div>';
+
+		var d = dialog({
+			innerHTML : html
+		});
+
+		return d;
+	},
+
 	/**
 	 * 提示框并自动关闭
 	 */
-	tipAndClose : function(c) {
+	tipAndClose : function(c, waitTime) {
 		var content = c || '欢迎使用';
 		var d = dialog({
 			title : '提示',
@@ -70,7 +83,7 @@ var popup = {
 		d.showModal();
 		setTimeout(function() {
 			d.close().remove();
-		}, 2000);
+		}, waitTime);
 	},
 	/**
 	 * 确认弹窗
