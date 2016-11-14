@@ -172,7 +172,7 @@ doCaculate = function(ids) {
  */
 doDetail = function () {
 
-    var id = $("topCheckItemId").val();
+    var id = $("#topCheckItemId").val();
     // 校验
     if (utils.empty(id)) {
         popup.tip("请选择查看对象");
@@ -191,7 +191,7 @@ doDetail = function () {
     // 异步获取页面内容
     $.ajax({
         type: "post",
-        url: WEBROOT + '/portal/checkResult/detail.html?id=' + id,
+        url: WEBROOT + '/portal/checkResult/detail.html?checkItemId=' + id,
         success: function (data) {
             userDetailModel.content(data);
             userDetailModel.showModal();

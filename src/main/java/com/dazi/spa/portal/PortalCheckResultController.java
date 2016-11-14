@@ -8,6 +8,8 @@ import com.dazi.spa.modules.client.model.CheckRecord;
 import com.dazi.spa.modules.client.model.CheckResult;
 import com.dazi.spa.modules.client.service.CheckRecordService;
 import com.dazi.spa.modules.client.service.CheckResultService;
+import com.dazi.spa.modules.product.model.ProductImage;
+import com.dazi.spa.modules.product.service.ProductImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +38,9 @@ public class PortalCheckResultController {
 
     @Autowired
     private CheckItemService checkItemService;
+
+    @Autowired
+    private ProductImageService productImageService;
 
     @RequestMapping("/index")
     public String index(CheckResult checkResult, int start, int length, Model model) {
@@ -114,8 +119,8 @@ public class PortalCheckResultController {
     }
 
     @RequestMapping("/detail")
-    public String detail(Integer id, Model model) {
-        Assert.isTrue(IntegerUtil.gtZero(id), "id不能小于1");
+    public String detail(Integer checkItemId, Model model) {
+        Assert.isTrue(IntegerUtil.gtZero(checkItemId), "id不能小于1");
 //
 //        Custom custom = customService.selectByPrimaryKey(id);
 //        // custom tag
@@ -123,6 +128,15 @@ public class PortalCheckResultController {
 //
 //        model.addAttribute("custom", custom);
 //        model.addAttribute("tagCustomList", tagCustomList);
+        // 获取产品图片
+        ProductImage productImage = new ProductImage();
+        productImage.setItemId(checkItemId);
+        List<ProductImage> list = productImageService.selectList(productImage, null, 0, 1);
+        if(!CollectionUtils.isEmpty(list)) {
+            productImage = list.get(0);
+        }
+
+        model.addAttribute("productImage", productImage);
         return "portal/checkResult/detail";
     }
 

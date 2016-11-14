@@ -8,6 +8,9 @@
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+
   </resultMap>
   <sql id="Base_Column_List">
     id, product_id, short_url, url, create_time, modify_time
@@ -31,6 +34,9 @@
     </if>
     <if test="record.modifyTime != null">
       and spi.modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="record.itemId != null">
+      and sci.item_id = #{record.itemId,jdbcType=INTEGER}
     </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -156,6 +162,8 @@
     select 
     <include refid="Base_Column_List" />
      from spa_product_image spi
+    inner join spa_product sp on spi.product_id=sp.id
+    inner join spa_check_item sci on sp.item_id=sci.id
     <include refid="Where_Clause" />
     <if test="order != null and order.colName != null and order.colName != ''">
       order by ${order.colName}

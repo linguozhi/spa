@@ -94,4 +94,14 @@ public class ProductImage implements Serializable {
     public void setImageIdStr(String imageIdStr) {
         this.imageIdStr = imageIdStr;
     }
+
+    private Integer itemId;
+
+    public Integer getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
 }
