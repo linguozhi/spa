@@ -10,24 +10,25 @@
     <style>
         body {
             background-image:url('/public/images/common/index-bg.jpg');
-            background-size:100%;
+            width: 100%;
+            background-size:100% 100%;
             background-repeat:no-repeat;
+            background-attachment: fixed;
         }
     </style>
 </head>
 <body>
 
-    <div class="btn-group btn-opts set" style="width:100px;height:100px;float:right;">
+<!--    <div class="btn-group btn-opts set" style="width:100px;height:100px;float:right;">
         <div style="display: none">
         <a href="/index.html" target="_blank">设置>></a>
         </div>
+    </div>-->
+    <div class="main-con">
+        <div class="btn-group btn-opts btn-cli">
+            <span id="btnAdd" class="btn btn-lg btn-success"><a href="/client/index.html">用 户 </a> </span>
+        </div>
     </div>
-    <div class="btn-group btn-opts" style="margin-top: 700px;margin-left: 700px">
-        <span id="btnAdd" class="btn btn-lg btn-success"><a href="/client/index.html">用 户 </a> </span>
-
-    </div>
-
-
 </body>
 
 [#include "../../common/footer.html" /]

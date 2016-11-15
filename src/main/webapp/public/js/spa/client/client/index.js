@@ -34,16 +34,6 @@ var datatable = $('#datatable').DataTable(
             {"data": "id", "defaultContent": "", "width": "80px", class: "text-center"},
             {"data": "name", "defaultContent": ""},
             {"data": "age", "defaultContent": ""},
-            {
-                "data": "createTime", "defaultContent": "", "render": function (data, type) {
-                return moment(data).format("YYYY-MM-DD HH:mm:ss");
-            }
-            },
-            {
-                "data": "modifyTime", "defaultContent": "", "render": function (data, type) {
-                return moment(data).format("YYYY-MM-DD HH:mm:ss");
-            }
-            },
             {"data": "id", className: "center", "orderable": false, "width": "120px", class: "text-center"},
         ],
         "preDrawCallback": function (settings) {
@@ -53,10 +43,10 @@ var datatable = $('#datatable').DataTable(
             $('td:eq(0)', nRow).html('<input role="ck" type="checkbox" name="checkbox" class="center" value="' + aData.id + '">');
             //var html = '<a href="javascript:doDetail(' + aData.name + ')">查看</a>|';
             var html = '';
-            html += '<a href="javascript:doMod(' + aData.id + ')">修改</a>|';
+            //html += '<a href="javascript:doMod(' + aData.id + ')">修改</a>|';
             html += '<a href="javascript:doCaculate(' + aData.id + ')">开始检测</a>|';
-            html += '<a href="javascript:doDel(' + aData.id + ')">删除</a>|';
-            $('td:eq(6)', nRow).html(html.substr(0, html.length - 1));
+            //html += '<a href="javascript:doDel(' + aData.id + ')">删除</a>|';
+            $('td:eq(4)', nRow).html(html.substr(0, html.length - 1));
         },
         "drawCallback": function (settings) {
             popup.loading().hide();
@@ -150,28 +140,30 @@ doCaculate = function(ids) {
 
     // 操作
     popup.confirm('检测', '是否确认检测', function () {
+        popup.bubble("iframeMain",  "checking....");
+        popup.confirm('系统检测中', '点击确认进入下一步', function () {
+            //popup.loading('正在检测，请稍候:<span id="waitTime">15</span>').show();
+            var countdown = 5000;
+            var delay = popup.block("系统分析中,请耐心等待...");
+            delay.showModal();
+            $.post(WEBROOT + "/client/caculate.html", {
+                id: ids
+            }, function (result) {
+                //popup.loading().hide();
+                if (protocols.isSuccess(result)) {
+                    myDataTable.reloads();
+                } else {
+                    popup.tip(protocols.getMessage(result));
+                    console.log(protocols.getMessage(result));
+                }
+            }, "json");
 
-        //popup.loading('正在检测，请稍候:<span id="waitTime">15</span>').show();
-        var countdown = 5000;
-        var delay = popup.block("检测分析中,请耐心等待...");
-        delay.showModal();
-        $.post(WEBROOT + "/client/caculate.html", {
-            id: ids
-        }, function (result) {
-            //popup.loading().hide();
-            if (protocols.isSuccess(result)) {
-                myDataTable.reloads();
-            } else {
-                popup.tip(protocols.getMessage(result));
-                console.log(protocols.getMessage(result));
-            }
-        }, "json");
+            window.setTimeout(function() {
+                window.location.href = "/portal/checkResult/index.html?start=0&length=1&clientId=" + ids;
+                delay.close().remove();
 
-        window.setTimeout(function() {
-            window.location.href = "/portal/checkResult/index.html?start=0&length=1&clientId=" + ids;
-            delay.close().remove();
-
-        }, countdown);
+            }, countdown);
+        });
     });
 }
 

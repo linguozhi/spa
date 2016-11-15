@@ -107,7 +107,6 @@ public class PortalCheckResultController {
 
         }
 
-        model.addAttribute("topCheckItem", topCheckItem);
         model.addAttribute("topCheckResult", topCheckResult);
         model.addAttribute("childCheckResultList", childCheckResultList);
 

@@ -13,7 +13,7 @@
 
   </resultMap>
   <sql id="Base_Column_List">
-    id, product_id, short_url, url, create_time, modify_time
+    spi.id, spi.product_id, spi.short_url, spi.url, spi.create_time, spi.modify_time
   </sql>
   <sql id="Where_Clause">
      where 1=1 
@@ -36,7 +36,7 @@
       and spi.modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     </if>
     <if test="record.itemId != null">
-      and sci.item_id = #{record.itemId,jdbcType=INTEGER}
+      and sp.item_id = #{record.itemId,jdbcType=INTEGER}
     </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

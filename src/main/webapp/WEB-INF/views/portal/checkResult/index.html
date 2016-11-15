@@ -14,7 +14,7 @@
 <h1> <div class="tit"> 检 测 报 告</div></h1>
 
 <div class="main-con">
-    <input type="hidden" id="topCheckItemId" value="${topCheckItem.id!}" >
+    <input type="hidden" id="topCheckItemId" value="${topCheckResult.itemId!}" >
     <div style="height: 500px">
     [#if topCheckResult??]
     <div class="item-title"><h1>${topCheckResult.itemName}</h1></div>
@@ -71,7 +71,10 @@
     <div class="s-product" style="width: 50%">
         <ul class="pager" style="float:left;margin-top: 20px">
             <div class="btn-group btn-opts">
+                <!--综合报告没有推荐-->
+                [#if start lt total]
                 <span id="btnDetail" class="btn btn-md btn-success">推荐产品</span>
+                [/#if]
             </div>
         </ul>
     </div>
@@ -79,6 +82,10 @@
         <ul class="pager">
             [#if start == 0]
             <li class="disabled"><a href="#">上一页</a></li>
+            [#elseif start gte total]
+            <li>
+                <a href="${WEBROOT}/portal/checkResult/index.html?clientId=${clientId}&start=0&length=1">重看</a>
+            </li>
             [#else]
             <li>
                 <a href="${WEBROOT}/portal/checkResult/index.html?clientId=${clientId}&start=${start-1}&length=1">上一页</a>
@@ -86,7 +93,7 @@
             [/#if]
 
             [#if start gte total]
-            <li class="disabled"><a href="#">下一页</a></li>
+            <li><a href="/portal/client/index.html">回到首页</a></li>
             [#else]
             <li>
                 <a href="${WEBROOT}/portal/checkResult/index.html?clientId=${clientId}&start=${start+1}&length=1">下一页</a>

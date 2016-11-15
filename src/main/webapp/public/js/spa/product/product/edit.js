@@ -40,7 +40,7 @@ loadInit = function() {
 		initialPreviewConfig: imageConfigArr,
 		deleteUrl: "/image/del.html",
 		overwriteInitial: false,
-		maxFileCount: 4,
+		maxFileCount: 1,
 		//initialCaption: "",
 		//maxFilePreviewSize: 10240
 		allowedFileExtensions:  ['jpg', 'png'],

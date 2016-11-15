@@ -58,6 +58,11 @@ var popup = {
 		d.showModal();
 	},
 
+	conver : function() {
+		var d = dialog();
+		d.showModal();
+	},
+
 	block : function(c) {
 		var html =  '<div class="ui-dialog" style="width: 200px;">'
 			+	'<p>' + c + '</p>'
@@ -73,7 +78,7 @@ var popup = {
 	/**
 	 * 提示框并自动关闭
 	 */
-	tipAndClose : function(c, waitTime) {
+	tipAndClose : function(c) {
 		var content = c || '欢迎使用';
 		var d = dialog({
 			title : '提示',
@@ -83,7 +88,7 @@ var popup = {
 		d.showModal();
 		setTimeout(function() {
 			d.close().remove();
-		}, waitTime);
+		}, 2000);
 	},
 	/**
 	 * 确认弹窗
