@@ -58,9 +58,16 @@ var popup = {
 		d.showModal();
 	},
 
-	conver : function() {
-		var d = dialog();
+	conver : function(c, clk) {
+		var d = dialog({
+			content : c
+		});
+
 		d.showModal();
+		$("body").delegate("div", "click", function() {
+			d.close().remove();
+			clk();
+		});
 	},
 
 	block : function(c) {

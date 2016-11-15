@@ -10,8 +10,11 @@
  * 系统
  */
 $(document).ready(function () {
-    $(".set").hover(function() {
-        $(this).children().show();
-    })
+
+    //$(".set").hover(function() {
+    //    $(this).children().show();
+    //})
+
+
 });
 
