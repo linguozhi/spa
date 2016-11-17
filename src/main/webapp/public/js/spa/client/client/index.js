@@ -142,30 +142,29 @@ doCaculate = function(ids) {
 
     // 操作
    popup.confirm('检测', '是否确认检测', function () {
-       popup.conver("检测中....", function() {
-           popup.confirm('确认结束', '点击确认检测结束', function () {
-               //popup.loading('正在检测，请稍候:<span id="waitTime">15</span>').show();
-               var countdown = 5000;
-               var delay = popup.block("系统分析中,请耐心等待...");
-               delay.showModal();
-               $.post(WEBROOT + "/client/caculate.html", {
-                   id: ids
-               }, function (result) {
-                   //popup.loading().hide();
-                   if (protocols.isSuccess(result)) {
-                       myDataTable.reloads();
-                   } else {
-                       popup.tip(protocols.getMessage(result));
-                       console.log(protocols.getMessage(result));
-                   }
-               }, "json");
 
-               window.setTimeout(function() {
-                   window.location.href = "/portal/checkResult/index.html?start=0&length=1&clientId=" + ids;
-                   delay.close().remove();
+       popup.confirm('检测中', '检测完成后,点击确认进入下一步', function () {
+           //popup.loading('正在检测，请稍候:<span id="waitTime">15</span>').show();
+           var countdown = 5000;
+           var delay = popup.block("系统分析中,请耐心等待...");
+           delay.showModal();
+           $.post(WEBROOT + "/client/caculate.html", {
+               id: ids
+           }, function (result) {
+               //popup.loading().hide();
+               if (protocols.isSuccess(result)) {
+                   myDataTable.reloads();
+               } else {
+                   popup.tip(protocols.getMessage(result));
+                   console.log(protocols.getMessage(result));
+               }
+           }, "json");
 
-               }, countdown);
-           });
+           window.setTimeout(function() {
+               window.location.href = "/portal/checkResult/index.html?start=0&length=1&clientId=" + ids;
+               delay.close().remove();
+
+           }, countdown);
        });
 
     });

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -52,7 +53,7 @@ public class ImageController extends BaseController {
 
         // save
         ProductImage productImage = new ProductImage();
-        productImage.setShortUrl(SHORT_FILE_PATH + filePath.substring(filePath.lastIndexOf("/") + 1));
+        productImage.setShortUrl(SHORT_FILE_PATH + filePath.substring(filePath.lastIndexOf(File.separator) + 1));
         productImage.setUrl(filePath);
 
         if(productImageService.insertSelective(productImage) < 1) {

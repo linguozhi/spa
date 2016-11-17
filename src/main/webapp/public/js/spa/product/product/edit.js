@@ -35,6 +35,9 @@ loadInit = function() {
 		language : 'zh',
 		//allowedPreviewTypes: ['image'],
 		//allowedFileTypes: ['image'],
+		previewSettings : {
+			image: {width: "100%", height: "100%"}
+		},
 		initialPreview: imageArr,
 		initialPreviewAsData: true,
 		initialPreviewConfig: imageConfigArr,
@@ -46,8 +49,9 @@ loadInit = function() {
 		allowedFileExtensions:  ['jpg', 'png'],
 		uploadUrl: '/image/upload.html',
 		maxFilePreviewSize: 10240,
-		imageWidth: 50,
-		imageHeight: 50
+		imageWidth: '200px',
+		resizeImage: true,
+		imageHeight: '200px'
 	});
 
 	$('#input-24').on('fileuploaded', function(event, data, previewId, index) {

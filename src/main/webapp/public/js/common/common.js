@@ -71,14 +71,9 @@ var popup = {
 	},
 
 	block : function(c) {
-		var html =  '<div class="ui-dialog" style="width: 200px;">'
-			+	'<p>' + c + '</p>'
-			+'</div>';
-
 		var d = dialog({
-			innerHTML : html
+			content : c
 		});
-
 		return d;
 	},
 
