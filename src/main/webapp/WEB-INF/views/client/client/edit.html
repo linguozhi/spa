@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     [#include "../../common/header.html" /]
+    <link href="${WEBROOT}/public/js/bootstrap-fileinput/css/fileinput.css" rel="stylesheet">
+
 </head>
 <body>
 [#if client.id?? ]
@@ -15,6 +17,16 @@
           class="form-horizontal">
         [/#if]
         <input id="id" name="id" type="hidden" class="form-control input-sm" required value="${client.id!}">
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>头像</label>
+            <div class="col-sm-3">
+                <input type="hidden" id="headImageId" name="headImageId" value="">
+                <input id="image" name="productImage" type="file" multiple class="file-loading">
+                <p class="help-block">支持jpg、png格式，大小不超过2.0M</p>
+                <div id="errorBlock" class="help-block"></div>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>姓名</label>
             <div class="col-sm-3">
@@ -29,6 +41,33 @@
                        value="${client.age!}">
             </div>
         </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>性别</label>
+            <div class="col-sm-3">
+                <select id="itemId" name="itemId" class="form-control input-sm" value="">
+                    <option value="-1">-性别-</option>
+                    [if sexList??]
+                    [#list sexList as sex]
+                    <option value="${sex.index}" [#if client.sex?? && client.sex == sex.index]selected="selected"[/#if]>${sex.value}</option>
+                    [/#list]
+                    [/if]
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>电话</label>
+            <div class="col-sm-3">
+                <input id="phone" name="phone" type="text" class="form-control input-sm" maxlength="20" required
+                       value="${client.phone!}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>地址</label>
+            <div class="col-sm-3">
+                <input id="addr" name="addr" type="text" class="form-control input-sm" maxlength="100" required
+                       value="${client.addr!}">
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-sm-offset-2f col-sm-2">
@@ -40,6 +79,23 @@
 </body>
 
 [#include "../../common/footer.html" /]
+<script>
+    var imageArr = [];
+    var imageConfigArr = [];
+    var config = {caption: "Moon.jpg" , width: "200px", key: 1, extra:{id:1}};
+    [#if image??]
+    imageArr.push('${image.shortUrl!}');
+
+    config.caption = '${image.id}';
+    config.key = ${image.id};
+    config.extra.id = ${image.id}
+
+    imageConfigArr.push(config);
+
+    [/#if]
+</script>
+<script type="text/javascript" src="${WEBROOT}/public/js/bootstrap-fileinput/js/fileinput.js"></script>
+<script type="text/javascript" src="${WEBROOT}/public/js/bootstrap-fileinput/js/locales/zh.js"></script>
 <script type="text/javascript" src="${WEBROOT}/public/js/bootstrap/bootstrap3-typeahead.js"></script>
 <script type="text/javascript" src="${WEBROOT}/public/js/spa/client/client/edit.js?v=0614"></script>
 </html>

@@ -1,5 +1,6 @@
 package com.dazi.spa.modules.client.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.dazi.spa.common.datatable.Order;
@@ -26,6 +27,7 @@ public class ClientService {
 
     public int insertSelective(Client record) {
         Assert.notNull(record, "查询对象不能为空");
+        record.setCreateTime(new Date());
         return clientMapper.insertSelective(record);
     }
 

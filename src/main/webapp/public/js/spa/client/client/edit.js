@@ -156,6 +156,45 @@ buildUserGame = function() {
 loadInit = function() {
 	$("#btnAdd").click(addGame);
 	bindHover();
+
+	$("#image").fileinput({
+		showUpload : false,
+		showRemove : false,
+		language : 'zh',
+		//allowedPreviewTypes: ['image'],
+		//allowedFileTypes: ['image'],
+		previewSettings : {
+			image: {width: "100%", height: "100%"}
+		},
+		initialPreview: imageArr,
+		initialPreviewAsData: true,
+		initialPreviewConfig: imageConfigArr,
+		deleteUrl: "/image/del.html",
+		overwriteInitial: false,
+		maxFileCount: 1,
+		//initialCaption: "",
+		//maxFilePreviewSize: 10240
+		allowedFileExtensions:  ['jpg', 'png'],
+		uploadUrl: '/image/upload.html',
+		maxFilePreviewSize: 10240,
+		imageWidth: '200px',
+		resizeImage: true,
+		imageHeight: '200px'
+	});
+
+	$('#image').on('fileuploaded', function(event, data, previewId, index) {
+		console.log(data);
+		var result = data.response;
+		if(!protocols.isSuccess(result)) {
+			popup.tip(protocols.getMessage(result));
+			return;
+		}
+
+		var imageId = data.response.data;
+		if(imageId > 0) {
+			$('#headImageId').val(imageId)
+		}
+	});
 }
 
 

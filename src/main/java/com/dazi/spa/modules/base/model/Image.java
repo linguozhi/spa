@@ -1,18 +1,23 @@
-package com.dazi.spa.modules.client.model;
+package com.dazi.spa.modules.base.model;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class CheckRecord implements Serializable {
+public class Image implements Serializable {
     /**
      *  自增id
      */
     private Integer id;
 
     /**
-     *  客户id
+     *  短地址
      */
-    private Integer clientId;
+    private String shortUrl;
+
+    /**
+     *  完整地址
+     */
+    private String url;
 
     /**
      *  创建时间
@@ -24,16 +29,6 @@ public class CheckRecord implements Serializable {
      */
     private Date modifyTime;
 
-    /**
-     *  上次检测时间
-     */
-    private Date prevTime;
-
-    /**
-     *  第几次检测
-     */
-    private Integer times;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -44,12 +39,20 @@ public class CheckRecord implements Serializable {
         this.id = id;
     }
 
-    public Integer getClientId() {
-        return clientId;
+    public String getShortUrl() {
+        return shortUrl;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Date getCreateTime() {
@@ -66,21 +69,5 @@ public class CheckRecord implements Serializable {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
-    }
-
-    public Date getPrevTime() {
-        return prevTime;
-    }
-
-    public void setPrevTime(Date prevTime) {
-        this.prevTime = prevTime;
-    }
-
-    public Integer getTimes() {
-        return times;
-    }
-
-    public void setTimes(Integer times) {
-        this.times = times;
     }
 }

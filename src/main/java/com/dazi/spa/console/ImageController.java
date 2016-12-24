@@ -4,6 +4,8 @@ import com.dazi.spa.common.protocol.ResponseHelper;
 import com.dazi.spa.common.protocol.StatusCodeEnum;
 import com.dazi.spa.common.utils.FileUtil;
 import com.dazi.spa.common.utils.IntegerUtil;
+import com.dazi.spa.modules.base.model.Image;
+import com.dazi.spa.modules.base.service.ImageService;
 import com.dazi.spa.modules.product.model.ProductImage;
 import com.dazi.spa.modules.product.service.ProductImageService;
 import org.slf4j.Logger;
@@ -40,8 +42,11 @@ public class ImageController extends BaseController {
     @Value("${upload.shortPath}")
     private String SHORT_FILE_PATH;
 
+//    @Autowired
+//    private ProductImageService productImageService;
+
     @Autowired
-    private ProductImageService productImageService;
+    private ImageService imageService;
 
     @RequestMapping("/upload")
     @ResponseBody
@@ -52,21 +57,21 @@ public class ImageController extends BaseController {
         logger.info("filePath:" + filePath);
 
         // save
-        ProductImage productImage = new ProductImage();
-        productImage.setShortUrl(SHORT_FILE_PATH + filePath.substring(filePath.lastIndexOf(File.separator) + 1));
-        productImage.setUrl(filePath);
+        Image image = new Image();
+        image.setShortUrl(SHORT_FILE_PATH + filePath.substring(filePath.lastIndexOf(File.separator) + 1));
+        image.setUrl(filePath);
 
-        if(productImageService.insertSelective(productImage) < 1) {
+        if(imageService.insertSelective(image) < 1) {
             ResponseHelper.buildErrorResult("上传失败");
         }
-        return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, productImage.getId().toString());
+        return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, image.getId().toString());
     }
 
     @RequestMapping("/del")
     @ResponseBody  public Map delete(Integer id) {
         Assert.isTrue(IntegerUtil.gtZero(id) , "id不能小于1");
 
-        if(productImageService.deleteByPrimaryKey(id) < 1) {
+        if(imageService.deleteByPrimaryKey(id) < 1) {
             return ResponseHelper.buildErrorResult("删除失败");
         }
 

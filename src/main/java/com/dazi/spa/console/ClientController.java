@@ -4,10 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.dazi.spa.common.datatable.DataTable;
 import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.protocol.ResponseHelper;
+import com.dazi.spa.common.protocol.StatusCodeEnum;
 import com.dazi.spa.common.utils.DateUtils;
 import com.dazi.spa.common.utils.IntegerUtil;
+import com.dazi.spa.modules.base.model.Image;
+import com.dazi.spa.modules.base.service.ImageService;
 import com.dazi.spa.modules.checkItem.model.CheckItem;
 import com.dazi.spa.modules.checkItem.service.CheckItemService;
+import com.dazi.spa.modules.client.enums.SexEnum;
 import com.dazi.spa.modules.client.model.CheckRecord;
 import com.dazi.spa.modules.client.model.Client;
 import com.dazi.spa.modules.client.service.CheckRecordService;
@@ -28,7 +32,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("client")
-public class ClientController {
+public class ClientController extends BaseController {
     @Autowired
     private ClientService clientService;
 
@@ -40,6 +44,9 @@ public class ClientController {
 
     @Autowired
     private CheckRecordService checkRecordService;
+
+    @Autowired
+    private ImageService imageService;
 
     @RequestMapping("/index")
     public String index() {
@@ -63,11 +70,19 @@ public class ClientController {
     @RequestMapping("/edit")
     public String edit(Integer id, Model model) {
         Client client = new Client();
+
+        // 用户头像
+        Image image = new Image();
         if(IntegerUtil.gtZero(id)) {
             client = clientService.selectByPrimaryKey(id);
+            image = imageService.selectByPrimaryKey(client.getHeadImageId());
         }
 
+        SexEnum[] sexList = SexEnum.values();
+
         model.addAttribute("client", client);
+        model.addAttribute("sexList", sexList);
+        model.addAttribute("image", image);
 
         return "client/client/edit";
     }
@@ -75,10 +90,10 @@ public class ClientController {
     @RequestMapping("/save")
     @ResponseBody
     public Map save(Client client) {
+        // 校验
+        Assert.notNull(client.getName(), "客户名称不能为空");
+        Assert.isTrue(IntegerUtil.gtZero(client.getAge()), "客户年龄不能小于1");
 
-        int total = clientService.selectTotal(new Client());
-
-        client.setCreateTime(new Date());
         if(clientService.insertSelective(client) < 1) {
             return ResponseHelper.buildErrorResult("保存失败");
         }
@@ -108,6 +123,20 @@ public class ClientController {
         }
 
         return ResponseHelper.buildSuccessResult();
+    }
+
+    /**
+     * 获取客户信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/get")
+    @ResponseBody
+    public Map get(Integer id) {
+        Assert.notNull(id, "id不能为空");
+
+        Client client = clientService.selectByPrimaryKey(id);
+        return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, client);
     }
 
     /**

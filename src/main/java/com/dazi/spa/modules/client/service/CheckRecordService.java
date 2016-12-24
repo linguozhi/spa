@@ -85,4 +85,23 @@ public class CheckRecordService {
         List<CheckRecord> list = selectList(record, Order.build("modify_time"), 0, 1);
         return CollectionUtils.isEmpty(list) ? null : list.get(0);
     }
+
+    /**
+     * 保存检测记录
+     * @param checkRecord
+     * @return
+     */
+    public int save(CheckRecord checkRecord) {
+        Assert.notNull(checkRecord, "checkRecord not null");
+        Assert.isTrue(IntegerUtil.gtZero(checkRecord.getClientId()), "clientId not less than 1");
+
+        CheckRecord prevRecord = getLatest(checkRecord.getClientId());
+        if (null != prevRecord) {
+            checkRecord.setPrevTime(prevRecord.getCreateTime());
+            checkRecord.setTimes(prevRecord.getTimes() + 1);
+        }
+
+        return insertSelective(checkRecord);
+
+    }
 }

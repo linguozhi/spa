@@ -29,6 +29,31 @@ public class Client implements Serializable {
      */
     private Date modifyTime;
 
+    /**
+     *  生日
+     */
+    private Date birthday;
+
+    /**
+     *  地址
+     */
+    private String addr;
+
+    /**
+     *  性别。0：女：1：男：3：其他
+     */
+    private Integer sex;
+
+    /**
+     *  联系电话
+     */
+    private String phone;
+
+    /**
+     *  用户头像
+     */
+    private Integer headImageId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -71,6 +96,38 @@ public class Client implements Serializable {
         this.modifyTime = modifyTime;
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     // extend fields
     private Integer recordId;
 
@@ -80,5 +137,13 @@ public class Client implements Serializable {
 
     public void setRecordId(Integer recordId) {
         this.recordId = recordId;
+    }
+
+    public Integer getHeadImageId() {
+        return headImageId;
+    }
+
+    public void setHeadImageId(Integer headImageId) {
+        this.headImageId = headImageId;
     }
 }
