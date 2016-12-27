@@ -8,9 +8,11 @@
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="prev_time" jdbcType="TIMESTAMP" property="prevTime" />
     <result column="times" jdbcType="INTEGER" property="times" />
+
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, client_id, create_time, modify_time, prev_time, times
+    scr.id, scr.client_id, scr.create_time, scr.modify_time, scr.prev_time, scr.times
   </sql>
   <sql id="Where_Clause">
      where 1=1 
@@ -52,6 +54,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dazi.spa.modules.client.model.CheckRecord">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into spa_check_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -131,7 +136,9 @@
   <select id="selectList" parameterType="com.dazi.spa.modules.client.model.CheckRecord" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
+    , sc.name client_name
      from spa_check_record scr
+    left join spa_client sc on scr.client_id=sc.id
     <include refid="Where_Clause" />
     <if test="order != null and order.colName != null and order.colName != ''">
       order by ${order.colName}

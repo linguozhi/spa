@@ -157,7 +157,7 @@ public class ClientController extends BaseController {
         // 生成检测记录
         CheckRecord checkRecord = new CheckRecord();
         checkRecord.setClientId(id);
-        if(checkRecordService.insertSelective(checkRecord) < 1) {
+        if(checkRecordService.save(checkRecord) < 1) {
             return ResponseHelper.buildErrorResult("生成检测记录失败");
         }
 
