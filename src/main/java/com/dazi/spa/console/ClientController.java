@@ -136,6 +136,12 @@ public class ClientController extends BaseController {
         Assert.notNull(id, "id不能为空");
 
         Client client = clientService.selectByPrimaryKey(id);
+        if (null != client) {
+            Image image = imageService.selectByPrimaryKey(client.getHeadImageId());
+
+            client.setHeadImageUrl(image == null ? "" : image.getShortUrl());
+        }
+
         return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, client);
     }
 

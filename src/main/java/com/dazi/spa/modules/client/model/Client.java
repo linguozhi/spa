@@ -146,4 +146,15 @@ public class Client implements Serializable {
     public void setHeadImageId(Integer headImageId) {
         this.headImageId = headImageId;
     }
+
+    private String headImageUrl;
+
+
+    public String getHeadImageUrl() {
+        return headImageUrl;
+    }
+
+    public void setHeadImageUrl(String headImageUrl) {
+        this.headImageUrl = headImageUrl;
+    }
 }
