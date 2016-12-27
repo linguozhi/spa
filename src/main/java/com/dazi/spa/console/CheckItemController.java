@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.dazi.spa.common.datatable.DataTable;
 import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.protocol.ResponseHelper;
+import com.dazi.spa.common.protocol.StatusCodeEnum;
 import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.model.AgeLevel;
 import com.dazi.spa.modules.checkItem.model.CheckItem;
@@ -149,6 +150,20 @@ public class CheckItemController {
         }
 
         return ResponseHelper.buildSuccessResult();
+    }
+
+    /**
+     * 获取所有检测品项
+     * @return
+     */
+    @RequestMapping("/getAll")
+    @ResponseBody
+    public Map getAll() {
+        CheckItem checkItem = new CheckItem();
+        checkItem.setParentId(0);
+
+        List<CheckItem> list = checkItemService.selectList(checkItem, Order.build("order_no", "asc"), 0, -1);
+        return ResponseHelper.buildResult(StatusCodeEnum.DATA_EXIST, list);
     }
 
 }
