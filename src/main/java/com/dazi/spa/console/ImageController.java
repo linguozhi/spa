@@ -50,7 +50,7 @@ public class ImageController extends BaseController {
 
     @RequestMapping("/upload")
     @ResponseBody
-    public Map upload(@RequestParam(value = "productImage") MultipartFile file
+    public Map upload(@RequestParam(value = "image") MultipartFile file
             , HttpServletRequest request
             , HttpServletResponse response) throws IOException {
         String filePath = FileUtil.uploadFile(file, FILE_PATH, request);

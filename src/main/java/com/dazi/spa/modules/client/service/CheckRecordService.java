@@ -95,6 +95,7 @@ public class CheckRecordService {
         Assert.notNull(checkRecord, "checkRecord not null");
         Assert.isTrue(IntegerUtil.gtZero(checkRecord.getClientId()), "clientId not less than 1");
 
+        checkRecord.setTimes(1);
         CheckRecord prevRecord = getLatest(checkRecord.getClientId());
         if (null != prevRecord) {
             checkRecord.setPrevTime(prevRecord.getCreateTime());

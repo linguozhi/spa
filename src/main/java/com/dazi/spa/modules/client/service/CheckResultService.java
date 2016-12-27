@@ -141,32 +141,32 @@ public class CheckResultService {
         }
 
         // 计算子品项分值
-        List<CheckItem> childItemList = checkItemService.getListByParentId(checkItem.getId());
-        if(CollectionUtils.isEmpty(childItemList)) {
-            errors.add("子品项为空");
-            logger.error("子品项为空,info:{}", JSON.toJSONString(checkItem));
-            return;
-        }
-
-        for (CheckItem child : childItemList) {
-            r = (int)Math.pow(-1, (int)(Math.random()*2));
-            rd = checkItem.getRandRatio().multiply(new BigDecimal(Math.random())).multiply(new BigDecimal(r));
-            finalShowRatio = new BigDecimal(1).add(rd);
-            // 子相分值=父项分值 * 比例
-            BigDecimal childScore = topScore.multiply(finalShowRatio);
-
-            checkResult = new CheckResult();
-            checkResult.setScore(childScore);
-            checkResult.setItemId(child.getId());
-            checkResult.setClientId(client.getId());
-            checkResult.setRecordId(client.getRecordId());
-            checkResult.setGeneralScore(ageLevel.getScore());
-
-            if(insertSelective(checkResult) < 1) {
-                errors.add("子品项入库失败");
-                logger.error("insert child item checkResult failed,info:{}", JSON.toJSONString(child));
-            }
-        }
+//        List<CheckItem> childItemList = checkItemService.getListByParentId(checkItem.getId());
+//        if(CollectionUtils.isEmpty(childItemList)) {
+//            errors.add("子品项为空");
+//            logger.error("子品项为空,info:{}", JSON.toJSONString(checkItem));
+//            return;
+//        }
+//
+//        for (CheckItem child : childItemList) {
+//            r = (int)Math.pow(-1, (int)(Math.random()*2));
+//            rd = checkItem.getRandRatio().multiply(new BigDecimal(Math.random())).multiply(new BigDecimal(r));
+//            finalShowRatio = new BigDecimal(1).add(rd);
+//            // 子相分值=父项分值 * 比例
+//            BigDecimal childScore = topScore.multiply(finalShowRatio);
+//
+//            checkResult = new CheckResult();
+//            checkResult.setScore(childScore);
+//            checkResult.setItemId(child.getId());
+//            checkResult.setClientId(client.getId());
+//            checkResult.setRecordId(client.getRecordId());
+//            checkResult.setGeneralScore(ageLevel.getScore());
+//
+//            if(insertSelective(checkResult) < 1) {
+//                errors.add("子品项入库失败");
+//                logger.error("insert child item checkResult failed,info:{}", JSON.toJSONString(child));
+//            }
+//        }
     }
 
     public void caculate(Client client, List<String> errors) {
@@ -213,10 +213,10 @@ public class CheckResultService {
 
             // 计算增益后分数
             CheckResult newTopCheckResult = countScore(lastTopCheckResult, addRatio, client.getRecordId());
-            List<CheckResult> newChildCheckResultList = countScore(lastChildCheckResultList, addRatio, client.getRecordId());
+//            List<CheckResult> newChildCheckResultList = countScore(lastChildCheckResultList, addRatio, client.getRecordId());
 
             caculateList.add(newTopCheckResult);
-            caculateList.addAll(newChildCheckResultList);
+//            caculateList.addAll(newChildCheckResultList);
         }
 
         // 最新检测分数入库

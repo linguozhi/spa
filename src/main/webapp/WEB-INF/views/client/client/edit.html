@@ -21,7 +21,7 @@
             <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>头像</label>
             <div class="col-sm-3">
                 <input type="hidden" id="headImageId" name="headImageId" value="">
-                <input id="image" name="productImage" type="file" multiple class="file-loading">
+                <input id="image" name="image" type="file" multiple class="file-loading">
                 <p class="help-block">支持jpg、png格式，大小不超过2.0M</p>
                 <div id="errorBlock" class="help-block"></div>
             </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             <label for="" class="col-sm-2f control-label"><em class="text-danger">*</em>性别</label>
             <div class="col-sm-3">
-                <select id="itemId" name="itemId" class="form-control input-sm" value="">
+                <select id="sex" name="sex" class="form-control input-sm" value="">
                     <option value="-1">-性别-</option>
                     [if sexList??]
                     [#list sexList as sex]
@@ -83,12 +83,12 @@
     var imageArr = [];
     var imageConfigArr = [];
     var config = {caption: "Moon.jpg" , width: "200px", key: 1, extra:{id:1}};
-    [#if image??]
+    [#if image?? && image.id??]
     imageArr.push('${image.shortUrl!}');
 
-    config.caption = '${image.id}';
-    config.key = ${image.id};
-    config.extra.id = ${image.id}
+    config.caption = '${image.id!}';
+    config.key = ${image.id!};
+    config.extra.id = ${image.id!}
 
     imageConfigArr.push(config);
 
