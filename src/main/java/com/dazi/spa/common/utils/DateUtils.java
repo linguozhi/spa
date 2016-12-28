@@ -527,4 +527,14 @@ public class DateUtils {
 	    theDayCalendar.set(Calendar.DAY_OF_MONTH, pointDay);
 	    return theDayCalendar.getTime();
 	}
+
+	/**
+	 * 计算两个时间的差异天数
+	 * @param d1
+	 * @param d2
+     */
+	public static int getDiff(Date d1, Date d2) {
+		long diff = d2.getTime() - d1.getTime();
+		return (int)diff / (24 * 60 * 60 * 1000);
+	}
 }

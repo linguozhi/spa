@@ -141,4 +141,26 @@ public class CheckRecord implements Serializable {
     public void setPrevTimeStr(Date prevTime) {
         this.prevTimeStr = DateUtils.format(prevTime, "yyyy-MM-dd HH:mm:ss");
     }
+
+    /**
+     * 间隔天数
+     */
+    private Integer diffDay;
+
+    public Integer getDiffDay() {
+        return diffDay;
+    }
+
+    public void setDiffDay(Integer diffDay) {
+        this.diffDay = diffDay;
+    }
+
+    /**
+     * 计算与上次时间的间隔
+     */
+    public void setDiffDay() {
+        if (this.createTime != null && this.prevTime != null) {
+            this.diffDay = DateUtils.getDiff(this.createTime, this.prevTime);
+        }
+    }
 }

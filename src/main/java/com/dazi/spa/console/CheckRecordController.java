@@ -64,6 +64,7 @@ public class CheckRecordController {
         CheckRecord checkRecord = checkRecordService.selectByPrimaryKey(recordId);
         if (null != checkRecord) {
             checkRecord.setCheckResultList(checkResultService.getListByRecordId(checkRecord.getId()));
+            checkRecord.setDiffDay();
         }
         return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, checkRecord);
     }
@@ -84,6 +85,7 @@ public class CheckRecordController {
         if (!CollectionUtils.isEmpty(list)) {
             for (CheckRecord cr : list) {
                 cr.setCheckResultList(checkResultService.getListByRecordId(cr.getId()));
+                cr.setDiffDay();
             }
         }
         return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, list);
