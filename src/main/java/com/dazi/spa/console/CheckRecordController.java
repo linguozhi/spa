@@ -74,7 +74,7 @@ public class CheckRecordController {
      * @param clientId
      * @return
      */
-    @RequestMapping("loadList")
+    @RequestMapping("/loadList")
     @ResponseBody
     public Map loadList(Integer clientId, int start, int length) {
         Assert.isTrue(IntegerUtil.gtZero(clientId), "clientId not less than 1");

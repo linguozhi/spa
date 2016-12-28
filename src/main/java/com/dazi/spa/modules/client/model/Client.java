@@ -1,5 +1,7 @@
 package com.dazi.spa.modules.client.model;
 
+import com.dazi.spa.common.utils.DateUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -102,6 +104,7 @@ public class Client implements Serializable {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+        setBirthdayStr(birthday);
     }
 
     public String getAddr() {
@@ -156,5 +159,19 @@ public class Client implements Serializable {
 
     public void setHeadImageUrl(String headImageUrl) {
         this.headImageUrl = headImageUrl;
+    }
+
+    private String birthdayStr;
+
+    public String getBirthdayStr() {
+        return birthdayStr;
+    }
+
+    public void setBirthdayStr(String birthdayStr) {
+        this.birthdayStr = birthdayStr;
+    }
+
+    public void setBirthdayStr(Date birthday) {
+        this.birthdayStr = birthday == null ? null : DateUtils.format(birthday, "yyyy-MM-dd");
     }
 }
