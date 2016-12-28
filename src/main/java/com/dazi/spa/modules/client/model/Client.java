@@ -1,6 +1,7 @@
 package com.dazi.spa.modules.client.model;
 
 import com.dazi.spa.common.utils.DateUtils;
+import com.dazi.spa.modules.client.enums.SexEnum;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -173,5 +174,19 @@ public class Client implements Serializable {
 
     public void setBirthdayStr(Date birthday) {
         this.birthdayStr = birthday == null ? null : DateUtils.format(birthday, "yyyy-MM-dd");
+    }
+
+    private String sexName;
+
+    public String getSexName() {
+        return sexName;
+    }
+
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
+    }
+
+    public void setSexName(Integer sex) {
+        this.sexName = SexEnum.get(sex).getValue();
     }
 }
