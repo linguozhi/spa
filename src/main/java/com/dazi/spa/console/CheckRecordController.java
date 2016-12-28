@@ -6,7 +6,6 @@ import com.dazi.spa.common.protocol.ResponseHelper;
 import com.dazi.spa.common.protocol.StatusCodeEnum;
 import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.client.model.CheckRecord;
-import com.dazi.spa.modules.client.model.CheckResult;
 import com.dazi.spa.modules.client.service.CheckRecordService;
 import com.dazi.spa.modules.client.service.CheckResultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +57,11 @@ public class CheckRecordController {
      */
     @RequestMapping("/get")
     @ResponseBody
-    public Map get(Integer id, Integer clientId) {
-        Assert.isTrue(IntegerUtil.gtZero(id), "id not less than 1");
+    public Map get(Integer recordId, Integer clientId) {
+        Assert.isTrue(IntegerUtil.gtZero(recordId), "recordId not less than 1");
         Assert.isTrue(IntegerUtil.gtZero(clientId), "clientId not less than 1");
 
-        CheckRecord checkRecord = checkRecordService.selectByPrimaryKey(id);
+        CheckRecord checkRecord = checkRecordService.selectByPrimaryKey(recordId);
         if (null != checkRecord) {
             checkRecord.setCheckResultList(checkResultService.getListByRecordId(checkRecord.getId()));
         }

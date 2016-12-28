@@ -46,6 +46,11 @@ public class CheckResult implements Serializable {
      */
     private BigDecimal generalScore;
 
+    /**
+     * 品项阶梯id
+     */
+    private Integer itemLevelId;
+
     private static final long serialVersionUID = 1L;
     private Integer parentId;
 
@@ -105,6 +110,13 @@ public class CheckResult implements Serializable {
         this.generalScore = generalScore;
     }
 
+    public Integer getItemLevelId() {
+        return itemLevelId;
+    }
+
+    public void setItemLevelId(Integer itemLevelId) {
+        this.itemLevelId = itemLevelId;
+    }
 
     // extend fields
     /**

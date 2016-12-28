@@ -5,8 +5,10 @@ import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.model.AgeLevel;
 import com.dazi.spa.modules.checkItem.model.CheckItem;
+import com.dazi.spa.modules.checkItem.model.ItemLevel;
 import com.dazi.spa.modules.checkItem.service.AgeLevelService;
 import com.dazi.spa.modules.checkItem.service.CheckItemService;
+import com.dazi.spa.modules.checkItem.service.ItemLevelService;
 import com.dazi.spa.modules.client.mapper.CheckResultMapper;
 import com.dazi.spa.modules.client.model.CheckRecord;
 import com.dazi.spa.modules.client.model.CheckResult;
@@ -35,9 +37,11 @@ public class CheckResultService {
     @Autowired
     private AgeLevelService ageLevelService;
 
-
     @Autowired
     private CheckResultMapper checkResultMapper;
+
+    @Autowired
+    private ItemLevelService itemLevelService;
 
     public int deleteByPrimaryKey(Integer id) {
         Assert.notNull(id, "id不能为空");
@@ -125,6 +129,8 @@ public class CheckResultService {
 
         // 当前分值
         BigDecimal topScore = ageLevel.getScore().multiply(finalShowRatio);
+        // 当前分值对应的等级
+        ItemLevel itemLevel = itemLevelService.get(checkItem.getId(), topScore);
 
         CheckResult checkResult = new CheckResult();
         checkResult.setItemId(checkItem.getId());
@@ -132,6 +138,9 @@ public class CheckResultService {
         checkResult.setRecordId(client.getRecordId());
         checkResult.setScore(topScore);
         checkResult.setGeneralScore(ageLevel.getScore());
+        if (itemLevel != null) {
+            checkResult.setItemLevelId(itemLevel.getId());
+        }
 
         if(insertSelective(checkResult) < 1) {
             errors.add("检测结果入库失败");

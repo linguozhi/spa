@@ -156,14 +156,13 @@ public class CheckItemController {
      * 获取所有检测品项
      * @return
      */
-    @RequestMapping("/getAll")
+    @RequestMapping("/loadList")
     @ResponseBody
-    public Map getAll() {
-        CheckItem checkItem = new CheckItem();
+    public Map loadList(CheckItem checkItem, int start, int length) {
         checkItem.setParentId(0);
 
         List<CheckItem> list = checkItemService.selectList(checkItem, Order.build("order_no", "asc"), 0, -1);
-        return ResponseHelper.buildResult(StatusCodeEnum.DATA_EXIST, list);
+        return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, list);
     }
 
 }

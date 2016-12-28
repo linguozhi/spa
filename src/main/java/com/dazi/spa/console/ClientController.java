@@ -151,7 +151,8 @@ public class ClientController extends BaseController {
      * @return
      */
     @RequestMapping("/caculate")
-    @ResponseBody  public Map caculate(Integer id) {
+    @ResponseBody
+    public Map caculate(Integer id) {
         Assert.isTrue(IntegerUtil.gtZero(id), "id不能小于1");
 
         Client client = clientService.selectByPrimaryKey(id);

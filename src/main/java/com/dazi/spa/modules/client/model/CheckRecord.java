@@ -1,5 +1,7 @@
 package com.dazi.spa.modules.client.model;
 
+import com.dazi.spa.common.utils.DateUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -59,6 +61,7 @@ public class CheckRecord implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+        setCreateTimeStr(createTime);
     }
 
     public Date getModifyTime() {
@@ -75,6 +78,7 @@ public class CheckRecord implements Serializable {
 
     public void setPrevTime(Date prevTime) {
         this.prevTime = prevTime;
+        setPrevTimeStr(prevTime);
     }
 
     public Integer getTimes() {
@@ -108,5 +112,33 @@ public class CheckRecord implements Serializable {
 
     public void setCheckResultList(List<CheckResult> checkResultList) {
         this.checkResultList = checkResultList;
+    }
+
+    private String createTimeStr;
+
+    private String prevTimeStr;
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
+    }
+
+    public void setCreateTimeStr(Date createTime) {
+        this.createTimeStr = DateUtils.format(createTime, "yyyy-MM-dd HH:mm:ss");
+    }
+
+    public String getPrevTimeStr() {
+        return prevTimeStr;
+    }
+
+    public void setPrevTimeStr(String prevTimeStr) {
+        this.prevTimeStr = prevTimeStr;
+    }
+
+    public void setPrevTimeStr(Date prevTime) {
+        this.prevTimeStr = DateUtils.format(prevTime, "yyyy-MM-dd HH:mm:ss");
     }
 }
