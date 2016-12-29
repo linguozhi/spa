@@ -106,4 +106,15 @@ public class ItemLevel implements Serializable {
     public BigDecimal getScore() {
         return score;
     }
+
+    // ext
+    private Integer selected;
+
+    public Integer getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Integer selected) {
+        this.selected = selected;
+    }
 }

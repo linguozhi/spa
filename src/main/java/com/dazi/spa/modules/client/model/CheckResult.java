@@ -1,8 +1,11 @@
 package com.dazi.spa.modules.client.model;
 
+import com.dazi.spa.modules.checkItem.model.ItemLevel;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class CheckResult implements Serializable {
     /**
@@ -159,5 +162,16 @@ public class CheckResult implements Serializable {
 
     public Integer getParentId() {
         return parentId;
+    }
+
+    private List<ItemLevel> itemLevelList;
+
+
+    public List<ItemLevel> getItemLevelList() {
+        return itemLevelList;
+    }
+
+    public void setItemLevelList(List<ItemLevel> itemLevelList) {
+        this.itemLevelList = itemLevelList;
     }
 }

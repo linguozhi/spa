@@ -1,6 +1,7 @@
 package com.dazi.spa.modules.checkItem.service;
 
 import com.dazi.spa.common.datatable.Order;
+import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.checkItem.mapper.ItemLevelMapper;
 import com.dazi.spa.modules.checkItem.model.ItemLevel;
 
@@ -68,5 +69,19 @@ public class ItemLevelService {
 
         List<ItemLevel> list = selectList(itemLevel, null, 0, 1);
         return CollectionUtils.isEmpty(list) ? null : list.get(0);
+    }
+
+    /**
+     * select by itemId
+     * @param itemId
+     * @return
+     */
+    public List<ItemLevel> getByItemId(Integer itemId) {
+        Assert.isTrue(IntegerUtil.gtZero(itemId), "itemId not less than 1");
+
+        ItemLevel itemLevel = new ItemLevel();
+        itemLevel.setItemId(itemId);
+
+        return selectList(itemLevel, null, 0, -1);
     }
 }

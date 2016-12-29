@@ -5,7 +5,10 @@ import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.protocol.ResponseHelper;
 import com.dazi.spa.common.protocol.StatusCodeEnum;
 import com.dazi.spa.common.utils.IntegerUtil;
+import com.dazi.spa.modules.checkItem.model.ItemLevel;
+import com.dazi.spa.modules.checkItem.service.ItemLevelService;
 import com.dazi.spa.modules.client.model.CheckRecord;
+import com.dazi.spa.modules.client.model.CheckResult;
 import com.dazi.spa.modules.client.service.CheckRecordService;
 import com.dazi.spa.modules.client.service.CheckResultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class CheckRecordController {
 
     @Autowired
     private CheckResultService checkResultService;
+
+    @Autowired
+    private ItemLevelService itemLevelService;
 
     @RequestMapping("/index")
     public String index() {
@@ -63,8 +69,24 @@ public class CheckRecordController {
 
         CheckRecord checkRecord = checkRecordService.selectByPrimaryKey(recordId);
         if (null != checkRecord) {
-            checkRecord.setCheckResultList(checkResultService.getListByRecordId(checkRecord.getId()));
+            List<CheckResult> checkResultList = checkResultService.getListByRecordId(checkRecord.getId());
+            if (!CollectionUtils.isEmpty(checkResultList)) {
+                for (CheckResult checkResult : checkResultList) {
+
+                    List<ItemLevel> itemLevelList = itemLevelService.getByItemId(checkResult.getItemId());
+                    if (!CollectionUtils.isEmpty(itemLevelList)) {
+                        for (ItemLevel itemLevel : itemLevelList) {
+                            if (checkResult.getItemLevelId() == itemLevel.getId()) {
+                                itemLevel.setSelected(1);
+                            }
+                        }
+                    }
+                    checkResult.setItemLevelList(itemLevelList);
+                }
+            }
+            checkRecord.setCheckResultList(checkResultList);
             checkRecord.setDiffDay();
+
         }
         return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, checkRecord);
     }
