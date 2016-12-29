@@ -122,4 +122,14 @@ public class ProductController {
         return ResponseHelper.buildSuccessResult();
     }
 
+    /**
+     * 获取推荐产品
+     * @return
+     */
+    @RequestMapping("/getAdvice")
+    @ResponseBody
+    public Map getAdvice() {
+        return ResponseHelper.buildSuccessResult();
+    }
+
 }

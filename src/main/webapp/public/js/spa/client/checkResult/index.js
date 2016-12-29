@@ -22,6 +22,7 @@ var datatable = $('#datatable').DataTable(
             "data": function (d) {
                 return $.extend({}, d,
                     {
+                        "recordId" : $('#sch_recordId').val(),
                         "clientName": $('#sch_clientName').val(),
                         "itemName": $('#sch_itemName').val(),
                         "colName": $('tr[role="row"]').find('th').eq($('#datatable').DataTable().order()[0][0]).attr('id'),

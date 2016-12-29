@@ -37,7 +37,7 @@
       and sil.modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     </if>
     <if test="record.score != null">
-      and sil.score BETWEEN #{record.gtScore,jdbcType=DECIMAL} and #{record.ltScore,jdbcType=DECIMAL}
+      and #{record.score,jdbcType=DECIMAL} BETWEEN sil.gt_score and sil.lt_score
     </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

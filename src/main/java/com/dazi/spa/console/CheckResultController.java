@@ -6,6 +6,7 @@ import com.dazi.spa.common.protocol.ResponseHelper;
 import com.dazi.spa.common.utils.IntegerUtil;
 import com.dazi.spa.modules.client.model.CheckResult;
 import com.dazi.spa.modules.client.service.CheckResultService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,8 @@ public class CheckResultController {
     private CheckResultService checkResultService;
 
     @RequestMapping("/index")
-    public String index() {
+    public String index(CheckResult checkResult, Model model) {
+        model.addAttribute("checkResult", checkResult);
         return "client/checkResult/index";
     }
 

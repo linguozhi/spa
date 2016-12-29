@@ -45,7 +45,7 @@ var datatable = $('#datatable').DataTable(
             }
             },
             {"data": "times", "defaultContent": ""},
-            //{"data": "id", className: "center", "orderable": false, "width": "120px", class: "text-center"},
+            {"data": "id", className: "center", "orderable": false, "width": "120px", class: "text-center"},
         ],
         "preDrawCallback": function (settings) {
             popup.loading().show();
@@ -54,10 +54,10 @@ var datatable = $('#datatable').DataTable(
             $('td:eq(0)', nRow).html('<input role="ck" type="checkbox" name="checkbox" class="center" value="' + aData.id + '">');
             //var html = '<a href="javascript:doDetail(' + aData.name + ')">查看</a>|';
             var html = '';
-            html += '<a href="javascript:doMod(' + aData.id + ')">修改</a>|';
-            html += '<a href="javascript:doCaculate(' + aData.id + ')">开始检测</a>|';
-            html += '<a href="javascript:doDel(' + aData.id + ')">删除</a>|';
-            //$('td:eq(7)', nRow).html(html.substr(0, html.length - 1));
+            html += '<a href="javascript:doCheckResult(' + aData.id + ')">查看检测结果</a>|';
+            //html += '<a href="javascript:doCaculate(' + aData.id + ')">开始检测</a>|';
+            //html += '<a href="javascript:doDel(' + aData.id + ')">删除</a>|';
+            $('td:eq(6)', nRow).html(html.substr(0, html.length - 1));
         },
         "drawCallback": function (settings) {
             popup.loading().hide();
@@ -74,6 +74,20 @@ doQuery = function () {
     datatable.ajax.reload();
 }
 
+
+doCheckResult = function(id) {
+    // 校验
+    if (utils.empty(id)) {
+        popup.tip("请选择查看对象");
+        return;
+    }
+    if (utils.length(utils.split(id, ",")) > 1) {
+        popup.tip("每次只允许操作1条数据");
+        return;
+    }
+    // 操作
+    windows.go(WEBROOT + '/checkResult/index.html?recordId=' + id);
+}
 
 /**
  * 导出Excel

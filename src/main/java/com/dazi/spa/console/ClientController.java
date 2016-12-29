@@ -25,10 +25,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("client")
@@ -180,8 +177,11 @@ public class ClientController extends BaseController {
             checkResultService.caculate(client, errors);
         }
 
+        Map<String , Object> result = new HashMap<>();
+        result.put("recordId", checkRecord.getId());
+
         if(CollectionUtils.isEmpty(errors)) {
-            return ResponseHelper.buildSuccessResult("检测完成");
+            return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, result);
 
         } else {
             return ResponseHelper.buildErrorResult("检测完成,但存在错误:" + JSON.toJSONString(errors));
