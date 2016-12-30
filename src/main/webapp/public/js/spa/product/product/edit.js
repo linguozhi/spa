@@ -50,7 +50,7 @@ loadInit = function() {
 		uploadUrl: '/image/upload.html',
 		maxFilePreviewSize: 10240,
 		imageWidth: '200px',
-		resizeImage: true,
+		//resizeImage: true,
 		imageHeight: '200px'
 	});
 

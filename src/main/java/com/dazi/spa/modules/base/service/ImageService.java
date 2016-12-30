@@ -47,4 +47,5 @@ public class ImageService {
         Assert.notNull(record, "查询对象不能为空");
         return imageMapper.selectList(record, order, offset, count);
     }
+
 }

@@ -35,6 +35,7 @@ public class Product implements Serializable {
     private Integer orderNo;
 
     private static final long serialVersionUID = 1L;
+    private String imageUrl;
 
     public Integer getId() {
         return id;
@@ -103,5 +104,13 @@ public class Product implements Serializable {
 
     public void setImageIdStr(String imageIdStr) {
         this.imageIdStr = imageIdStr;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

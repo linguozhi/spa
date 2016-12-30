@@ -11,6 +11,7 @@ import com.dazi.spa.modules.client.model.CheckRecord;
 import com.dazi.spa.modules.client.model.CheckResult;
 import com.dazi.spa.modules.client.service.CheckRecordService;
 import com.dazi.spa.modules.client.service.CheckResultService;
+import com.dazi.spa.modules.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -37,6 +38,9 @@ public class CheckRecordController {
 
     @Autowired
     private ItemLevelService itemLevelService;
+
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping("/index")
     public String index() {
@@ -72,7 +76,7 @@ public class CheckRecordController {
             List<CheckResult> checkResultList = checkResultService.getListByRecordId(checkRecord.getId());
             if (!CollectionUtils.isEmpty(checkResultList)) {
                 for (CheckResult checkResult : checkResultList) {
-
+                    // 检测等级
                     List<ItemLevel> itemLevelList = itemLevelService.getByItemId(checkResult.getItemId());
                     if (!CollectionUtils.isEmpty(itemLevelList)) {
                         for (ItemLevel itemLevel : itemLevelList) {
@@ -82,6 +86,9 @@ public class CheckRecordController {
                         }
                     }
                     checkResult.setItemLevelList(itemLevelList);
+
+                    // 推荐产品
+                    checkResult.setProduct(productService.getByItemId(checkResult.getItemId()));
                 }
             }
             checkRecord.setCheckResultList(checkResultList);

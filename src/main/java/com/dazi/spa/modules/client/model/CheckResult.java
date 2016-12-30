@@ -1,6 +1,7 @@
 package com.dazi.spa.modules.client.model;
 
 import com.dazi.spa.modules.checkItem.model.ItemLevel;
+import com.dazi.spa.modules.product.model.Product;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -56,6 +57,7 @@ public class CheckResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer parentId;
+    private Product product;
 
     public Integer getId() {
         return id;
@@ -173,5 +175,13 @@ public class CheckResult implements Serializable {
 
     public void setItemLevelList(List<ItemLevel> itemLevelList) {
         this.itemLevelList = itemLevelList;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }

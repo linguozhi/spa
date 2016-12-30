@@ -97,6 +97,9 @@
       <if test="generalScore != null">
         general_score,
       </if>
+      <if test="itemLevelId != null">
+        item_level_id,
+      </if>
 
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -124,7 +127,9 @@
       <if test="generalScore != null">
         #{generalScore,jdbcType=DECIMAL},
       </if>
-
+      <if test="itemLevelId != null">
+        #{itemLevelId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.dazi.spa.modules.client.model.CheckResult">

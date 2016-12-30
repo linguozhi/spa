@@ -22,5 +22,5 @@ public interface ProductImageMapper {
 
     List<ProductImage> selectList(@Param("record") ProductImage record, @Param("order") Order order, @Param("offset") int offset, @Param("count") int count);
 
-    int updateByImageIdStrSelective(ProductImage record);
+    int deleteByProductId(Integer productId);
 }

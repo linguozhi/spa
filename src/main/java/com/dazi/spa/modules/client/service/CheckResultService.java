@@ -217,11 +217,16 @@ public class CheckResultService {
             // 体验后增益比例
             BigDecimal addRatio = topCheckItem.getAddRatio();
             // 获取上次子项检测结果
-            record.setParentId(topCheckItem.getId());
-            List<CheckResult> lastChildCheckResultList = selectList(record, null, 0, -1);
+//            record.setParentId(topCheckItem.getId());
+//            List<CheckResult> lastChildCheckResultList = selectList(record, null, 0, -1);
 
             // 计算增益后分数
             CheckResult newTopCheckResult = countScore(lastTopCheckResult, addRatio, client.getRecordId());
+            // 当前分值对应的等级
+            ItemLevel itemLevel = itemLevelService.get(topCheckItem.getId(), newTopCheckResult.getScore());
+            if (itemLevel != null) {
+                newTopCheckResult.setItemLevelId(itemLevel.getId());
+            }
 //            List<CheckResult> newChildCheckResultList = countScore(lastChildCheckResultList, addRatio, client.getRecordId());
 
             caculateList.add(newTopCheckResult);

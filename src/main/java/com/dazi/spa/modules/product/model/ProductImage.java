@@ -15,14 +15,9 @@ public class ProductImage implements Serializable {
     private Integer productId;
 
     /**
-     *  短地址
+     *  图片id
      */
-    private String shortUrl;
-
-    /**
-     *  完整地址
-     */
-    private String url;
+    private Integer imageId;
 
     /**
      *  创建时间
@@ -33,6 +28,7 @@ public class ProductImage implements Serializable {
      *  修改时间
      */
     private Date modifyTime;
+
 
     private static final long serialVersionUID = 1L;
 
@@ -52,20 +48,12 @@ public class ProductImage implements Serializable {
         this.productId = productId;
     }
 
-    public String getShortUrl() {
-        return shortUrl;
+    public Integer getImageId() {
+        return imageId;
     }
 
-    public void setShortUrl(String shortUrl) {
-        this.shortUrl = shortUrl;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
     }
 
     public Date getCreateTime() {
@@ -84,15 +72,25 @@ public class ProductImage implements Serializable {
         this.modifyTime = modifyTime;
     }
 
-    // extend fields
-    private String imageIdStr;
+    // ext
+    private String imageUrl;
 
-    public String getImageIdStr() {
-        return imageIdStr;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageIdStr(String imageIdStr) {
-        this.imageIdStr = imageIdStr;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String productName;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     private Integer itemId;
@@ -103,5 +101,15 @@ public class ProductImage implements Serializable {
 
     public void setItemId(Integer itemId) {
         this.itemId = itemId;
+    }
+
+    private String shortUrl;
+
+    public String getShortUrl() {
+        return shortUrl;
+    }
+
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
     }
 }
