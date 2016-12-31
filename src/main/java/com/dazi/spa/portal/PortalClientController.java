@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date: 2016/11/14
  */
 @Controller
-@RequestMapping("portal/client")
+@RequestMapping("")
 public class PortalClientController {
 
-    @RequestMapping("/index")
-    public String index() {
+//    @RequestMapping("/index")
+//    public String index() {
+//
+//        return "portal/client/index";
+//    }
 
-        return "portal/client/index";
+    @RequestMapping("/client")
+    public String client() {
+        return "client";
     }
 }

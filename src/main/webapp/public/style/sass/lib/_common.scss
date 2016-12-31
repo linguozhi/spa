@@ -1,0 +1,121 @@
+@charset "UTF-8"; 
+//公用css
+*{ 
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+
+    
+}
+html, body {
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  height:100%;
+  background:#010020;
+  
+}
+img{
+    border:none;
+}
+ul,li{
+    list-style-type: none;          
+}
+
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+} 
+
+
+input,button,select,textarea{
+  outline:none;
+}
+.main-input-text{
+  color: #464241;
+  .main-input-text-label{
+    color: #464241;
+    height: 100%;
+    float: left;
+  }
+  .main-input-text-content{
+    width: 100%;
+    color: #464241;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom:1px solid #9a9997;
+    text-align: center;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    
+  }
+}
+.main-input-radio{
+  
+  width: 100%;
+  overflow: hidden;
+  .main-input-radio-items{
+    float: left;
+  }
+  .main-input-radio-box-wrap{
+    height: 100%;
+    float: left;
+    position: relative;
+  }
+  .main-input-radio-box-tick{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 1px;
+  }
+  .main-input-radio-label{
+    color: #464241;
+    float: left;
+  }
+  .main-input-radio-box{
+    border-radius:4px;
+    border:1px solid #aba9ab;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+.main-percentage-bar{
+  .main-percentage-bar-label{
+    color: #004098;
+    float: left;
+  }
+  .main-percentage-bar-bar{
+    float: left;
+    border:1px solid #706e6f;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    .main-percentage-bar-complete{
+      position:relative;
+      background-color: #004098;
+      .main-percentage-bar-complete-dot{
+        background-color: #004098;
+        position:absolute;
+        right: 0px;
+        .main-percentage-bar-complete-num{
+          position:absolute;
+          color: #004098;
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+}
+
+
+
+
+
