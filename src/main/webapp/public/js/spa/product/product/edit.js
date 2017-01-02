@@ -62,7 +62,7 @@ loadInit = function() {
 			return;
 		}
 
-		var imageId = data.response.data;
+		var imageId = data.response.data.id;
 		var imageIdStr = $('#imageIdStr').val();
 		if(imageId > 0) {
 			if(utils.empty(imageIdStr)) {

@@ -64,7 +64,9 @@ public class ImageController extends BaseController {
         if(imageService.insertSelective(image) < 1) {
             ResponseHelper.buildErrorResult("上传失败");
         }
-        return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, image.getId().toString());
+
+        image = imageService.selectByPrimaryKey(image.getId());
+        return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, image);
     }
 
     @RequestMapping("/del")

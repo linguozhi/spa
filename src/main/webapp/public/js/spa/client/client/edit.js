@@ -190,7 +190,7 @@ loadInit = function() {
 			return;
 		}
 
-		var imageId = data.response.data;
+		var imageId = data.response.data.id;
 		if(imageId > 0) {
 			$('#headImageId').val(imageId)
 		}

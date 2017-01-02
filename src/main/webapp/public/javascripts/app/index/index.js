@@ -132,7 +132,9 @@ define(function(require) {
                 that.hide();
                 home.show();
              });
-
+             $("#pageNewUserHeadImg").bind(window.click,function(){
+                window.JsCallJava.startTakingPictures();
+             });
              
              that.initUi();
              
@@ -160,12 +162,12 @@ define(function(require) {
                     $("#mainInputTextPageNewUserPhone .mainInputTextContent").html(data.data.phone);
                     $("#pageNewUserHeadImg").attr("src","."+data.data.headImageUrl);
 
-                    that.mainInputRadioPageNewUserGenderObject.select([0,1]);
+                    that.mainInputRadioPageNewUserGenderObject.select([1,0]);
 
                     
                 },
                 error: function(){
-                    that.requestPayStateQueryAgain();
+                    
                 }
 
             });
@@ -184,6 +186,10 @@ define(function(require) {
             var that = this;
             that.isShow = false;
             $("#pageNewUser").hide();
+        },
+        setHeadPortraitUrl: function(url){
+            var that = this;
+            $("#pageNewUserHeadImg").attr("src",url);
         },
         initUi: function(){
             var that = this;
@@ -229,13 +235,15 @@ define(function(require) {
                 fontSize:Math.round(bigTitleFontSize),
                 marginBottom: Math.round(bigTitleFontSize)
             });
-            var headImgWidth = windowWidth*0.0875;
-            var headImgHeight = headImgWidth*1.28;
+            var headImgHeight = windowHeight*0.2;
+            var headImgWidth = headImgHeight*(165/211);
+           
             $("#pageNewUserHeadImg").css({
                 width:headImgWidth,
                 height:headImgHeight,
                 marginRight:headImgWidth/2.3
             }); 
+
             var basisInfoHeight = headImgHeight;
             var basisInfoWidth = headImgWidth*2.4;
             $("#pageNewUserBasisInfo").css({
@@ -339,11 +347,11 @@ define(function(require) {
         init: function(){
             var that = this;
             that.show();
-            setTimeout(function(){
+            $("#pageStart").bind(window.click,function(){
                 $("#pageMain").show();
                 home.show();
                 that.hide();
-            },2000);
+            });
         },
         hide:function(){
             $("#pageStart").hide();
@@ -774,9 +782,11 @@ define(function(require) {
             window.onNewIntent = function(pPage) {
                 pageChange(pPage)
             }
-            window.onStop = function() {
+            window.headPortraitShootCallback = function() {
+                var scanActivityTakingPicturesReturnData = $.parseJSON(window.JsCallJava.getScanActivityTakingPicturesReturnData());
+                var headPortraitUrl = "http://120.132.68.148:18048"+scanActivityTakingPicturesReturnData.data.shortUrl;
+                newUser.setHeadPortraitUrl(headPortraitUrl);
 
-                
             }
             pageChange(1);
         }
