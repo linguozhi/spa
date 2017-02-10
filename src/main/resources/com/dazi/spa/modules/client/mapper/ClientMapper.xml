@@ -70,6 +70,9 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dazi.spa.modules.client.model.Client">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into spa_client
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

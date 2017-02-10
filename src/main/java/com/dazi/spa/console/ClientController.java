@@ -95,7 +95,7 @@ public class ClientController extends BaseController {
             return ResponseHelper.buildErrorResult("保存失败");
         }
 
-        return ResponseHelper.buildSuccessResult();
+        return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, client.getId());
     }
 
     @RequestMapping("/update")

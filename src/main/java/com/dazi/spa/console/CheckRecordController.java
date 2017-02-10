@@ -119,4 +119,21 @@ public class CheckRecordController {
         }
         return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, list);
     }
+
+    /**
+     * 删除检测记录
+     * @param recordId
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Map delete(Integer recordId) {
+        Assert.isTrue(IntegerUtil.gtZero(recordId), "recordId not less than 1");
+
+        if (checkRecordService.deleteByPrimaryKey(recordId) < 1) {
+            return ResponseHelper.buildErrorResult("删除失败");
+        }
+
+        return ResponseHelper.buildSuccessResult();
+    }
 }
