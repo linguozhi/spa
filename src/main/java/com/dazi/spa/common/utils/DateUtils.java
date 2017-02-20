@@ -535,6 +535,6 @@ public class DateUtils {
      */
 	public static int getDiff(Date d1, Date d2) {
 		long diff = d2.getTime() - d1.getTime();
-		return (int)diff / (24 * 60 * 60 * 1000);
+		return (int)(diff / (24 * 60 * 60 * 1000));
 	}
 }

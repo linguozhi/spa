@@ -22,7 +22,7 @@
       and sc.id = #{record.id,jdbcType=INTEGER}
     </if>
     <if test="record.name != null and record.name != ''">
-      and sc.name = #{record.name,jdbcType=VARCHAR}
+      and sc.name like concat('%', #{record.name,jdbcType=VARCHAR} ,'%')
     </if>
     <if test="record.age != null">
       and sc.age = #{record.age,jdbcType=INTEGER}
@@ -43,7 +43,7 @@
       and sc.sex = #{record.sex,jdbcType=INTEGER}
     </if>
     <if test="record.phone != null and record.phone != ''">
-      and sc.phone = #{record.phone,jdbcType=VARCHAR}
+      and sc.phone like concat('%',#{record.phone,jdbcType=VARCHAR}, '%')
     </if>
     <if test="record.headImageId != null">
       and sc.head_image_id = #{record.headImageId,jdbcType=INTEGER}

@@ -53,6 +53,141 @@
             }
     	}
     }
+    .page-user-list{
+        width: 100%;
+        height:100%;
+        display: none; 
+        position: absolute;
+        .bg{
+            position: absolute;
+            width: 100%;
+            height:100%;
+        }
+        .body{
+            overflow: hidden;
+            position: absolute;
+            background:#fff;
+            .operation{
+                .so-btn,
+                .back-btn{
+                    float: right;
+                    text-align: center;
+                    border: 1px solid #92918d;
+                    
+                    font-size: inherit;
+                    box-sizing: border-box;
+                    color: #1e1916;
+                    &.hover-color {
+                      background: #133984; 
+                      color: #fff;
+                    }
+                }
+                .main-input-text-content-wrap{
+                    float: left;
+                    .main-input-text-content{
+                        border: 1px solid #9a9997;
+                        color: #1e1916;
+                    }
+                }
+            }
+            
+            .main-div-table{
+                .main-dav-table-line{
+                    .column-one{
+                        width:6%;
+                    }
+                    .column-two{
+                        width:9%;
+                    }
+                    .column-three{
+                        width:6%;
+                    }
+                    .column-four{
+                        width:6%;
+                    }
+                    .column-five{
+                        width:15%;    
+                    }
+                    .column-six{
+                        width:11%;
+                    }
+                    .column-seven{
+                        width:13%;
+                    }
+                    .column-eight{
+                        width:34%;
+                    }
+                    .column-fill{
+                        width:100%;
+                    }
+                }
+            }
+        }
+    }
+    .page-test-list{
+        width: 100%;
+        height:100%;
+        display: none; 
+        position: absolute;
+        .bg{
+            position: absolute;
+            width: 100%;
+            height:100%;
+        }
+        .body{
+            overflow: hidden;
+            position: absolute;
+            background:#fff;
+            position:relative;
+            .operation{
+                .name,
+                .num{
+                    float: left;
+                }
+                .back-btn{
+                    float: right;
+                    text-align: center;
+                    border: 1px solid #92918d;
+                    
+                    font-size: inherit;
+                    box-sizing: border-box;
+                    color: #1e1916;
+                    &.hover-color {
+                      background: #133984; 
+                      color: #fff;
+                    }
+                }
+                .main-input-text-content-wrap{
+                    float: left;
+                    .main-input-text-content{
+                        border: 1px solid #9a9997;
+                        color: #1e1916;
+                    }
+                }
+            }
+            
+            .main-div-table{
+                .main-dav-table-line{
+                    .column-one{
+                        width:10%;
+                    }
+                    .column-two{
+                        width:30%;
+                    }
+                    .column-three{
+                        width:10%;
+                    }
+                    .column-four{
+                        width:50%;
+                    }
+                    .column-fill{
+                        width:100%;
+                    }
+                    
+                }
+            }
+        }
+    }
     .page-test-report{
         width: 100%;
         height:100%;
@@ -66,15 +201,14 @@
         }
         .body{
             overflow: hidden;
-           
+            position: absolute;
+            background:#fff;
             .title{
                 width: 100%;
                 text-align: center;
                 font-weight: 700;
                 color: #004098;
             }
-            position: absolute;
-            background:#fff;
             .recommend-btn{
                 display: none;
                 border-radius:4px;
@@ -257,6 +391,10 @@
                     display: block;
                     border: 1px solid #9f9f9c;
                     float: left;
+                    opacity: 1; 
+                    &.hover-color{
+                        opacity: 0.7; 
+                    }
                 }
                 .basis-info{
                     display: block;
@@ -311,8 +449,10 @@
                     float: left;
                     width: 100%;
                     .recent-analyze-wrap{
+                        display: none;
                         border:1px solid #8190a5;
                         .line{
+                            overflow: hidden;
                             -webkit-box-sizing: border-box;
                             -moz-box-sizing: border-box;
                             box-sizing: border-box;
@@ -325,6 +465,13 @@
                                 background-color:#133984;
                                 color: #fff;
                                 width: 33%;
+                                float: left;
+                            }
+                            .line-content{
+                                text-align: center;
+                                color: #464241;
+                                width: 67%;
+                                float: right;
                             }
                             .line-title,
                             .line-content{
@@ -345,7 +492,6 @@
                 border: 1px solid #23353f;
                 color: #fff;
                 text-align: center;
-                font-weight: 700;
                 position: absolute;
                 &.hover-color{
                     background: -webkit-linear-gradient(top, #011c43 0%,#4c92f4 100%);
@@ -393,5 +539,6 @@
     }
 
 }
+
 
  

@@ -19,6 +19,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Map;
 
@@ -105,19 +106,25 @@ public class CheckRecordController {
      */
     @RequestMapping("/loadList")
     @ResponseBody
-    public Map loadList(Integer clientId, int start, int length) {
+    public DataTable loadList(Integer clientId, int start, int length) {
         Assert.isTrue(IntegerUtil.gtZero(clientId), "clientId not less than 1");
 
         CheckRecord checkRecord = new CheckRecord();
         checkRecord.setClientId(clientId);
-        List<CheckRecord> list = checkRecordService.selectList(checkRecord, Order.build("create_time"), start, length);
-        if (!CollectionUtils.isEmpty(list)) {
-            for (CheckRecord cr : list) {
-                cr.setCheckResultList(checkResultService.getListByRecordId(cr.getId()));
-                cr.setDiffDay();
+
+        int total = checkRecordService.selectTotal(checkRecord);
+        List<CheckRecord> list = null;
+        if (total > 0) {
+            list = checkRecordService.selectList(checkRecord, Order.build("create_time"), start, length);
+            if (!CollectionUtils.isEmpty(list)) {
+                for (CheckRecord cr : list) {
+                    cr.setCheckResultList(checkResultService.getListByRecordId(cr.getId()));
+                    cr.setDiffDay();
+                }
             }
         }
-        return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, list);
+
+        return ResponseHelper.buildDataTable(1, total, list);
     }
 
     /**

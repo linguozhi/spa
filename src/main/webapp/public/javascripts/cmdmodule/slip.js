@@ -84,6 +84,7 @@ var slipjs = {
 	},
 	__posX: function(x) { // 作用：当设置滑动的方向为“X”时用于设置滑动元素的坐标
 		this.xy = x;
+
 		this.core.style['webkitTransform'] = 'translate3d('+x+'px, 0px, 0px)';
 		//this.core.style['webkitTransform'] = 'translate('+x+'px, 0px) scale(1) translateZ(0px)';
 	},
@@ -95,6 +96,7 @@ var slipjs = {
 	_posTime: function(x,time) { // 作用：缓慢移动
 		this.core.style.webkitTransitionDuration = ''+time+'ms';
 		this._pos(x);
+
 	},
 	addCallback: function(type, fun) {// 作用：添加回调函数
 		this[type] = fun;
@@ -198,6 +200,7 @@ var SlipPage = _fun.clone(slipjs);
 		var that = this;
 		that.change_time && that._stop();
 		that._forward();
+
 	};
 	SlipPage._backward = function(e){
 		var that = this;
@@ -241,6 +244,7 @@ var SlipPage = _fun.clone(slipjs);
 		that.endFun && that.endFun();
 	};
 	SlipPage.toPage = function(num, time) { // 可在外部调用的函数，指定轮换到第几张，只要传入：“轮换到第几张”和“时间”两个参数。
+		
 		this._posTime(-this.parent_wide_high * num + this._initial_coordinates, time || 0);
 		this.page = num;
 	};

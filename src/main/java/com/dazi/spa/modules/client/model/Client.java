@@ -189,4 +189,43 @@ public class Client implements Serializable {
     public void setSexName(Integer sex) {
         this.sexName = SexEnum.get(sex).getValue();
     }
+
+    /**
+     * 上次检测时间
+     */
+    private String prevTimeStr;
+
+    public String getPrevTimeStr() {
+        return prevTimeStr;
+    }
+
+    public void setPrevTimeStr(String prevTimeStr) {
+        this.prevTimeStr = prevTimeStr;
+    }
+
+    /**
+     * 检测次数
+     */
+    private Integer times;
+
+    public Integer getTimes() {
+        return times;
+    }
+
+    public void setTimes(Integer times) {
+        this.times = times;
+    }
+
+    /**
+     * 间隔天数
+     */
+    private Integer invervalDays;
+
+    public Integer getInvervalDays() {
+        return invervalDays;
+    }
+
+    public void setInvervalDays(Integer invervalDays) {
+        this.invervalDays = invervalDays;
+    }
 }

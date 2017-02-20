@@ -10,9 +10,13 @@ define(function(require, exports, module) {
 					var that = this;
 					var boxWidth = Math.round(height*0.9); 
 					var boxHeight = boxWidth;
+					that.radio = false;
 					that.obj = obj;
+					that.selectArr = new Array();
+					that.itemSize = obj.find(".mainInputRadioItems").size();
 					obj.find(".mainInputRadioItems").each(function(){
-						
+						var index = $(this).index();
+						that.selectArr[index] = 0;
 						$(this).css({
 							height:Math.round(height)
 						});
@@ -37,16 +41,28 @@ define(function(require, exports, module) {
 					});
 					obj.find(".mainInputRadioItems").bind("click",function(){
 						var index = $(this).index();
-						console.log("index"+index);
+
 	                	if(that.selectArr[index]==0){
+	                		if(that.radio){
+	                			for(var i=0; i<that.itemSize; i++){
+	                				that.selectArr[i] = 0;
+	                			}
+								obj.find(".mainInputRadioBoxTick").hide();
+	                		}
+
 	                		$(this).find(".mainInputRadioBoxTick").show();
 	                		that.selectArr[index] = 1;
+
 	                	}else if(that.selectArr[index]==1){
 	                		$(this).find(".mainInputRadioBoxTick").hide();
 	                		that.selectArr[index] = 0;
 	                	}
 	            	});
 					
+				},
+				setRadio:function(){
+					var that = this;
+					that.radio = true;
 				},
 				select:function(selectArr){
 					var that = this;
@@ -60,6 +76,10 @@ define(function(require, exports, module) {
 							$(this).find(".mainInputRadioBoxTick").hide();
 						}
 					});
+				},
+				getSelectArr:function(){
+					var that = this;
+					return that.selectArr;
 				}
 			}
 			return app;
