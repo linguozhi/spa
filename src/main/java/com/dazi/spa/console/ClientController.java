@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -86,11 +87,14 @@ public class ClientController extends BaseController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public Map save(Client client) {
+    public Map save(Client client) throws Exception{
         // 校验
         Assert.notNull(client.getName(), "客户名称不能为空");
         Assert.isTrue(IntegerUtil.gtZero(client.getAge()), "客户年龄不能小于1");
 
+        if (!StringUtils.isEmpty(client.getBirthdayStr())) {
+            client.setBirthday(DateUtils.parse(client.getBirthdayStr(), "yyyy-MM-dd"));
+        }
         if(clientService.insertSelective(client) < 1) {
             return ResponseHelper.buildErrorResult("保存失败");
         }

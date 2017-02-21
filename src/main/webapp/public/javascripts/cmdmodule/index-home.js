@@ -44,11 +44,11 @@ define(function(require, exports, module) {
                 top:"48%",
                 right:"20%"
             }).show();
-            $("#btnNew").bind(window.click,function(){
+            $("#btnNew").bind("click",function(){
                 that.hide();
                 that.newUser.show(-1);
             });
-            $("#btnRecord").bind(window.click,function(){
+            $("#btnRecord").bind("click",function(){
                 that.hide();
                
                 that.userList.show();

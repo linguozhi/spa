@@ -204,6 +204,8 @@ define(function(require, exports, module) {
         requestDataList: function(){
             var that = this;
             $.ajax({
+
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./portal/client/getList.html",
                 timeout: 10000,
@@ -244,6 +246,7 @@ define(function(require, exports, module) {
         requestUserInfo: function(id){
             var that = this;
             $.ajax({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./client/get.html",
                 timeout: 10000,
@@ -306,9 +309,9 @@ define(function(require, exports, module) {
         },
         createItmeHtml: function(id, name, sex, age, prevTimeStr,invervalDays, times){
             var that = this;
-            var sexStr = "男";
-            if(sex != 0){
-                sexStr = "女"
+            var sexStr = "女";
+            if(sex == 1){
+                sexStr = "男"
             }
             if(prevTimeStr==null){
                 prevTimeStr = "";

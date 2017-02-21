@@ -7,7 +7,7 @@ define(function(require, exports, module) {
             if(!that.isInit){
                 that.isInit = true;
                 that.show();
-                $("#pageStart").bind(window.click,function(){
+                $("#pageStart").bind("click",function(){
                     $("#pageMain").show();
                     home.show();
                     that.hide();

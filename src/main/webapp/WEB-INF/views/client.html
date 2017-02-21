@@ -10,7 +10,12 @@
 
 </head>
 <body>
-
+<div id="mainInputModule" class="main-input-module">
+	<div class="bg"></div>
+	<input id="mainInputModuleInput" placeholder="" class="input" type="text">
+	<div id="mainInputModuleBtnOk" class="mainInputModuleBtn btn-ok hoverColor">确 定</div>
+	<div id="mainInputModuleBtnCancel" class="mainInputModuleBtn btn-cancel hoverColor">取 消</div>
+</div>
 <div id="pageStart" class="page-start">
 
 </div>
@@ -19,12 +24,57 @@
 		<div id="btnNew" class="btn-new hoverColor">新 用 户</div>
 		<div id="btnRecord" class="btn-record hoverColor">客 户 记 录</div>
 	</div>
+
+	<div id="pageDataAnalysising" class="page-data-analysising">
+		<div id="pageDataAnalysisingTipText" class="tip-text">系统数据分析中，请耐心等待···</div>
+		<div id="pageDataAnalysisingProgressBar" class="progress-bar">
+			<div id="pageDataAnalysisingComplete" class="complete"></div>
+		</div>
+	</div>
+
+	<div id="pageUserList" class="page-user-list">
+		<div id="pageUserListBg" class="bg"></div>
+		<div id="pageUserListBody" class="body">
+			<div id="pageUserListOperation" class="operation">
+				<div class="main-input-text">
+					<div id="pageUserListSoName" class="main-input-text-content-wrap"><div id="" class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="姓 名" data-null_show_placeholder="1"></div></div>
+					<div id="pageUserListSoPhoneNum" class="main-input-text-content-wrap"><div id="" class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="手机号码" data-null_show_placeholder="1"></div></div>
+					<div id="pageUserListSoId" class="main-input-text-content-wrap"><div id="" class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="编 号" data-null_show_placeholder="1"></div></div>
+				</div>
+				<div class="backBtn hoverColor back-btn">返 回</div>
+				<div class="soBtn hoverColor so-btn">搜 索</div>
+			</div>
+			<div id="pageUserListTable" class="main-div-table">
+				<div id="pageUserListTableTitle" class="main-dav-table-title">
+					<div class="main-dav-table-line">
+						<div class="main-dav-table-block column-one">编号</div>
+						<div class="main-dav-table-block column-two">姓名</div>
+						<div class="main-dav-table-block column-three">性别</div>
+						<div class="main-dav-table-block column-four">年龄</div>
+						<div class="main-dav-table-block column-five">上次检测时间</div>
+						<div class="main-dav-table-block column-six">间隔天数</div>
+						<div class="main-dav-table-block column-seven">已检测次数</div>
+						<div class="main-dav-table-block column-eight">操作</div>
+					</div>
+				</div>
+				<div id="pageUserListTableBody" class="main-dav-table-body">
+
+
+				</div>
+
+			</div>
+			<div id="pageUserListTurnPage"  class="main-turn-page">
+
+			</div>
+		</div>
+
+	</div>
 	<div id="pageNewUser" class="page-new-user">
 		<div id="pageNewUserBg" class="bg"></div>
 		<div id="pageNewUserBody" class="body">
 			<div class="left">
 				<h1 class="pageNewUserBigTitle big-title">基本资料</h1>
-				<img id="pageNewUserHeadImg" class="head-img" alt="" src="">
+				<img id="pageNewUserHeadImg" class="head-img hoverColor" alt="" src="./public/images-dist/head-portrait-camera.jpg">
 				<div id="pageNewUserBasisInfo" class="basis-info">
 
 					<div id="mainInputRadioPageNewUserGender" class="main-input-radio">
@@ -45,58 +95,58 @@
 					</div>
 					<div id="mainInputTextPageNewUserName" class="main-input-text mainInputText">
 						<div class="mainInputTextLabel main-input-text-label">姓名：</div>
-						<div class="mainInputTextContent main-input-text-content"></div>
+						<div class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="请输入姓名"></div>
 					</div>
 					<div id="mainInputTextPageNewUserAge" class="main-input-text mainInputText">
 						<div class="mainInputTextLabel main-input-text-label">年龄：</div>
-						<div class="mainInputTextContent main-input-text-content">31</div>
+						<div class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="年龄"></div>
 					</div>
 					<div id="mainInputTextPageNewUserBirthday" class="main-input-text mainInputText">
 						<div class="mainInputTextLabel main-input-text-label">生日：</div>
-						<div class="mainInputTextContent main-input-text-content"></div>
+						<div class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="请输入生日 格式: 2017-01-01"></div>
 					</div>
 					<div id="mainInputTextPageNewUserId" class="main-input-text mainInputText">
 						<div class="mainInputTextLabel main-input-text-label">序号：</div>
-						<div class="mainInputTextContent main-input-text-content">31</div>
+						<div class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="请输入序号"></div>
 					</div>
 				</div>
 				<div id="pageNewUserContactInfo" class="contact-info">
 					<div id="mainInputTextPageNewUserAddress" class="main-input-text mainInputText">
 						<div class="mainInputTextLabel main-input-text-label">地　　址：</div>
-						<div class="mainInputTextContent main-input-text-content"></div>
+						<div class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="请输入地址"></div>
 					</div>
 					<div id="mainInputTextPageNewUserPhone" class="main-input-text mainInputText">
 						<div class="mainInputTextLabel main-input-text-label">联系电话：</div>
-						<div class="mainInputTextContent main-input-text-content"></div>
+						<div class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="请输入联系电话"></div>
 					</div>
 				</div>
-				<div id="pageNewUserCaseHistory" class="case-history">
-					<div class="pageNewUserCaseHistoryBlockItems block-items">
-						阁下有没有任何<br>敏感现象
-					</div>
-					<div class="pageNewUserCaseHistoryBlockItems block-items">
-						阁下有没有任何<br>痤疮现象
-					</div>
-				</div>
-				<div id="pageNewUserCaseHistoryTick" class="case-history-tick main-input-radio">
-					<div class="mainInputRadioItems main-input-radio-items">
-						<div class="mainInputRadioBoxWrap main-input-radio-box-wrap">
-							<div class="mainInputRadioBox main-input-radio-box"></div>
-							<img class="mainInputRadioBoxTick main-input-radio-box-tick" src="./public/images-dist/main-input-radio-tick.png" />
-						</div>
-						<div class="mainInputRadioLabel main-input-radio-label"></div>
-					</div>
-					<div class="mainInputRadioItems main-input-radio-items">
-						<div class="mainInputRadioBoxWrap main-input-radio-box-wrap">
-							<div class="mainInputRadioBox main-input-radio-box"></div>
-							<img class="mainInputRadioBoxTick main-input-radio-box-tick" src="./public/images-dist/main-input-radio-tick.png" />
-						</div>
-						<div class="mainInputRadioLabel main-input-radio-label"></div>
-					</div>
-				</div>
+				<!-- <div id="pageNewUserCaseHistory" class="case-history">
+                    <div class="pageNewUserCaseHistoryBlockItems block-items">
+                        阁下有没有任何<br>敏感现象
+                    </div>
+                    <div class="pageNewUserCaseHistoryBlockItems block-items">
+                        阁下有没有任何<br>痤疮现象
+                    </div>
+                </div>
+                <div id="pageNewUserCaseHistoryTick" class="case-history-tick main-input-radio">
+                    <div class="mainInputRadioItems main-input-radio-items">
+                        <div class="mainInputRadioBoxWrap main-input-radio-box-wrap">
+                            <div class="mainInputRadioBox main-input-radio-box"></div>
+                            <img class="mainInputRadioBoxTick main-input-radio-box-tick" src="./public/images-dist/main-input-radio-tick.png" />
+                        </div>
+                        <div class="mainInputRadioLabel main-input-radio-label"></div>
+                    </div>
+                    <div class="mainInputRadioItems main-input-radio-items">
+                        <div class="mainInputRadioBoxWrap main-input-radio-box-wrap">
+                            <div class="mainInputRadioBox main-input-radio-box"></div>
+                            <img class="mainInputRadioBoxTick main-input-radio-box-tick" src="./public/images-dist/main-input-radio-tick.png" />
+                        </div>
+                        <div class="mainInputRadioLabel main-input-radio-label"></div>
+                    </div>
+                </div> -->
 				<div id="mainInputTextPageNewUserConsultant" class="main-input-text mainInputText">
 					<div class="mainInputTextLabel main-input-text-label">服务您的美容顾问：</div>
-					<div class="mainInputTextContent main-input-text-content">王美丽</div>
+					<div class="mainInputTextContent main-input-text-content"  data-placeholder="请输入美容顾问">王美丽</div>
 				</div>
 
 			</div>
@@ -162,57 +212,79 @@
 					</div>
 				</div>
 
-				<div id="pageNewUserRecentAnalyze" class="recent-analyze">
-					<h1 class="pageNewUserBigTitle big-title">您最近的肌肤分析</h1>
-					<div class="recent-analyze-wrap">
-						<div class="line">
-							<div class="line-title">面部(水分)</div>
-							<div class="line-content"></div>
-						</div>
-						<div class="line">
-							<div class="line-title">面部(光泽)</div>
-							<div class="line-content"></div>
-						</div>
-						<div class="line">
-							<div class="line-title">面部(水分)</div>
-							<div class="line-content"></div>
-						</div>
-						<div class="line">
-							<div class="line-title">面部(光泽)</div>
-							<div class="line-content"></div>
-						</div>
-						<div class="line">
-							<div class="line-title">面部(水分)</div>
-							<div class="line-content"></div>
-						</div>
-						<div class="line">
-							<div class="line-title">面部(光泽)</div>
-							<div class="line-content"></div>
-						</div>
-						<div class="line">
-							<div class="line-title">面部(水分)</div>
-							<div class="line-content"></div>
-						</div>
-						<div class="line">
-							<div class="line-title">面部(光泽)</div>
-							<div class="line-content"></div>
-						</div>
-					</div>
+				<!-- <div id="pageNewUserRecentAnalyze" class="recent-analyze">
+                    <h1 class="pageNewUserBigTitle big-title">您最近的肌肤分析</h1>
+                    <div id="pageNewUserRecentAnalyzeContent" class="recent-analyze-wrap">
+                        <div class="line">
+                            <div class="line-title">面部(水分)</div>
+                            <div class="line-content"></div>
+                        </div>
+                        <div class="line">
+                            <div class="line-title">面部(光泽)</div>
+                            <div class="line-content"></div>
+                        </div>
+                        <div class="line">
+                            <div class="line-title">面部(紧致)</div>
+                            <div class="line-content"></div>
+                        </div>
+                        <div class="line">
+                            <div class="line-title">面部(白皙)</div>
+                            <div class="line-content"></div>
+                        </div>
+                        <div class="line">
+                            <div class="line-title">面部(铅汞)</div>
+                            <div class="line-content"></div>
+                        </div>
+                        <div class="line">
+                            <div class="line-title">面部(油分)</div>
+                            <div class="line-content"></div>
+                        </div>
+                        <div class="line">
+                            <div class="line-title">面部(毛孔)</div>
+                            <div class="line-content"></div>
+                        </div>
+                        <div class="line">
+                            <div class="line-title">面部(弹性)</div>
+                            <div class="line-content"></div>
+                        </div>
+                    </div>
 
-				</div>
+                </div> -->
 			</div>
 
 			<div id="pageNewUserCloseBtn"  class="close-btn hoverColor">关闭</div>
-			<div id="pageNewUserSaveBackBtn" class="save-back-btn hoverColor">保存并返回主页</div>
+			<div id="pageNewUserSaveBackBtn" class="save-back-btn hoverColor">保 存 并 返 回</div>
 			<div id="pageNewUserSaveScanningBtn" class="save-scanning-btn hoverColor">保存并开始检测</div>
 
 		</div>
 	</div>
-	<div id="pageDataAnalysising" class="page-data-analysising">
-		<div id="pageDataAnalysisingTipText" class="tip-text">系统数据分析中，请耐心等待···</div>
-		<div id="pageDataAnalysisingProgressBar" class="progress-bar">
-			<div id="pageDataAnalysisingComplete" class="complete"></div>
+	<div id="pageTestList" class="page-test-list">
+		<div id="pageTestListBg" class="bg"></div>
+		<div id="pageTestListBody" class="body">
+			<div id="pageTestListOperation" class="operation">
+				<div id="pageTestListName" class="name">姓 名：王美丽</div>
+				<div id="pageTestListNum" class="num">编 号：12</div>
+				<div class="backBtn hoverColor back-btn">返 回</div>
+			</div>
+			<div id="pageTestListTable" class="main-div-table">
+				<div id="pageTestListTableTitle" class="main-dav-table-title">
+					<div class="main-dav-table-line">
+						<div class="main-dav-table-block column-one">编号</div>
+						<div class="main-dav-table-block column-two">检测时间</div>
+						<div class="main-dav-table-block column-three">间隔天数</div>
+						<div class="main-dav-table-block column-four">操作</div>
+					</div>
+				</div>
+				<div id="pageTestListTableBody" class="main-dav-table-body">
+
+				</div>
+
+			</div>
+			<div id="pageTestListTurnPage"  class="main-turn-page">
+
+			</div>
 		</div>
+
 	</div>
 	<div id="pageTestReport" class="page-test-report">
 		<div id="pageTestReportBg" class="bg"></div>

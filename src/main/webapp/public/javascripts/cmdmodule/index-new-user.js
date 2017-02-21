@@ -99,6 +99,7 @@ define(function(require, exports, module) {
                     };
                 }
                 $.ajax({
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                     type:"post",
                     url: mUrl,
                     timeout: 10000,
@@ -109,7 +110,9 @@ define(function(require, exports, module) {
                     success: function(data){
                         if(data.state.code==2000000){
                             if(that.successGoScan){
-                                userId = data.data;
+                                if(userId==-1){
+                                    userId = data.data;
+                                }
                                 $("#pageMain").hide();
                                 that.hide();
                                 mainLoading.hide();
@@ -152,6 +155,7 @@ define(function(require, exports, module) {
         requestUserInfo: function(){
             var that = this;
             $.ajax({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./client/get.html",
                 timeout: 10000,
@@ -166,7 +170,7 @@ define(function(require, exports, module) {
                     
                     $("#mainInputTextPageNewUserName .mainInputTextContent").html(data.data.name);
                     $("#mainInputTextPageNewUserAge .mainInputTextContent").html(data.data.age);
-                    $("#mainInputTextPageNewUserBirthday .mainInputTextContent").html(data.data.birthday);
+                    $("#mainInputTextPageNewUserBirthday .mainInputTextContent").html(data.data.birthdayStr);
                     $("#mainInputTextPageNewUserId .mainInputTextContent").html(data.data.id);
                     $("#mainInputTextPageNewUserAddress .mainInputTextContent").html(data.data.addr);
                     $("#mainInputTextPageNewUserPhone .mainInputTextContent").html(data.data.phone);
@@ -180,9 +184,9 @@ define(function(require, exports, module) {
                     var sexData;
                     
                     if(data.data.sex==0){
-                        sexData = [0,1];
-                    }else if(data.data.sex==1){
                         sexData = [1,0];
+                    }else if(data.data.sex==1){
+                        sexData = [0,1];
                     }
 
                     that.mainInputRadioPageNewUserGenderObject.select(sexData);
@@ -198,6 +202,7 @@ define(function(require, exports, module) {
         requestCheckRecordLast: function(){
             var that = this;
             $.ajax({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./checkRecord/loadList.html",
                 timeout: 10000,
@@ -254,7 +259,7 @@ define(function(require, exports, module) {
             if(userId!=-1){
                 //查看用户
                 that.requestUserInfo();
-                that.requestCheckRecordLast();
+                //that.requestCheckRecordLast();
 
             }else{
                 //新建用户
@@ -414,19 +419,19 @@ define(function(require, exports, module) {
                 lineHeight:Math.round((pageNewUserCaseHistoryBlockItemsHeight-pageNewUserCaseHistoryBlockItemsHeight/15*2)/2+1)+"px"
             });
 
-            var pageNewUserCaseHistoryTickHeight = pageNewUserCaseHistoryBlockItemsHeight/2;
-            pageNewUserCaseHistoryTickObject = mainInputRadio.getObject();
-            pageNewUserCaseHistoryTickObject.init($("#pageNewUserCaseHistoryTick"),pageNewUserCaseHistoryTickHeight);
-            pageNewUserCaseHistoryTickObject.select([1,1]);
+            // var pageNewUserCaseHistoryTickHeight = pageNewUserCaseHistoryBlockItemsHeight/2;
+            // pageNewUserCaseHistoryTickObject = mainInputRadio.getObject();
+            // pageNewUserCaseHistoryTickObject.init($("#pageNewUserCaseHistoryTick"),pageNewUserCaseHistoryTickHeight);
+            // pageNewUserCaseHistoryTickObject.select([1,1]);
 
 
-            $("#pageNewUserCaseHistoryTick .mainInputRadioItems .mainInputRadioBoxWrap").css({
-                marginLeft: contactInfoWidth*0.4/2-pageNewUserCaseHistoryTickHeight/2
-            });
-            $("#pageNewUserCaseHistoryTick").css({
-                marginTop: pageNewUserCaseHistoryTickHeight*0.4,
-                marginBottom: pageNewUserCaseHistoryTickHeight*0.8
-            }); 
+            // $("#pageNewUserCaseHistoryTick .mainInputRadioItems .mainInputRadioBoxWrap").css({
+            //     marginLeft: contactInfoWidth*0.4/2-pageNewUserCaseHistoryTickHeight/2
+            // });
+            // $("#pageNewUserCaseHistoryTick").css({
+            //     marginTop: pageNewUserCaseHistoryTickHeight*0.4,
+            //     marginBottom: pageNewUserCaseHistoryTickHeight*0.8
+            // }); 
 
             pageNewUserGenderAnalyzeProjectObject = mainInputRadio.getObject();
             pageNewUserGenderAnalyzeProjectObject.init($("#pageNewUserGenderAnalyzeProject"),basisInfoInputTextHeight);
@@ -438,7 +443,7 @@ define(function(require, exports, module) {
             that.pageNewUserRecentAnalyzeLine = Math.round((bodyHeight - bodyPadding*2)/14);
             
             $(".right .pageNewUserBigTitle").css({
-                marginBottom:windowWidth*0.01
+                marginBottom:windowWidth*0.022
             });
             
 

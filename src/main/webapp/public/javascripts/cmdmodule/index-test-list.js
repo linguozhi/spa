@@ -157,6 +157,7 @@ define(function(require, exports, module) {
         requestDataList: function(){
             var that = this;
             $.ajax({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./checkRecord/loadList.html",
                 timeout: 10000,
@@ -245,6 +246,7 @@ define(function(require, exports, module) {
         requestDetectionResults: function(recordId){
             var that = this;
             $.ajax({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./checkRecord/get.html",
                 timeout: 10000,
@@ -269,6 +271,7 @@ define(function(require, exports, module) {
         requestDetectiondel: function(recordId){
             var that = this;
             $.ajax({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./checkRecord/delete.html",
                 timeout: 10000,

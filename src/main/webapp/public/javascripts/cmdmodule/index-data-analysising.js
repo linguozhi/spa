@@ -21,7 +21,9 @@ define(function(require, exports, module) {
         },
         requestDetection: function(){
             var that = this;
+            console.log("#userId"+userId);
             $.ajax({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./client/caculate.html",
                 timeout: 10000,
@@ -44,6 +46,7 @@ define(function(require, exports, module) {
         requestDetectionResults: function(){
             var that = this;
             $.ajax({
+                contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
                 url: "./checkRecord/get.html",
                 timeout: 10000,

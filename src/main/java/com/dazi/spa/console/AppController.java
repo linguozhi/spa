@@ -16,4 +16,9 @@ public class AppController extends BaseController {
     public String index(){
         return "index";
     }
+
+    @RequestMapping("/client")
+    public String client(){
+        return "client";
+    }
 }
