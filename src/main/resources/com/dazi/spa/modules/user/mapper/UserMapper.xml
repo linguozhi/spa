@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dazi.spa.modules.user.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.dazi.spa.modules.user.model.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="pswd" jdbcType="VARCHAR" property="pswd" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="status" jdbcType="BIGINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, nickname, email, pswd, create_time, last_login_time, status
+  </sql>
+  <sql id="Where_Clause">
+     where 1=1 
+    <if test="record.id != null">
+      and uu.id = #{record.id,jdbcType=BIGINT}
+    </if>
+    <if test="record.nickname != null and record.nickname != ''">
+      and uu.nickname = #{record.nickname,jdbcType=VARCHAR}
+    </if>
+    <if test="record.email != null and record.email != ''">
+      and uu.email = #{record.email,jdbcType=VARCHAR}
+    </if>
+    <if test="record.pswd != null and record.pswd != ''">
+      and uu.pswd = #{record.pswd,jdbcType=VARCHAR}
+    </if>
+    <if test="record.createTime != null">
+      and uu.create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="record.lastLoginTime != null">
+      and uu.last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="record.status != null">
+      and uu.status = #{record.status,jdbcType=BIGINT}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from u_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dazi.spa.modules.user.model.User">
+    insert into u_user (id, nickname, email, 
+      pswd, create_time, last_login_time, 
+      status)
+    values (#{id,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{pswd,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dazi.spa.modules.user.model.User">
+    insert into u_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="pswd != null">
+        pswd,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pswd != null">
+        #{pswd,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dazi.spa.modules.user.model.User">
+    update u_user
+    <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="pswd != null">
+        pswd = #{pswd,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dazi.spa.modules.user.model.User">
+    update u_user
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      pswd = #{pswd,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectTotal" parameterType="com.dazi.spa.modules.user.model.User" resultType="java.lang.Integer">
+    select count(*) from u_user uu
+    <include refid="Where_Clause" />
+  </select>
+  <select id="selectList" parameterType="com.dazi.spa.modules.user.model.User" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+     from u_user uu
+    <include refid="Where_Clause" />
+    <if test="order != null and order.colName != null and order.colName != ''">
+      order by ${order.colName}
+      <if test="order.desc">
+        desc
+      </if>
+    </if>
+    <if test="count > 0">
+      limit #{count} offset #{offset}
+    </if>
+  </select>
+</mapper>

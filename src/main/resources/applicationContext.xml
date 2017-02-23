@@ -134,4 +134,10 @@
     </bean>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    <bean name="springContextUtil" class="com.dazi.spa.common.utils.SpringContextUtil" scope="singleton"></bean>
+    <!--import-->
+    <import resource="spring-cache.xml"/>
+
+    <import resource="spring-shiro.xml" />
+
 </beans>

@@ -5,6 +5,8 @@ import com.dazi.spa.common.datatable.Order;
 import com.dazi.spa.common.protocol.ResponseHelper;
 import com.dazi.spa.modules.client.model.Client;
 import com.dazi.spa.modules.client.service.ClientService;
+import com.dazi.spa.modules.user.model.User;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,8 @@ public class PortalClientController {
 
     @RequestMapping("/client")
     public String client() {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        System.out.print(user.getEmail());
         return "client";
     }
 
