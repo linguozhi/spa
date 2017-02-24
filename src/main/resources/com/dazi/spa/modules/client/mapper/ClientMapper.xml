@@ -48,6 +48,9 @@
     <if test="record.headImageId != null">
       and sc.head_image_id = #{record.headImageId,jdbcType=INTEGER}
     </if>
+    <if test="record.uid != null and record.uid > 0">
+      and sc.id IN (SELECT cid from spa_user_client where uid=#{record.uid,jdbcType=INTEGER})
+    </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

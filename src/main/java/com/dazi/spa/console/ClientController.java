@@ -102,6 +102,7 @@ public class ClientController extends BaseController {
         return ResponseHelper.buildResult(StatusCodeEnum.SUCCESS, client.getId());
     }
 
+
     @RequestMapping("/update")
     @ResponseBody
     public Map update(Client client) {
