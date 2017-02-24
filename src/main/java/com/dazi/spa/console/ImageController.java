@@ -70,7 +70,8 @@ public class ImageController extends BaseController {
     }
 
     @RequestMapping("/del")
-    @ResponseBody  public Map delete(Integer id) {
+    @ResponseBody
+    public Map delete(Integer id) {
         Assert.isTrue(IntegerUtil.gtZero(id) , "id不能小于1");
 
         if(imageService.deleteByPrimaryKey(id) < 1) {
