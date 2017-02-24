@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dazi.spa.modules.client.mapper.UserClientMapper">
+  <resultMap id="BaseResultMap" type="com.dazi.spa.modules.client.model.UserClient">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, cid
+  </sql>
+  <sql id="Where_Clause">
+     where 1=1 
+    <if test="record.id != null">
+      and suc.id = #{record.id,jdbcType=INTEGER}
+    </if>
+    <if test="record.uid != null">
+      and suc.uid = #{record.uid,jdbcType=BIGINT}
+    </if>
+    <if test="record.cid != null">
+      and suc.cid = #{record.cid,jdbcType=INTEGER}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spa_user_client
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from spa_user_client
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dazi.spa.modules.client.model.UserClient">
+    insert into spa_user_client (id, uid, cid)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=BIGINT}, #{cid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dazi.spa.modules.client.model.UserClient">
+    insert into spa_user_client
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dazi.spa.modules.client.model.UserClient">
+    update spa_user_client
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dazi.spa.modules.client.model.UserClient">
+    update spa_user_client
+    set uid = #{uid,jdbcType=BIGINT},
+      cid = #{cid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectTotal" parameterType="com.dazi.spa.modules.client.model.UserClient" resultType="java.lang.Integer">
+    select count(*) from spa_user_client suc
+    <include refid="Where_Clause" />
+  </select>
+  <select id="selectList" parameterType="com.dazi.spa.modules.client.model.UserClient" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+     from spa_user_client suc
+    <include refid="Where_Clause" />
+    <if test="order != null and order.colName != null and order.colName != ''">
+      order by ${order.colName}
+      <if test="order.desc">
+        desc
+      </if>
+    </if>
+    <if test="count > 0">
+      limit #{count} offset #{offset}
+    </if>
+  </select>
+</mapper>
