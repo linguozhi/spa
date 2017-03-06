@@ -85,18 +85,4 @@ public class UserController {
         return ResponseHelper.buildSuccessResult("删除成功");
     }
 
-    /**
-     * 登录
-     */
-    @RequestMapping("/submitLogin")
-    @ResponseBody
-    public Map submitLogin(User user, HttpServletRequest request) {
-        try {
-            TokenManager.login(user, true);
-            return ResponseHelper.buildSuccessResult("登录成功");
-        } catch (Exception ex) {
-            logger.error("登录错误", ex);
-            return ResponseHelper.buildErrorResult("登录失败");
-        }
-    }
 }
