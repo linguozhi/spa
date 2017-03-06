@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="http://192.168.31.101:8080/Scanning/public/style/css/login.css">
+
+</head>
+<body>
+<div id="mainInputModule" class="main-input-module">
+    <div class="bg"></div>
+    <input id="mainInputModuleInput" placeholder="" class="input" type="text">
+    <div id="mainInputModuleBtnOk" class="mainInputModuleBtn btn-ok hoverColor">确 定</div>
+    <div id="mainInputModuleBtnCancel" class="mainInputModuleBtn btn-cancel hoverColor">取 消</div>
+</div>
+
+
+
+<div id="pageLogin" class="page-login">
+    <div id="pageLoginWrap" class="page-login-wrap">
+        <div id="mainInputTextPageLoginUserName" class="main-input-text mainInputText">
+            <div class="mainInputTextLabel main-input-text-label">用户名：</div>
+            <div class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="请输入用户名"></div>
+        </div>
+        <div id="mainInputTextPageLoginPassword" class="main-input-text mainInputText">
+            <div class="mainInputTextLabel main-input-text-label">密　码：</div>
+            <div data-password="true" class="mainInputTextContent hoverColor main-input-text-content" data-placeholder="请输入密码"></div>
+        </div>
+        <div id="pageLoginBtn" class="login-btn hoverColor">登 录</div>
+    </div>
+</div>
+
+
+
+
+
+<script src="http://192.168.31.101:8080/Scanning/public/javascripts/lib/zepto.js?var=20161221"></script>
+<script src="http://192.168.31.101:8080/Scanning/public/javascripts/seajs/sea.js?var=20161221"></script>
+<script>
+
+    var verNum = "20161221";
+    seajs.config({
+        //加版本号
+        map: [
+            [ '.js', '.js?v='+verNum+'' ]
+        ]
+    });
+    /* seajs.use("./public/javascripts/app/login/login.js"); */
+    seajs.use("http://192.168.31.101:8080/Scanning/public/javascripts/app/login/login.js");
+
+</script>
+</body>
+
+</html>
+
+
+

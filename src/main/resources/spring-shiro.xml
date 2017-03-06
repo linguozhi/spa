@@ -158,14 +158,24 @@
 	
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
+<<<<<<< HEAD
 		<property name="loginUrl" value="/portal/login.html" />
 		<!--	TODO 待提取	-->
 		<property name="successUrl" value="/client.html" />
+=======
+		<property name="loginUrl" value="/portal/user/login.html" />
+		<!--	TODO 待提取	-->
+		<property name="successUrl" value="/portal/client/client.html" />
+>>>>>>> 36c5b6cb52df82e8c70cbda2cc85192a86782092
 		<property name="unauthorizedUrl" value="/?login" />
 		
 <!--	初始配置，现采用自定义	-->
 		<property name="filterChainDefinitions" >
 			<value>
+<<<<<<< HEAD
+=======
+				/portal/user/submitLogin.html = anon
+>>>>>>> 36c5b6cb52df82e8c70cbda2cc85192a86782092
 				/portal/** = authc
 				/public/** = anon
 				/** = anon
