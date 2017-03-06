@@ -25,6 +25,22 @@
         <jackson.version>2.4.3</jackson.version>
 
     </properties>
+
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>modbus-data-source</id>
+            <name>Modbus Dependencies</name>
+            <url>http://mangoautomation.net:9902/maven-repo/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -213,6 +229,8 @@
             <artifactId>commons-httpclient</artifactId>
             <version>3.1</version>
         </dependency>
+
+
 
     </dependencies>
     <build>
