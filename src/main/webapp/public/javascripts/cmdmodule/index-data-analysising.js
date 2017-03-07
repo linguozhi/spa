@@ -25,7 +25,7 @@ define(function(require, exports, module) {
             $.ajax({
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./client/caculate.html",
+                url: "./caculate.html",
                 timeout: 10000,
                 data:{
                     "id":userId
@@ -48,7 +48,7 @@ define(function(require, exports, module) {
             $.ajax({
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./checkRecord/get.html",
+                url: "../checkRecord/get.html",
                 timeout: 10000,
                 data:{
                     "clientId":userId,

@@ -159,7 +159,7 @@ define(function(require, exports, module) {
             $.ajax({
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./checkRecord/loadList.html",
+                url: "../checkRecord/loadList.html",
                 timeout: 10000,
                 data:{
                     "clientId":that.clientId,
@@ -248,7 +248,7 @@ define(function(require, exports, module) {
             $.ajax({
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./checkRecord/get.html",
+                url: "../checkRecord/get.html",
                 timeout: 10000,
                 data:{
                     "clientId":that.clientId,
@@ -273,7 +273,7 @@ define(function(require, exports, module) {
             $.ajax({
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./checkRecord/delete.html",
+                url: "../checkRecord/delete.html",
                 timeout: 10000,
                 data:{
                     "recordId":recordId

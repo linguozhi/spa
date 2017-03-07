@@ -207,7 +207,7 @@ define(function(require, exports, module) {
 
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./portal/client/getList.html",
+                url: "./getList.html",
                 timeout: 10000,
                 data:{
                     "name":that.name,
@@ -248,7 +248,7 @@ define(function(require, exports, module) {
             $.ajax({
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./client/get.html",
+                url: "./get.html",
                 timeout: 10000,
                 data:{
                     "id":id

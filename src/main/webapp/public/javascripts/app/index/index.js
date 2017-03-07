@@ -3,13 +3,13 @@ define(function(require) {
     var page = 0;
     window.userId = -1;
     window.detectionResults = null;
-		
 	require('../../cmdmodule/common');
     require('../../cmdmodule/main-toast');
     require('../../cmdmodule/main-loading');
     require('../../cmdmodule/main-input-module');
-
-    var util = require('../../cmdmodule/util');util.initKeyboard();
+    
+    var util = require('../../cmdmodule/util');
+    util.initKeyboard();
 	window.slip = require('../../cmdmodule/slip');
     window.newUser = require('../../cmdmodule/index-new-user'); 
     var start = require('../../cmdmodule/index-start'); 
@@ -63,6 +63,7 @@ define(function(require) {
                 pageChange(pPage);
             }
             window.headPortraitShootCallback = function() {
+                console.log(scanActivityTakingPicturesReturnData);
                 var scanActivityTakingPicturesReturnData = $.parseJSON(window.JsCallJava.getScanActivityTakingPicturesReturnData());
                 var headPortraitUrl = "http://120.132.68.148:18048"+scanActivityTakingPicturesReturnData.data.shortUrl;
                 newUser.setHeadPortraitUrl(headPortraitUrl,scanActivityTakingPicturesReturnData.data.id);

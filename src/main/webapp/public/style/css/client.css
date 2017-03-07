@@ -1,0 +1,276 @@
+/* line 3, ../sass/lib/_common.scss */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px; }
+
+/* line 12, ../sass/lib/_common.scss */
+html, body {
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
+  height: 100%;
+  background: #010020; }
+
+/* line 19, ../sass/lib/_common.scss */
+img {
+  border: none; }
+
+/* line 22, ../sass/lib/_common.scss */
+ul, li {
+  list-style-type: none; }
+
+/* line 26, ../sass/lib/_common.scss */
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none; }
+
+/* line 31, ../sass/lib/_common.scss */
+input, button, select, textarea {
+  outline: none; }
+
+/* line 34, ../sass/lib/_common.scss */
+.main-input-text {
+  color: #464241; }
+  /* line 36, ../sass/lib/_common.scss */
+  .main-input-text .main-input-text-label {
+    color: #464241;
+    height: 100%;
+    float: left; }
+  /* line 41, ../sass/lib/_common.scss */
+  .main-input-text .main-input-text-content {
+    width: 100%;
+    color: #464241;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #9a9997;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
+    /* line 53, ../sass/lib/_common.scss */
+    .main-input-text .main-input-text-content.hover-color {
+      background-color: #eee; }
+
+/* line 58, ../sass/lib/_common.scss */
+.main-input-radio {
+  width: 100%;
+  overflow: hidden; }
+  /* line 62, ../sass/lib/_common.scss */
+  .main-input-radio .main-input-radio-items {
+    float: left; }
+  /* line 65, ../sass/lib/_common.scss */
+  .main-input-radio .main-input-radio-box-wrap {
+    height: 100%;
+    float: left;
+    position: relative; }
+  /* line 70, ../sass/lib/_common.scss */
+  .main-input-radio .main-input-radio-box-tick {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 1px; }
+  /* line 78, ../sass/lib/_common.scss */
+  .main-input-radio .main-input-radio-label {
+    color: #464241;
+    float: left; }
+  /* line 82, ../sass/lib/_common.scss */
+  .main-input-radio .main-input-radio-box {
+    border-radius: 4px;
+    border: 1px solid #aba9ab;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+/* line 91, ../sass/lib/_common.scss */
+.main-percentage-bar .main-percentage-bar-label {
+  color: #004098;
+  float: left; }
+/* line 95, ../sass/lib/_common.scss */
+.main-percentage-bar .main-percentage-bar-bar {
+  float: left;
+  border: 1px solid #706e6f;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+  /* line 102, ../sass/lib/_common.scss */
+  .main-percentage-bar .main-percentage-bar-bar .main-percentage-bar-complete {
+    position: relative;
+    background-color: #004098; }
+    /* line 105, ../sass/lib/_common.scss */
+    .main-percentage-bar .main-percentage-bar-bar .main-percentage-bar-complete .main-percentage-bar-complete-dot {
+      background-color: #004098;
+      position: absolute;
+      right: 0px; }
+      /* line 109, ../sass/lib/_common.scss */
+      .main-percentage-bar .main-percentage-bar-bar .main-percentage-bar-complete .main-percentage-bar-complete-dot .main-percentage-bar-complete-num {
+        position: absolute;
+        color: #004098;
+        text-align: center; }
+
+/* line 119, ../sass/lib/_common.scss */
+.main-input-module {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%; }
+  /* line 124, ../sass/lib/_common.scss */
+  .main-input-module .bg {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%; }
+  /* line 130, ../sass/lib/_common.scss */
+  .main-input-module .input {
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: none; }
+  /* line 138, ../sass/lib/_common.scss */
+  .main-input-module .btn-ok {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 4px;
+    width: 200px;
+    height: 40px;
+    background: -webkit-linear-gradient(top, #4c92f4 0%, #011c43 100%);
+    border: 1px solid #23353f;
+    color: #fff;
+    text-align: center;
+    position: absolute; }
+    /* line 151, ../sass/lib/_common.scss */
+    .main-input-module .btn-ok.hover-color {
+      background: -webkit-linear-gradient(top, #011c43 0%, #4c92f4 100%); }
+  /* line 155, ../sass/lib/_common.scss */
+  .main-input-module .btn-cancel {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 4px;
+    width: 200px;
+    height: 40px;
+    background: -webkit-linear-gradient(top, #4c92f4 0%, #011c43 100%);
+    border: 1px solid #23353f;
+    color: #fff;
+    text-align: center;
+    position: absolute; }
+    /* line 168, ../sass/lib/_common.scss */
+    .main-input-module .btn-cancel.hover-color {
+      background: -webkit-linear-gradient(top, #011c43 0%, #4c92f4 100%); }
+
+/* line 173, ../sass/lib/_common.scss */
+.main-div-table {
+  float: left;
+  box-sizing: border-box;
+  border: 1px solid #6d6865; }
+  /* line 178, ../sass/lib/_common.scss */
+  .main-div-table .main-dav-table-title {
+    width: 100%;
+    float: left; }
+    /* line 181, ../sass/lib/_common.scss */
+    .main-div-table .main-dav-table-title .main-dav-table-line {
+      width: 100%;
+      float: left;
+      box-sizing: border-box;
+      border-bottom: 1px solid #6d6865; }
+      /* line 186, ../sass/lib/_common.scss */
+      .main-div-table .main-dav-table-title .main-dav-table-line .main-dav-table-block {
+        box-sizing: border-box;
+        font-weight: 700;
+        float: left;
+        text-align: center;
+        color: #1e1916;
+        border-right: 1px solid #6d6865; }
+        /* line 193, ../sass/lib/_common.scss */
+        .main-div-table .main-dav-table-title .main-dav-table-line .main-dav-table-block:last-child {
+          border-right: none; }
+  /* line 199, ../sass/lib/_common.scss */
+  .main-div-table .main-dav-table-body {
+    width: 100%;
+    float: left; }
+    /* line 202, ../sass/lib/_common.scss */
+    .main-div-table .main-dav-table-body .main-dav-table-line {
+      width: 100%;
+      float: left;
+      box-sizing: border-box;
+      border-bottom: 1px solid #6d6865; }
+      /* line 207, ../sass/lib/_common.scss */
+      .main-div-table .main-dav-table-body .main-dav-table-line:last-child {
+        border-bottom: none; }
+      /* line 210, ../sass/lib/_common.scss */
+      .main-div-table .main-dav-table-body .main-dav-table-line .main-dav-table-block {
+        box-sizing: border-box;
+        font-weight: 700;
+        float: left;
+        text-align: center;
+        color: #1e1916;
+        border-right: 1px solid #6d6865; }
+        /* line 217, ../sass/lib/_common.scss */
+        .main-div-table .main-dav-table-body .main-dav-table-line .main-dav-table-block:last-child {
+          border-right: none; }
+        /* line 220, ../sass/lib/_common.scss */
+        .main-div-table .main-dav-table-body .main-dav-table-line .main-dav-table-block .btn {
+          border: 1px solid #92918d;
+          float: left;
+          font-size: inherit;
+          box-sizing: border-box; }
+          /* line 225, ../sass/lib/_common.scss */
+          .main-div-table .main-dav-table-body .main-dav-table-line .main-dav-table-block .btn.hover-color {
+            background: #133984;
+            color: #fff; }
+
+/* line 234, ../sass/lib/_common.scss */
+.main-turn-page {
+  position: absolute; }
+  /* line 236, ../sass/lib/_common.scss */
+  .main-turn-page .turn-page-item {
+    border: 1px solid #92918d;
+    float: left;
+    font-size: inherit;
+    box-sizing: border-box;
+    color: #1e1916; }
+    /* line 242, ../sass/lib/_common.scss */
+    .main-turn-page .turn-page-item.hover-color {
+      background: #133984;
+      color: #fff; }
+    /* line 246, ../sass/lib/_common.scss */
+    .main-turn-page .turn-page-item.on {
+      background: #133984;
+      color: #fff; }
+
+/* line 4, ../sass/client.scss */
+.page-login {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: #010020;
+  background-size: cover;
+  background-image: url("../../images-dist/page-main-bg.jpg");
+  position: relative; }
+  /* line 12, ../sass/client.scss */
+  .page-login .page-login-wrap {
+    background-color: #fff;
+    border-radius: 10px;
+    position: absolute; }
+    /* line 16, ../sass/client.scss */
+    .page-login .page-login-wrap .login-btn {
+      border-radius: 4px;
+      width: 200px;
+      height: 40px;
+      background: -webkit-linear-gradient(top, #4c92f4 0%, #011c43 100%);
+      border: 1px solid #23353f;
+      color: #fff;
+      text-align: center;
+      position: absolute; }
+      /* line 25, ../sass/client.scss */
+      .page-login .page-login-wrap .login-btn.hover-color {
+        background: -webkit-linear-gradient(top, #011c43 0%, #4c92f4 100%); }

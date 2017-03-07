@@ -21,8 +21,6 @@ define(function(require, exports, module) {
                     if(that.newOrSaveUserInfo()){
                         mainLoading.show("正在保存，请等待");
                     }
-                    
-
                  });
                  $("#pageNewUserSaveBackBtn").bind("click",function(){
                     that.successGoScan = false;
@@ -57,10 +55,10 @@ define(function(require, exports, module) {
             var mUrl = "";
             if(userId!=-1){
                 //保存修改
-                mUrl = "./client/update.html";
+                mUrl = "./update.html";
             }else{
                 //新增用户
-                mUrl = "./client/save.html";
+                mUrl = "./save.html";
             }
             if(name!=false&&age!=false){
                 var postData;
@@ -157,7 +155,7 @@ define(function(require, exports, module) {
             $.ajax({
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./client/get.html",
+                url: "./get.html",
                 timeout: 10000,
                 data:{
                     "id":userId
@@ -176,7 +174,7 @@ define(function(require, exports, module) {
                     $("#mainInputTextPageNewUserPhone .mainInputTextContent").html(data.data.phone);
 
                     if(data.data.headImageUrl==null|data.data.headImageUrl==undefined|data.data.headImageUrl==""){
-                        $("#pageNewUserHeadImg").attr("src","./public/images-dist/head-portrait-camera.jpg");
+                        $("#pageNewUserHeadImg").attr("src","/public/images-dist/head-portrait-camera.jpg");
                     }else{
                         $("#pageNewUserHeadImg").attr("src","."+data.data.headImageUrl);
                     }
@@ -204,7 +202,7 @@ define(function(require, exports, module) {
             $.ajax({
                 contentType: "application/x-www-form-urlencoded; charset=utf-8", 
                 type:"post",
-                url: "./checkRecord/loadList.html",
+                url: "../checkRecord/loadList.html",
                 timeout: 10000,
                 data:{
                     "clientId":userId,
@@ -263,7 +261,7 @@ define(function(require, exports, module) {
 
             }else{
                 //新建用户
-                $("#pageNewUserHeadImg").attr("src","./public/images-dist/head-portrait-camera.jpg");
+                $("#pageNewUserHeadImg").attr("src","/public/images-dist/head-portrait-camera.jpg");
                 that.userNameMainInputText.cleanContent();
                 that.userAgeMainInputText.cleanContent();
                 that.userBirthdayMainInputText.cleanContent();

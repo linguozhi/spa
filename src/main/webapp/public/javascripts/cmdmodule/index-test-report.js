@@ -185,7 +185,7 @@ define(function(require, exports, module) {
             var listHtml = "";
             for(var i=0; i<checkResultListSize; i++){
                 var checkResultListOne = checkResultList[i];
-                listHtml+="<li style='width:"+recommendWidth+"px;'><img src=."+checkResultListOne.product.imageUrl+" /></li>";
+                listHtml+="<li style='width:"+recommendWidth+"px;'><img src="+checkResultListOne.product.imageUrl+" /></li>";
             }
 
             var imgSize = checkResultListSize; 
@@ -247,7 +247,7 @@ define(function(require, exports, module) {
                                             '<div class="mainInputRadioItems main-input-radio-items">'+
                                                 '<div class="mainInputRadioBoxWrap main-input-radio-box-wrap">'+
                                                     '<div class="mainInputRadioBox main-input-radio-box"></div>'+
-                                                    '<img class="mainInputRadioBoxTick main-input-radio-box-tick" src="./public/images-dist/main-input-radio-tick-red.png" />'+
+                                                    '<img class="mainInputRadioBoxTick main-input-radio-box-tick" src="/public/images-dist/main-input-radio-tick-red.png" />'+
                                                 '</div>'+
                                                 '<div class="mainInputRadioLabel main-input-radio-label">'+itemLevelList[i].name+'</div>'+
                                             '</div>'+

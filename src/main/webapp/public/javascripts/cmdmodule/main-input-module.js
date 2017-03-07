@@ -14,7 +14,18 @@ define(function(require, exports, module) {
                 if((val==null|val==""|val==undefined)&valNullShowPlaceholder){
                     that.targetObj.html(that.placeholder);
                 }else{
-                    that.targetObj.html(val);
+                    var dataPassword = that.targetObj.attr("data-password");
+                    if(dataPassword=="true"){
+                        that.targetObj.attr("data-password-val", val);
+                        that.targetObj.html(that.placeholder);
+                        var startVal = "";
+                        for(var i=0;i<val.length;i++){
+                            startVal+="*";
+                        }
+                        that.targetObj.html(startVal);
+                    }else{
+                        that.targetObj.html(val);
+                    }
                 }
                 
             });
@@ -32,7 +43,13 @@ define(function(require, exports, module) {
             var html = that.targetObj.html();
             if(placeholder==html){
                 html = "";
+            }else{
+                var dataPassword = that.targetObj.attr("data-password");
+                if(dataPassword=="true"){
+                    html = that.targetObj.attr("data-password-val");
+                }
             }
+            
             $("#mainInputModuleInput").val(html).attr("placeholder",placeholder);
             $("#mainInputModule").show();
             setTimeout(function(){
@@ -45,6 +62,13 @@ define(function(require, exports, module) {
                 valNullShowPlaceholder = true;
             }else{
                 valNullShowPlaceholder = false;
+            }
+
+            var dataPassword = that.targetObj.attr("data-password");
+            if(dataPassword=="true"){
+                $("#mainInputModuleInput").attr("type","password");
+            }else{
+                $("#mainInputModuleInput").attr("type","text");
             }
         },
         hide:function(){

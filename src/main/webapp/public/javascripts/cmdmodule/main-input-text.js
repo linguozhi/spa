@@ -26,10 +26,9 @@ define(function(require, exports, module) {
 						fontSize:Math.round(height*0.9),
 						lineHeight:Math.round(height-1)+"px"
 					});
-					obj.find(".mainInputTextContent").bind(window.click,function(){
+					obj.find(".mainInputTextContent").bind("click",function(){
 						
 						if(!that.isDisabled){
-							
 							mainInputModule.show($(this));
 						}
 		            });
@@ -50,6 +49,14 @@ define(function(require, exports, module) {
 				getVal:function(){
 					var that = this;
 					var val = $.trim(that.obj.find(".mainInputTextContent").eq(0).html());
+					if(val==""||val==that.placeholder){
+						return false;
+					}
+					return val;
+				},
+				getPasswordVal:function(){
+					var that = this;
+					var val = $.trim(that.obj.find(".mainInputTextContent").eq(0).attr("data-password-val"));
 					if(val==""||val==that.placeholder){
 						return false;
 					}
