@@ -176,7 +176,7 @@ define(function(require, exports, module) {
                     if(data.data.headImageUrl==null|data.data.headImageUrl==undefined|data.data.headImageUrl==""){
                         $("#pageNewUserHeadImg").attr("src","/public/images-dist/head-portrait-camera.jpg");
                     }else{
-                        $("#pageNewUserHeadImg").attr("src","."+data.data.headImageUrl);
+                        $("#pageNewUserHeadImg").attr("src",data.data.headImageUrl);
                     }
                     
                     var sexData;
