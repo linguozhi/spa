@@ -94,6 +94,7 @@ public class PortalCheckRecordController {
                             }
                         }
                     }
+
                     checkResult.setItemLevelList(itemLevelList);
 
                     // 推荐产品
