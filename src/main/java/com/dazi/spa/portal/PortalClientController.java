@@ -19,6 +19,8 @@ import com.dazi.spa.modules.client.service.UserClientService;
 import com.dazi.spa.modules.user.model.User;
 import com.dazi.spa.modules.user.service.UserService;
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -37,6 +39,7 @@ import java.util.*;
 @Controller
 @RequestMapping("portal/client")
 public class PortalClientController {
+    private static final Logger logger = LoggerFactory.getLogger(PortalClientController.class);
     @Autowired
     private ClientService clientService;
 
@@ -58,6 +61,7 @@ public class PortalClientController {
     @RequestMapping("/client")
     public String client() {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
+        logger.info("用户 {} 访问了 PortalClientController.client", JSON.toJSONString(user));
         System.out.print(user.getEmail());
         return "client";
     }
@@ -65,6 +69,9 @@ public class PortalClientController {
     @RequestMapping("/getList")
     @ResponseBody
     public DataTable getList(Client client, int start, int length) {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        logger.info("用户 {} 访问了 PortalClientController.getList", JSON.toJSONString(user));
+        client.setUid(Integer.parseInt(user.getId().toString()));
         int total = clientService.selectTotal(client);
         List<Client> list = null;
         if(total > 0) {
