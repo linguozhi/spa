@@ -47,11 +47,12 @@ define(function(require, exports, module) {
             $("#btnNew").bind("click",function(){
                 that.hide();
                 that.newUser.show(-1);
+                window.JsCallJava.wakeupDev();
             });
             $("#btnRecord").bind("click",function(){
                 that.hide();
-               
                 that.userList.show();
+                window.JsCallJava.wakeupDev();
                 //that.newUser.show(7);
             });
             

@@ -63,7 +63,7 @@ define(function(require) {
                 pageChange(pPage);
             }
             window.headPortraitShootCallback = function() {
-                console.log(scanActivityTakingPicturesReturnData);
+               
                 var scanActivityTakingPicturesReturnData = $.parseJSON(window.JsCallJava.getScanActivityTakingPicturesReturnData());
                 var headPortraitUrl = "http://120.132.68.148:18048"+scanActivityTakingPicturesReturnData.data.shortUrl;
                 newUser.setHeadPortraitUrl(headPortraitUrl,scanActivityTakingPicturesReturnData.data.id);
