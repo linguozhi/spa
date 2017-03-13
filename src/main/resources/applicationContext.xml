@@ -140,4 +140,6 @@
 
     <import resource="spring-shiro.xml" />
 
+    <aop:aspectj-autoproxy />
+
 </beans>

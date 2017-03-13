@@ -14,7 +14,7 @@
     <result column="head_image_id" jdbcType="INTEGER" property="headImageId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, age, create_time, modify_time, birthday, addr, sex, phone, head_image_id
+    sc.id, sc.name, sc.age, sc.create_time, sc.modify_time, sc.birthday, sc.addr, sc.sex, sc.phone, sc.head_image_id
   </sql>
   <sql id="Where_Clause">
      where 1=1 
@@ -49,14 +49,14 @@
       and sc.head_image_id = #{record.headImageId,jdbcType=INTEGER}
     </if>
     <if test="record.uid != null and record.uid > 0">
-      and sc.id IN (SELECT cid from spa_user_client where uid=#{record.uid,jdbcType=INTEGER})
+      and uc.uid=#{record.uid,jdbcType=INTEGER}
     </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from spa_client
-    where id = #{id,jdbcType=INTEGER}
+    from spa_client sc
+    where sc.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from spa_client
@@ -190,12 +190,14 @@
   </update>
   <select id="selectTotal" parameterType="com.dazi.spa.modules.client.model.Client" resultType="java.lang.Integer">
     select count(*) from spa_client sc
+    left join spa_user_client uc on sc.id=uc.cid
     <include refid="Where_Clause" />
   </select>
   <select id="selectList" parameterType="com.dazi.spa.modules.client.model.Client" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
      from spa_client sc
+    left join spa_user_client uc on sc.id=uc.cid
     <include refid="Where_Clause" />
     <if test="order != null and order.colName != null and order.colName != ''">
       order by ${order.colName}
