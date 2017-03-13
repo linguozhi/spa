@@ -9,6 +9,7 @@ define(function(require, exports, module) {
             if(!that.isInit){
                 that.isInit = true;
                 that.initUi();
+                
                 that.newUser = newUser;
                 that.userList = userList;
             }

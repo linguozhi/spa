@@ -241,7 +241,7 @@ define(function(require, exports, module) {
             that.recentAnalyzeCss();
             
         },
-        recentAnalyzeCss(){
+        recentAnalyzeCss: function(){
             var that = this;
             $("#pageNewUserRecentAnalyze .line").css({
                 height:that.pageNewUserRecentAnalyzeLine,

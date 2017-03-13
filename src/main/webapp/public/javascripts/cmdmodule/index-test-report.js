@@ -5,16 +5,13 @@ define(function(require, exports, module) {
     var testReport = {
         isShow: false,
         isInit:false,
+        slipIsInit:false,
         init: function(){
             var that = this;
            
             that.isInit = true;
             that.show();
             that.initUi();
-            $("#pageTestReportBg").bind("click",function(){
-                that.hide();
-                home.show();
-            });
             
         },
         show:function(){
@@ -104,11 +101,13 @@ define(function(require, exports, module) {
 
 
             
-            var slipDataWraps = slip('page',$("#pageTestReportDataWraps")[0],{
+            var slipDataWraps = slipReport('page',$("#pageTestReportDataWraps")[0],{
                   num: dataSize,
                   no_follow: true
             });
-
+            slipDataWraps.toPage(0,0);
+            
+            
 
 
 
@@ -181,55 +180,111 @@ define(function(require, exports, module) {
                 fontSize:closeBtnWidth/1.5,
                 lineHeight:closeBtnWidth+"px"
             });
+            
 
-            var listHtml = "";
-            for(var i=0; i<checkResultListSize; i++){
-                var checkResultListOne = checkResultList[i];
-                listHtml+="<li style='width:"+recommendWidth+"px;'><img src="+checkResultListOne.product.imageUrl+" /></li>";
-            }
+            
+            
+            
+            
+            
+            
 
-            var imgSize = checkResultListSize; 
-            
-            $("#pageTestReportRecommendProductListWrap").css({
-                width:recommendWidth
-            });
-            $("#pageTestReportRecommendProductList").css({
-                width:recommendWidth*(imgSize+2)
-            });
-            
-            
-            
-            $("#pageTestReportRecommendProductList").html(listHtml);
-            $("#pageTestReportRecommendClose, #pageTestReportRecommendBg").bind(window.click,function(){
-                $("#pageTestReportRecommendBg").hide();
-                $("#pageTestReportRecommend").hide();
-                
-            });
+            if(!that.slipIsInit){
 
-            var slipIsInit = false;
-            var slip_img = null;
-            $("#pageTestReportRecommendBtn").bind(window.click,function(){
-                $("#pageTestReportRecommendBg").show();
-                $("#pageTestReportRecommend").show();
-                slip_img = slip('page',$("#pageTestReportRecommendProductList")[0],{
-                  num: imgSize,
-                  no_follow: true
-                });
-                if(!slipIsInit){
-                    slipIsInit = true;
+                that.slipIsInit = true;
+                $("#pageTestReportRecommendBtn").bind("click",function(){
+                    var length = slipDataWraps.page*2+2;
+                    if(length>checkResultListSize){
+                        length = checkResultListSize;
+                    }
+                   
+                    var listHtml = "";
+                    for(var i=slipDataWraps.page*2; i<length; i++){
+                        var checkResultListOne = checkResultList[i];
+                        listHtml+="<li style='width:"+recommendWidth+"px;'><img src="+checkResultListOne.product.imageUrl+" /></li>";
+                    }
+                    $("#pageTestReportRecommendProductList").html(listHtml);
                     
-                    $("#pageTestReportRecommendLeftArrow").bind("click",function(){
-                        slip_img.backward(); // 上一张
-                        console.log("上一张");
+                    
+                    $("#pageTestReportRecommendProductListWrap").css({
+                        width:recommendWidth
                     });
-                    $("#pageTestReportRecommendRightArrow").bind("click",function(){
-                        slip_img.forward(); // 下一张
-                        console.log("下一张");
+                    $("#pageTestReportRecommendProductList").css({
+                        width:recommendWidth*(length+2)
                     });
-                }
-                slip_img.toPage(0,0);
+
+                    $("#pageTestReportRecommendBg").show();
+                    $("#pageTestReportRecommend").show();
+                    that.slip_img = slipRecommend('page',$("#pageTestReportRecommendProductList")[0],{
+                      num: length-slipDataWraps.page*2,
+                      no_follow: true
+                    });
+                    
+                        
+                    
+                    
+                    that.slip_img.toPage(0,0);
+                    
+                });
+                $("#pageTestReportRecommendLeftArrow").bind("click",function(){
+                    that.slip_img.backward(); // 上一张
+                    console.log("上一张");
+                });
+                $("#pageTestReportRecommendRightArrow").bind("click",function(){
+                    that.slip_img.forward(); // 下一张
+                    console.log("下一张");
+                });
+                $("#pageTestReportBg").bind("click",function(){
+                    that.hide();
+                    home.show();
+                });
+
+                $("#pageTestReportRecommendClose, #pageTestReportRecommendBg").bind("click",function(){
+                    $("#pageTestReportRecommendBg").hide();
+                    $("#pageTestReportRecommend").hide();
+                    
+                });
+                //临时--
+                var omprehensiveImgIsShow = false;
+                var omprehensiveImg = $("<img/>").attr("src", "http://gugugame-backup.oss-cn-shenzhen.aliyuncs.com/1489245648658.jpg").css({
+                    width: bodyWidth, 
+                    height: bodyHeight,
+                    display: "block",
+                    position: "absolute",
+                    top:0,
+                    left:0
+                }).hide();
+                var comprehensiveBtn = $("<div/>").css({
+                    width:btnWidth/2,
+                    height:btnHeight,
+                    fontSize:btnFontSize,
+                    lineHeight:btnHeight+1+"px",
+                    top:0,
+                    right:0,
+                    position: "absolute",
+                    background: "#004098",
+                    border: "1px solid #23353f",
+                    color: "#fff",
+                    textAlign: "center",
+                    fontWeight: "700"
+                }).html("总报告").click(function(){
+                    if(omprehensiveImgIsShow){
+                        omprehensiveImgIsShow = false;
+                        omprehensiveImg.hide();
+                        $(this).html("总报告");
+                    }else{
+                        omprehensiveImgIsShow = true;
+                        omprehensiveImg.show();
+                        $(this).html("关 闭");
+                    }
+                   
+                });
+                $("#pageTestReportBody").append(omprehensiveImg);
+                $("#pageTestReportBody").append(comprehensiveBtn);
                 
-            });
+                //临时--
+
+            }
           
         },
         

@@ -1,4 +1,5 @@
 define(function(require, exports, module) {
+	
 	var util = require('./util');
 	window.mainLoading={
 

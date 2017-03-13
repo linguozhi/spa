@@ -1,5 +1,5 @@
 define(function(require, exports, module) {
-		
+	
 	var start = {
         isInit:false,
         init: function(home){

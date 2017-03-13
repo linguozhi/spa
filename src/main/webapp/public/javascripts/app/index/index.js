@@ -10,7 +10,8 @@ define(function(require) {
     
     var util = require('../../cmdmodule/util');
     util.initKeyboard();
-	window.slip = require('../../cmdmodule/slip');
+	window.slipReport = require('../../cmdmodule/slip-report');
+    window.slipRecommend = require('../../cmdmodule/slip-recommend');
     window.newUser = require('../../cmdmodule/index-new-user'); 
     var start = require('../../cmdmodule/index-start'); 
     window.home = require('../../cmdmodule/index-home'); 
